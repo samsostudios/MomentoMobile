@@ -7,9 +7,30 @@
 //
 
 import UIKit
+import Firebase
 
 class ProfileViewController: UIViewController {
 
+    @IBOutlet weak var textEnter: UITextField!
+    @IBAction func submitBtn(_ sender: UIButton) {
+        
+        let dataDB = Database.database().reference().child("Data")
+        let input = textEnter.text!
+        
+        dataDB.childByAutoId().setValue(input) {
+            (error, refrence) in
+            
+            if error != nil {
+                print(error!)
+            }else{
+                print("data sent")
+                self.textEnter.text = ""
+            }
+        }
+
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

@@ -7,7 +7,7 @@ target 'Momento' do
 
   # Pods for Momento
 
-pod 'Firebase'
+pod 'Firebase/Core'
 pod 'Firebase/Auth'
 pod 'Firebase/Database'
 
