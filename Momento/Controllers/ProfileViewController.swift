@@ -15,7 +15,7 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var passwordInput: UITextField!
     
     @IBAction func signupBtn(_ sender: UIButton) {
-//        let userDb = Database.database().reference()
+        let userDb = Database.database().reference().child("Users")
         
         Auth.auth().createUser(withEmail: emailInput.text!, password: passwordInput.text!) { (user, error) in
             
@@ -23,6 +23,28 @@ class ProfileViewController: UIViewController {
                 print(error!)
             }else{
                 print("signed up!")
+                let userData = ["email": self.emailInput.text, "password": self.passwordInput.text]
+                
+                userDb.childByAutoId().setValue(userData) {
+                    (error, refrence) in
+                    
+                    if error != nil {
+                        print(error!)
+                    }else{
+                        print("user signed up!")
+                        
+                        self.emailInput.text = ""
+                        self.passwordInput.text = ""
+                    }
+                }
+                
+                
+                let alert = UIAlertController(title: "Signup Alert", message: "Thank you for signing up!", preferredStyle: UIAlertController.Style.alert)
+                
+                
+                alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
+                
+                self.present(alert, animated: true, completion: nil)
             }
         }
     }
