@@ -1,0 +1,6 @@
+framework module Pods_Momento {
+  umbrella header "Pods-Momento-umbrella.h"
+
+  export *
+  module * { export * }
+}

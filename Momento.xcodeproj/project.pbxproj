@@ -13,6 +13,7 @@
 		224751BC22151CA5004DFA77 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 224751BA22151CA5004DFA77 /* Main.storyboard */; };
 		224751BE22151CA5004DFA77 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 224751BD22151CA5004DFA77 /* Assets.xcassets */; };
 		224751C122151CA5004DFA77 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 224751BF22151CA5004DFA77 /* LaunchScreen.storyboard */; };
+		AB59B2BDB05E747A0A4EC165 /* Pods_Momento.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C389EF7EA72E80F41196C660 /* Pods_Momento.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,9 @@
 		224751BD22151CA5004DFA77 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		224751C022151CA5004DFA77 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		224751C222151CA5004DFA77 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		37CB4C58577D45E936E2C972 /* Pods-Momento.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Momento.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Momento/Pods-Momento.debug.xcconfig"; sourceTree = "<group>"; };
+		AA5D474D56CE39B6B2C3877A /* Pods-Momento.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Momento.release.xcconfig"; path = "Pods/Target Support Files/Pods-Momento/Pods-Momento.release.xcconfig"; sourceTree = "<group>"; };
+		C389EF7EA72E80F41196C660 /* Pods_Momento.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Momento.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +35,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AB59B2BDB05E747A0A4EC165 /* Pods_Momento.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -42,6 +47,8 @@
 			children = (
 				224751B322151CA5004DFA77 /* Momento */,
 				224751B222151CA5004DFA77 /* Products */,
+				23837C077173C07FB46E1504 /* Pods */,
+				76EA369137D395A74B6E502D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -67,6 +74,23 @@
 			path = Momento;
 			sourceTree = "<group>";
 		};
+		23837C077173C07FB46E1504 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				37CB4C58577D45E936E2C972 /* Pods-Momento.debug.xcconfig */,
+				AA5D474D56CE39B6B2C3877A /* Pods-Momento.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		76EA369137D395A74B6E502D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C389EF7EA72E80F41196C660 /* Pods_Momento.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -74,9 +98,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 224751C522151CA5004DFA77 /* Build configuration list for PBXNativeTarget "Momento" */;
 			buildPhases = (
+				B610B7CCC0A31FE62EF983ED /* [CP] Check Pods Manifest.lock */,
 				224751AD22151CA5004DFA77 /* Sources */,
 				224751AE22151CA5004DFA77 /* Frameworks */,
 				224751AF22151CA5004DFA77 /* Resources */,
+				30C1F45FC97CD40FF566B74A /* [CP] Embed Pods Frameworks */,
+				08D12FF3029E22227271F990 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -132,6 +159,66 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		08D12FF3029E22227271F990 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Momento/Pods-Momento-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		30C1F45FC97CD40FF566B74A /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Momento/Pods-Momento-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Momento/Pods-Momento-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B610B7CCC0A31FE62EF983ED /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Momento-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		224751AD22151CA5004DFA77 /* Sources */ = {
@@ -284,15 +371,13 @@
 		};
 		224751C622151CA5004DFA77 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 37CB4C58577D45E936E2C972 /* Pods-Momento.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 64ZFR3XB85;
 				INFOPLIST_FILE = Momento/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = SamHenry.Momento;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
@@ -302,15 +387,13 @@
 		};
 		224751C722151CA5004DFA77 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AA5D474D56CE39B6B2C3877A /* Pods-Momento.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 64ZFR3XB85;
 				INFOPLIST_FILE = Momento/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = SamHenry.Momento;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
