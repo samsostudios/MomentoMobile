@@ -8,23 +8,25 @@
 
 /* Begin PBXBuildFile section */
 		224751B522151CA5004DFA77 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224751B422151CA5004DFA77 /* AppDelegate.swift */; };
-		224751B722151CA5004DFA77 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224751B622151CA5004DFA77 /* FirstViewController.swift */; };
-		224751B922151CA5004DFA77 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224751B822151CA5004DFA77 /* SecondViewController.swift */; };
 		224751BC22151CA5004DFA77 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 224751BA22151CA5004DFA77 /* Main.storyboard */; };
 		224751BE22151CA5004DFA77 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 224751BD22151CA5004DFA77 /* Assets.xcassets */; };
 		224751C122151CA5004DFA77 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 224751BF22151CA5004DFA77 /* LaunchScreen.storyboard */; };
+		224751CB22151F1D004DFA77 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224751CA22151F1D004DFA77 /* FeedViewController.swift */; };
+		224751CD22151F30004DFA77 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224751CC22151F30004DFA77 /* ProfileViewController.swift */; };
+		224751CF22151F3D004DFA77 /* CommunityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224751CE22151F3D004DFA77 /* CommunityViewController.swift */; };
 		AB59B2BDB05E747A0A4EC165 /* Pods_Momento.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C389EF7EA72E80F41196C660 /* Pods_Momento.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		224751B122151CA5004DFA77 /* Momento.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Momento.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		224751B422151CA5004DFA77 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		224751B622151CA5004DFA77 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
-		224751B822151CA5004DFA77 /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
 		224751BB22151CA5004DFA77 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		224751BD22151CA5004DFA77 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		224751C022151CA5004DFA77 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		224751C222151CA5004DFA77 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		224751CA22151F1D004DFA77 /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
+		224751CC22151F30004DFA77 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		224751CE22151F3D004DFA77 /* CommunityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityViewController.swift; sourceTree = "<group>"; };
 		37CB4C58577D45E936E2C972 /* Pods-Momento.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Momento.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Momento/Pods-Momento.debug.xcconfig"; sourceTree = "<group>"; };
 		AA5D474D56CE39B6B2C3877A /* Pods-Momento.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Momento.release.xcconfig"; path = "Pods/Target Support Files/Pods-Momento/Pods-Momento.release.xcconfig"; sourceTree = "<group>"; };
 		C389EF7EA72E80F41196C660 /* Pods_Momento.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Momento.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -63,15 +65,32 @@
 		224751B322151CA5004DFA77 /* Momento */ = {
 			isa = PBXGroup;
 			children = (
-				224751B422151CA5004DFA77 /* AppDelegate.swift */,
-				224751B622151CA5004DFA77 /* FirstViewController.swift */,
-				224751B822151CA5004DFA77 /* SecondViewController.swift */,
-				224751BA22151CA5004DFA77 /* Main.storyboard */,
+				224751C822151ED9004DFA77 /* Controllers */,
+				224751C922151EFB004DFA77 /* View */,
 				224751BD22151CA5004DFA77 /* Assets.xcassets */,
-				224751BF22151CA5004DFA77 /* LaunchScreen.storyboard */,
 				224751C222151CA5004DFA77 /* Info.plist */,
 			);
 			path = Momento;
+			sourceTree = "<group>";
+		};
+		224751C822151ED9004DFA77 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				224751B422151CA5004DFA77 /* AppDelegate.swift */,
+				224751CA22151F1D004DFA77 /* FeedViewController.swift */,
+				224751CE22151F3D004DFA77 /* CommunityViewController.swift */,
+				224751CC22151F30004DFA77 /* ProfileViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		224751C922151EFB004DFA77 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				224751BA22151CA5004DFA77 /* Main.storyboard */,
+				224751BF22151CA5004DFA77 /* LaunchScreen.storyboard */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		23837C077173C07FB46E1504 /* Pods */ = {
@@ -225,9 +244,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				224751B922151CA5004DFA77 /* SecondViewController.swift in Sources */,
+				224751CF22151F3D004DFA77 /* CommunityViewController.swift in Sources */,
+				224751CD22151F30004DFA77 /* ProfileViewController.swift in Sources */,
+				224751CB22151F1D004DFA77 /* FeedViewController.swift in Sources */,
 				224751B522151CA5004DFA77 /* AppDelegate.swift in Sources */,
-				224751B722151CA5004DFA77 /* FirstViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -377,7 +397,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 64ZFR3XB85;
 				INFOPLIST_FILE = Momento/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = SamHenry.Momento;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
@@ -393,7 +416,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 64ZFR3XB85;
 				INFOPLIST_FILE = Momento/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = SamHenry.Momento;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
