@@ -11,23 +11,20 @@ import Firebase
 
 class ProfileViewController: UIViewController {
 
-    @IBOutlet weak var textEnter: UITextField!
-    @IBAction func submitBtn(_ sender: UIButton) {
+    @IBOutlet weak var emailInput: UITextField!
+    @IBOutlet weak var passwordInput: UITextField!
+    
+    @IBAction func signupBtn(_ sender: UIButton) {
+//        let userDb = Database.database().reference()
         
-        let dataDB = Database.database().reference().child("Data")
-        let input = textEnter.text!
-        
-        dataDB.childByAutoId().setValue(input) {
-            (error, refrence) in
+        Auth.auth().createUser(withEmail: emailInput.text!, password: passwordInput.text!) { (user, error) in
             
-            if error != nil {
+            if error != nil{
                 print(error!)
             }else{
-                print("data sent")
-                self.textEnter.text = ""
+                print("signed up!")
             }
         }
-
     }
     
     
