@@ -10,6 +10,8 @@ import UIKit
 import Firebase
 
 class ProfileViewController: UIViewController {
+    
+    let bgImage = UIImageView()
 
     @IBOutlet weak var emailInput: UITextField!
     @IBOutlet weak var passwordInput: UITextField!
@@ -52,8 +54,23 @@ class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        setBG()
 
         // Do any additional setup after loading the view.
+    }
+    
+    
+    func setBG(){
+        view.addSubview(bgImage)
+        bgImage.translatesAutoresizingMaskIntoConstraints = false
+        bgImage.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        bgImage.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        bgImage.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        bgImage.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        bgImage.image = UIImage(named: "overlay")
+        
+        view.sendSubviewToBack(bgImage)
     }
     
 
