@@ -16,7 +16,11 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var emailInput: UITextField!
     @IBOutlet weak var passwordInput: UITextField!
     
-    @IBAction func signupBtn(_ sender: UIButton) {
+    @IBAction func signUpBtn(_ sender: UIButton) {
+        
+    }
+    
+    @IBAction func loginBtn(_ sender: UIButton) {
         let userDb = Database.database().reference().child("Users")
         
         Auth.auth().createUser(withEmail: emailInput.text!, password: passwordInput.text!) { (user, error) in
@@ -54,6 +58,7 @@ class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.isNavigationBarHidden = true
         
         setBG()
 
@@ -72,6 +77,12 @@ class ProfileViewController: UIViewController {
         
         view.sendSubviewToBack(bgImage)
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        let signUpVC = segue.destination as! signupProfileViewController
+    }
+    
+    @IBAction func unwindToLogin(_sender: UIStoryboardSegue){}
     
 
     /*

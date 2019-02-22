@@ -14,6 +14,7 @@
 		224751CB22151F1D004DFA77 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224751CA22151F1D004DFA77 /* FeedViewController.swift */; };
 		224751CD22151F30004DFA77 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224751CC22151F30004DFA77 /* ProfileViewController.swift */; };
 		224751CF22151F3D004DFA77 /* CommunityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224751CE22151F3D004DFA77 /* CommunityViewController.swift */; };
+		22D27894221FCC42004273A8 /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D27893221FCC42004273A8 /* SignupViewController.swift */; };
 		AB59B2BDB05E747A0A4EC165 /* Pods_Momento.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C389EF7EA72E80F41196C660 /* Pods_Momento.framework */; };
 /* End PBXBuildFile section */
 
@@ -27,6 +28,7 @@
 		224751CA22151F1D004DFA77 /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		224751CC22151F30004DFA77 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		224751CE22151F3D004DFA77 /* CommunityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityViewController.swift; sourceTree = "<group>"; };
+		22D27893221FCC42004273A8 /* SignupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
 		37CB4C58577D45E936E2C972 /* Pods-Momento.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Momento.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Momento/Pods-Momento.debug.xcconfig"; sourceTree = "<group>"; };
 		AA5D474D56CE39B6B2C3877A /* Pods-Momento.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Momento.release.xcconfig"; path = "Pods/Target Support Files/Pods-Momento/Pods-Momento.release.xcconfig"; sourceTree = "<group>"; };
 		C389EF7EA72E80F41196C660 /* Pods_Momento.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Momento.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -80,6 +82,7 @@
 				224751CA22151F1D004DFA77 /* FeedViewController.swift */,
 				224751CE22151F3D004DFA77 /* CommunityViewController.swift */,
 				224751CC22151F30004DFA77 /* ProfileViewController.swift */,
+				22D27893221FCC42004273A8 /* SignupViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -246,6 +249,7 @@
 			files = (
 				224751CF22151F3D004DFA77 /* CommunityViewController.swift in Sources */,
 				224751CD22151F30004DFA77 /* ProfileViewController.swift in Sources */,
+				22D27894221FCC42004273A8 /* SignupViewController.swift in Sources */,
 				224751CB22151F1D004DFA77 /* FeedViewController.swift in Sources */,
 				224751B522151CA5004DFA77 /* AppDelegate.swift in Sources */,
 			);
