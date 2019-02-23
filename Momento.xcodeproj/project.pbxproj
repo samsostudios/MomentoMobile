@@ -12,9 +12,9 @@
 		224751BE22151CA5004DFA77 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 224751BD22151CA5004DFA77 /* Assets.xcassets */; };
 		224751C122151CA5004DFA77 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 224751BF22151CA5004DFA77 /* LaunchScreen.storyboard */; };
 		224751CB22151F1D004DFA77 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224751CA22151F1D004DFA77 /* FeedViewController.swift */; };
-		224751CD22151F30004DFA77 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224751CC22151F30004DFA77 /* ProfileViewController.swift */; };
 		224751CF22151F3D004DFA77 /* CommunityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224751CE22151F3D004DFA77 /* CommunityViewController.swift */; };
-		22D27894221FCC42004273A8 /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22D27893221FCC42004273A8 /* SignupViewController.swift */; };
+		228E56632221CCE1001AF3F0 /* LoginProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228E56622221CCE1001AF3F0 /* LoginProfileViewController.swift */; };
+		228E56652221CDBD001AF3F0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 228E56642221CDBD001AF3F0 /* GoogleService-Info.plist */; };
 		AB59B2BDB05E747A0A4EC165 /* Pods_Momento.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C389EF7EA72E80F41196C660 /* Pods_Momento.framework */; };
 /* End PBXBuildFile section */
 
@@ -26,9 +26,9 @@
 		224751C022151CA5004DFA77 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		224751C222151CA5004DFA77 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		224751CA22151F1D004DFA77 /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
-		224751CC22151F30004DFA77 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		224751CE22151F3D004DFA77 /* CommunityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityViewController.swift; sourceTree = "<group>"; };
-		22D27893221FCC42004273A8 /* SignupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
+		228E56622221CCE1001AF3F0 /* LoginProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginProfileViewController.swift; sourceTree = "<group>"; };
+		228E56642221CDBD001AF3F0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		37CB4C58577D45E936E2C972 /* Pods-Momento.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Momento.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Momento/Pods-Momento.debug.xcconfig"; sourceTree = "<group>"; };
 		AA5D474D56CE39B6B2C3877A /* Pods-Momento.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Momento.release.xcconfig"; path = "Pods/Target Support Files/Pods-Momento/Pods-Momento.release.xcconfig"; sourceTree = "<group>"; };
 		C389EF7EA72E80F41196C660 /* Pods_Momento.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Momento.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -70,6 +70,7 @@
 				224751C822151ED9004DFA77 /* Controllers */,
 				224751C922151EFB004DFA77 /* View */,
 				224751BD22151CA5004DFA77 /* Assets.xcassets */,
+				228E56642221CDBD001AF3F0 /* GoogleService-Info.plist */,
 				224751C222151CA5004DFA77 /* Info.plist */,
 			);
 			path = Momento;
@@ -81,8 +82,7 @@
 				224751B422151CA5004DFA77 /* AppDelegate.swift */,
 				224751CA22151F1D004DFA77 /* FeedViewController.swift */,
 				224751CE22151F3D004DFA77 /* CommunityViewController.swift */,
-				224751CC22151F30004DFA77 /* ProfileViewController.swift */,
-				22D27893221FCC42004273A8 /* SignupViewController.swift */,
+				228E56622221CCE1001AF3F0 /* LoginProfileViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -175,6 +175,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				224751C122151CA5004DFA77 /* LaunchScreen.storyboard in Resources */,
+				228E56652221CDBD001AF3F0 /* GoogleService-Info.plist in Resources */,
 				224751BE22151CA5004DFA77 /* Assets.xcassets in Resources */,
 				224751BC22151CA5004DFA77 /* Main.storyboard in Resources */,
 			);
@@ -206,14 +207,14 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Momento/Pods-Momento-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
-				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
@@ -247,9 +248,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				228E56632221CCE1001AF3F0 /* LoginProfileViewController.swift in Sources */,
 				224751CF22151F3D004DFA77 /* CommunityViewController.swift in Sources */,
-				224751CD22151F30004DFA77 /* ProfileViewController.swift in Sources */,
-				22D27894221FCC42004273A8 /* SignupViewController.swift in Sources */,
 				224751CB22151F1D004DFA77 /* FeedViewController.swift in Sources */,
 				224751B522151CA5004DFA77 /* AppDelegate.swift in Sources */,
 			);
@@ -401,10 +401,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 64ZFR3XB85;
 				INFOPLIST_FILE = Momento/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = SamHenry.Momento;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
@@ -420,10 +417,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 64ZFR3XB85;
 				INFOPLIST_FILE = Momento/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = SamHenry.Momento;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
