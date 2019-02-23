@@ -1,5 +1,5 @@
 //
-//  LoginProfileViewController.swift
+//  SignupProfileViewController.swift
 //  Momento
 //
 //  Created by Sam Henry on 2/23/19.
@@ -8,28 +8,25 @@
 
 import UIKit
 
-class LoginProfileViewController: UIViewController {
+class SignupProfileViewController: UIViewController {
     
     let bgImage = UIImageView()
 
-    @IBOutlet weak var emailInput: UITextField!
-    @IBOutlet weak var passwordInput: UITextField!
-    
-    
-    @IBAction func signupBtn(_ sender: UIButton) {
-        print("signup pressed")
-    }
-    
-    @IBAction func loginBtn(_ sender: UIButton) {
-        print("login pressed")
-    }
     override func viewDidLoad() {
         super.viewDidLoad()
         setBG()
-        
-        self.navigationController?.setNavigationBarHidden(true, animated: true)
-        // Do any additional setup after loading the view.
+        setNavBar()
     }
+    
+    func setNavBar(){
+        //      Navigation Bar Styling
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.navigationBar.isTranslucent = true
+        self.navigationController?.view.backgroundColor = UIColor.clear
+        
+        }
     
     func setBG (){
         view.addSubview(bgImage)
@@ -42,6 +39,7 @@ class LoginProfileViewController: UIViewController {
         
         view.sendSubviewToBack(bgImage)
     }
+    
 
     /*
     // MARK: - Navigation
