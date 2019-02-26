@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		222C33ED2225A72700A6536A /* Onboard1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 222C33EC2225A72700A6536A /* Onboard1ViewController.swift */; };
 		224751B522151CA5004DFA77 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224751B422151CA5004DFA77 /* AppDelegate.swift */; };
 		224751BC22151CA5004DFA77 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 224751BA22151CA5004DFA77 /* Main.storyboard */; };
 		224751BE22151CA5004DFA77 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 224751BD22151CA5004DFA77 /* Assets.xcassets */; };
@@ -20,6 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		222C33EC2225A72700A6536A /* Onboard1ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboard1ViewController.swift; sourceTree = "<group>"; };
 		224751B122151CA5004DFA77 /* Momento.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Momento.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		224751B422151CA5004DFA77 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		224751BB22151CA5004DFA77 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -86,6 +88,7 @@
 				224751CE22151F3D004DFA77 /* CommunityViewController.swift */,
 				228E56622221CCE1001AF3F0 /* LoginProfileViewController.swift */,
 				228E56662221DEA6001AF3F0 /* SignupProfileViewController.swift */,
+				222C33EC2225A72700A6536A /* Onboard1ViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -253,6 +256,7 @@
 			files = (
 				228E56632221CCE1001AF3F0 /* LoginProfileViewController.swift in Sources */,
 				228E56672221DEA6001AF3F0 /* SignupProfileViewController.swift in Sources */,
+				222C33ED2225A72700A6536A /* Onboard1ViewController.swift in Sources */,
 				224751CF22151F3D004DFA77 /* CommunityViewController.swift in Sources */,
 				224751CB22151F1D004DFA77 /* FeedViewController.swift in Sources */,
 				224751B522151CA5004DFA77 /* AppDelegate.swift in Sources */,

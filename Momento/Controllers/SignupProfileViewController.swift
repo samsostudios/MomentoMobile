@@ -7,11 +7,16 @@
 //
 
 import UIKit
+import Firebase
 
 class SignupProfileViewController: UIViewController {
     
     let bgImage = UIImageView()
 
+    @IBOutlet weak var emailInput: UITextField!
+    @IBOutlet weak var passwordInput: UITextField!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setBG()
@@ -40,7 +45,48 @@ class SignupProfileViewController: UIViewController {
         view.sendSubviewToBack(bgImage)
     }
     
+    @IBAction func signUp(_ sender: UIButton) {
+        print("sign up btn pressed!")
+        let userDB = Database.database().reference().child("Users")
+        
+        Auth.auth().createUser(withEmail: emailInput.text!, password: passwordInput.text!){
+            (user, error) in
+            
+            if error != nil{
+                print("error", error!)
+            }else{
+                print("signed up!")
+                
+                let uid = Auth.auth().currentUser!.uid
+                print("UID!!!!: ", uid)
+                
+                let userSignupInfo = ["email": self.emailInput.text, "password": self.passwordInput.text]
+                
+                userDB.child(uid).setValue(userSignupInfo){
+                    (error, refrence) in
+                    
+                    if error != nil{
+                        print("error!!! ", error!)
+                    }else{
+                        print("signed up!")
+                        
+                        self.emailInput.text = ""
+                        self.passwordInput.text = ""
 
+                    }
+                }
+                
+                self.performSegue(withIdentifier: "onboardSegue", sender: self)
+                
+            }
+        }
+    }
+    
+//    func segueToOnboard (){
+//        print("in segue to onboard")
+//        self.performSegue(withIdentifier: "onboardSegue", sender: self)
+//    }
+    
     /*
     // MARK: - Navigation
 

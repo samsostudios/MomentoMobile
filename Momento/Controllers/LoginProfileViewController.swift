@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class LoginProfileViewController: UIViewController {
     
@@ -15,14 +16,17 @@ class LoginProfileViewController: UIViewController {
     @IBOutlet weak var emailInput: UITextField!
     @IBOutlet weak var passwordInput: UITextField!
     
+    var userHandler: AuthStateDidChangeListenerHandle?
     
     @IBAction func signupBtn(_ sender: UIButton) {
-        print("signup pressed")
+//        print("signup pressed")
     }
     
     @IBAction func loginBtn(_ sender: UIButton) {
-        print("login pressed")
+//        print("login pressed")
     }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setBG()
@@ -42,7 +46,22 @@ class LoginProfileViewController: UIViewController {
         
         view.sendSubviewToBack(bgImage)
     }
-
+    
+    override func viewWillAppear(_ animated: Bool) {
+        userHandler = Auth.auth().addStateDidChangeListener {
+            (auth, user) in
+            
+            if user != nil {
+                print("user!!!!: ", user!.uid)
+            }else{
+                print("no current user!!!!")
+            }
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        Auth.auth().removeStateDidChangeListener(userHandler!)
+    }
     /*
     // MARK: - Navigation
 
