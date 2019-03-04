@@ -22,10 +22,10 @@ class LoginProfileViewController: UIViewController {
 //        print("signup pressed")
     }
     
+    @IBOutlet weak var loginBtnSetup: UIButton!
     @IBAction func loginBtn(_ sender: UIButton) {
 //        print("login pressed")
     }
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,6 +33,10 @@ class LoginProfileViewController: UIViewController {
         
         self.navigationController?.setNavigationBarHidden(true, animated: true)
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewDidLayoutSubviews() {
+        setButton()
     }
     
     func setBG (){
@@ -47,12 +51,20 @@ class LoginProfileViewController: UIViewController {
         view.sendSubviewToBack(bgImage)
     }
     
+    func setButton(){
+        loginBtnSetup.setGradient(colorOne: Colors.lightYellow, colorTwo: Colors.darkYellow)
+        loginBtnSetup.clipsToBounds = true
+        loginBtnSetup.layer.cornerRadius = 15
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         userHandler = Auth.auth().addStateDidChangeListener {
             (auth, user) in
             
             if user != nil {
                 print("user!!!!: ", user!.uid)
+                
+                
             }else{
                 print("no current user!!!!")
             }
@@ -62,6 +74,7 @@ class LoginProfileViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         Auth.auth().removeStateDidChangeListener(userHandler!)
     }
+    
     /*
     // MARK: - Navigation
 

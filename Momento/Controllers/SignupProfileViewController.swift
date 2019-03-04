@@ -23,6 +23,50 @@ class SignupProfileViewController: UIViewController {
         setNavBar()
     }
     
+    override func viewDidLayoutSubviews() {
+        setButton()
+    }
+    
+    
+    @IBOutlet weak var signupBtnSetup: UIButton!
+    @IBAction func signUp(_ sender: UIButton) {
+        print("sign up btn pressed!")
+        self.performSegue(withIdentifier: "onboardSegue", sender: self)
+//        let userDB = Database.database().reference().child("Users")
+        
+//        Auth.auth().createUser(withEmail: emailInput.text!, password: passwordInput.text!){
+//            (user, error) in
+//
+//            if error != nil{
+//                print("error", error!)
+//            }else{
+//                print("signed up!")
+//
+//                let uid = Auth.auth().currentUser!.uid
+//                print("UID!!!!: ", uid)
+//
+//                let userSignupInfo = ["email": self.emailInput.text, "password": self.passwordInput.text]
+//
+//                userDB.child(uid).setValue(userSignupInfo){
+//                    (error, refrence) in
+//
+//                    if error != nil{
+//                        print("error!!! ", error!)
+//                    }else{
+//                        print("signed up!")
+//
+//                        self.emailInput.text = ""
+//                        self.passwordInput.text = ""
+//
+//                    }
+//                }
+//
+//                self.performSegue(withIdentifier: "onboardSegue", sender: self)
+//
+//            }
+//        }
+    }
+    
     func setNavBar(){
         //      Navigation Bar Styling
         self.navigationController?.setNavigationBarHidden(false, animated: true)
@@ -31,7 +75,7 @@ class SignupProfileViewController: UIViewController {
         self.navigationController?.navigationBar.isTranslucent = true
         self.navigationController?.view.backgroundColor = UIColor.clear
         
-        }
+    }
     
     func setBG (){
         view.addSubview(bgImage)
@@ -45,47 +89,12 @@ class SignupProfileViewController: UIViewController {
         view.sendSubviewToBack(bgImage)
     }
     
-    @IBAction func signUp(_ sender: UIButton) {
-        print("sign up btn pressed!")
-        let userDB = Database.database().reference().child("Users")
-        
-        Auth.auth().createUser(withEmail: emailInput.text!, password: passwordInput.text!){
-            (user, error) in
-            
-            if error != nil{
-                print("error", error!)
-            }else{
-                print("signed up!")
-                
-                let uid = Auth.auth().currentUser!.uid
-                print("UID!!!!: ", uid)
-                
-                let userSignupInfo = ["email": self.emailInput.text, "password": self.passwordInput.text]
-                
-                userDB.child(uid).setValue(userSignupInfo){
-                    (error, refrence) in
-                    
-                    if error != nil{
-                        print("error!!! ", error!)
-                    }else{
-                        print("signed up!")
-                        
-                        self.emailInput.text = ""
-                        self.passwordInput.text = ""
-
-                    }
-                }
-                
-                self.performSegue(withIdentifier: "onboardSegue", sender: self)
-                
-            }
-        }
+    func setButton(){
+        signupBtnSetup.setGradient(colorOne: Colors.lightYellow, colorTwo: Colors.darkYellow)
+        signupBtnSetup.clipsToBounds = true
+        signupBtnSetup.layer.cornerRadius = 15
     }
     
-//    func segueToOnboard (){
-//        print("in segue to onboard")
-//        self.performSegue(withIdentifier: "onboardSegue", sender: self)
-//    }
     
     /*
     // MARK: - Navigation

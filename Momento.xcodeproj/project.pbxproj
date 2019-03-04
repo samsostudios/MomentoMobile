@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		222C33ED2225A72700A6536A /* Onboard1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 222C33EC2225A72700A6536A /* Onboard1ViewController.swift */; };
+		22440219222C6C5A004D089E /* OnBoardButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22440218222C6C5A004D089E /* OnBoardButton.swift */; };
+		2244021C222C925C004D089E /* YellowGradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2244021B222C925C004D089E /* YellowGradient.swift */; };
+		2244021E222C941E004D089E /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2244021D222C941E004D089E /* Colors.swift */; };
 		224751B522151CA5004DFA77 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224751B422151CA5004DFA77 /* AppDelegate.swift */; };
 		224751BC22151CA5004DFA77 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 224751BA22151CA5004DFA77 /* Main.storyboard */; };
 		224751BE22151CA5004DFA77 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 224751BD22151CA5004DFA77 /* Assets.xcassets */; };
@@ -22,6 +25,9 @@
 
 /* Begin PBXFileReference section */
 		222C33EC2225A72700A6536A /* Onboard1ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboard1ViewController.swift; sourceTree = "<group>"; };
+		22440218222C6C5A004D089E /* OnBoardButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardButton.swift; sourceTree = "<group>"; };
+		2244021B222C925C004D089E /* YellowGradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YellowGradient.swift; sourceTree = "<group>"; };
+		2244021D222C941E004D089E /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		224751B122151CA5004DFA77 /* Momento.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Momento.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		224751B422151CA5004DFA77 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		224751BB22151CA5004DFA77 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -50,6 +56,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		22440217222C6C10004D089E /* CustomElements */ = {
+			isa = PBXGroup;
+			children = (
+				22440218222C6C5A004D089E /* OnBoardButton.swift */,
+				2244021B222C925C004D089E /* YellowGradient.swift */,
+			);
+			path = CustomElements;
+			sourceTree = "<group>";
+		};
+		2244021A222C7B6E004D089E /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
 		224751A822151CA5004DFA77 = {
 			isa = PBXGroup;
 			children = (
@@ -71,11 +93,14 @@
 		224751B322151CA5004DFA77 /* Momento */ = {
 			isa = PBXGroup;
 			children = (
+				22440217222C6C10004D089E /* CustomElements */,
 				224751C822151ED9004DFA77 /* Controllers */,
 				224751C922151EFB004DFA77 /* View */,
+				2244021A222C7B6E004D089E /* Fonts */,
 				224751BD22151CA5004DFA77 /* Assets.xcassets */,
 				228E56642221CDBD001AF3F0 /* GoogleService-Info.plist */,
 				224751C222151CA5004DFA77 /* Info.plist */,
+				2244021D222C941E004D089E /* Colors.swift */,
 			);
 			path = Momento;
 			sourceTree = "<group>";
@@ -255,10 +280,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				228E56632221CCE1001AF3F0 /* LoginProfileViewController.swift in Sources */,
+				2244021E222C941E004D089E /* Colors.swift in Sources */,
+				2244021C222C925C004D089E /* YellowGradient.swift in Sources */,
 				228E56672221DEA6001AF3F0 /* SignupProfileViewController.swift in Sources */,
 				222C33ED2225A72700A6536A /* Onboard1ViewController.swift in Sources */,
 				224751CF22151F3D004DFA77 /* CommunityViewController.swift in Sources */,
 				224751CB22151F1D004DFA77 /* FeedViewController.swift in Sources */,
+				22440219222C6C5A004D089E /* OnBoardButton.swift in Sources */,
 				224751B522151CA5004DFA77 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
