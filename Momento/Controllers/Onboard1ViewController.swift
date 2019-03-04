@@ -21,6 +21,7 @@ class Onboard1ViewController: UIViewController {
     @IBOutlet weak var continueBtn: UIButton!
     @IBAction func continueBtnSegue(_ sender: UIButton) {
         print("continue pressed")
+        performSegue(withIdentifier: "onboard2Segue", sender: self)
     }
     
     override func viewDidLoad() {
