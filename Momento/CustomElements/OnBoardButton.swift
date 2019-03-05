@@ -10,6 +10,8 @@ import UIKit
 
 class OnboardButton: UIButton{
     
+    var isOn = false
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupButton()
@@ -21,6 +23,25 @@ class OnboardButton: UIButton{
     }
     
     func setupButton() {
+        layer.borderWidth = 2.0
+        layer.borderColor = Colors.darkYellow.cgColor
+        layer.cornerRadius = 10.0
         
+//        layer.frame.size = CGSize(width: 150.0, height: 150.0)
+        
+        addTarget(self, action: #selector(OnboardButton.buttonPressed), for: .touchUpInside)
+        
+    }
+    
+    @objc func buttonPressed(){
+        activateButtonSelected(bool: !isOn)
+    }
+    
+    func activateButtonSelected(bool: Bool){
+        isOn = bool
+        
+        let selectedColor = bool ? Colors.darkYellowOpac : .clear
+        
+        backgroundColor = selectedColor
     }
 }

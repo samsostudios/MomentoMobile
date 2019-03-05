@@ -31,40 +31,40 @@ class SignupProfileViewController: UIViewController {
     @IBOutlet weak var signupBtnSetup: UIButton!
     @IBAction func signUp(_ sender: UIButton) {
         print("sign up btn pressed!")
-        self.performSegue(withIdentifier: "onboardSegue", sender: self)
-//        let userDB = Database.database().reference().child("Users")
+//        self.performSegue(withIdentifier: "onboardSegue", sender: self)
+        let userDB = Database.database().reference().child("Users")
         
-//        Auth.auth().createUser(withEmail: emailInput.text!, password: passwordInput.text!){
-//            (user, error) in
-//
-//            if error != nil{
-//                print("error", error!)
-//            }else{
-//                print("signed up!")
-//
-//                let uid = Auth.auth().currentUser!.uid
-//                print("UID!!!!: ", uid)
-//
-//                let userSignupInfo = ["email": self.emailInput.text, "password": self.passwordInput.text]
-//
-//                userDB.child(uid).setValue(userSignupInfo){
-//                    (error, refrence) in
-//
-//                    if error != nil{
-//                        print("error!!! ", error!)
-//                    }else{
-//                        print("signed up!")
-//
-//                        self.emailInput.text = ""
-//                        self.passwordInput.text = ""
-//
-//                    }
-//                }
-//
-//                self.performSegue(withIdentifier: "onboardSegue", sender: self)
-//
-//            }
-//        }
+        Auth.auth().createUser(withEmail: emailInput.text!, password: passwordInput.text!){
+            (user, error) in
+
+            if error != nil{
+                print("error", error!)
+            }else{
+                print("signed up!")
+
+                let uid = Auth.auth().currentUser!.uid
+                print("UID!!!!: ", uid)
+
+                let userSignupInfo = ["email": self.emailInput.text, "password": self.passwordInput.text]
+
+                userDB.child(uid).setValue(userSignupInfo){
+                    (error, refrence) in
+
+                    if error != nil{
+                        print("error!!! ", error!)
+                    }else{
+                        print("signed up!")
+
+                        self.emailInput.text = ""
+                        self.passwordInput.text = ""
+
+                    }
+                }
+
+                self.performSegue(withIdentifier: "onboardSegue", sender: self)
+
+            }
+        }
     }
     
     func setNavBar(){

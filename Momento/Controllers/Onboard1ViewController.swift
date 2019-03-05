@@ -7,20 +7,70 @@
 //
 
 import UIKit
+import Firebase
 
 class Onboard1ViewController: UIViewController {
     
     let bgImage = UIImageView()
 
     @IBOutlet weak var nameInput: UITextField!
-    @IBOutlet weak var lastNameInput: UITextField!
     @IBOutlet weak var phoneInput: UITextField!
     
     @IBOutlet weak var dobPicker: UIDatePicker!
     
     @IBOutlet weak var continueBtn: UIButton!
     @IBAction func continueBtnSegue(_ sender: UIButton) {
-        print("continue pressed")
+        let userDB = Database.database().reference().child("Users")
+        let uid = Auth.auth().currentUser!.uid
+        
+        let fullName = nameInput.text!
+        let phoneNumber = phoneInput.text!
+        
+        dobPicker.datePickerMode = .date
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MMM dd, yyyy"
+        let selectedDate = dateFormatter.string(from: dobPicker.date)
+        
+        if fullName == ""{
+            print("Please Add Name!")
+        }else{
+            userDB.child(uid).child("Name").setValue(fullName){
+                (error, refrence) in
+                
+                if error != nil{
+                    print("Error!", error!)
+                }else{
+                    print("Success!")
+                }
+            }
+        }
+        if phoneNumber == ""{
+           print("Please Add Phone Number!")
+        }else{
+            userDB.child(uid).child("Phone Number").setValue(phoneNumber){
+                (error, refrence) in
+                
+                if error != nil{
+                    print("Error!", error!)
+                }else{
+                    print("Success!")
+                }
+            }
+        }
+        if selectedDate == ""{
+            print("Please Add Date of Birth!")
+        }else{
+            userDB.child(uid).child("Birth Date").setValue(selectedDate){
+                (error, refrence) in
+                
+                if error != nil{
+                    print("Error!", error!)
+                }else{
+                    print("Success!")
+                }
+            }
+        }
+        
         performSegue(withIdentifier: "onboard2Segue", sender: self)
     }
     
@@ -54,10 +104,6 @@ class Onboard1ViewController: UIViewController {
         nameInput.layer.cornerRadius = 5;
         nameInput.layer.borderColor = #colorLiteral(red: 0.9901060462, green: 0.6932173967, blue: 0.1471862197, alpha: 1)
         nameInput.layer.borderWidth = 1
-        
-        lastNameInput.layer.cornerRadius = 5;
-        lastNameInput.layer.borderColor = #colorLiteral(red: 0.9901060462, green: 0.6932173967, blue: 0.1471862197, alpha: 1)
-        lastNameInput.layer.borderWidth = 1
         
         phoneInput.layer.cornerRadius = 5;
         phoneInput.layer.borderColor = #colorLiteral(red: 0.9901060462, green: 0.6932173967, blue: 0.1471862197, alpha: 1)
