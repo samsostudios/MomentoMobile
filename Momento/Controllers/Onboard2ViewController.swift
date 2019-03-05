@@ -121,6 +121,13 @@ class Onboard2ViewController: UIViewController {
                 }
             }
             performSegue(withIdentifier: "ProfileSegueOnboard", sender: self)
+            
+            let designTypesDB = Database.database().reference().child("Design Types")
+            
+            for item in designTypes{
+                designTypesDB.child(item).child("Members").child(uid).setValue(true)
+            }
+            
         }
     }
     

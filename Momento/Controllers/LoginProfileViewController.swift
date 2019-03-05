@@ -24,7 +24,24 @@ class LoginProfileViewController: UIViewController {
     
     @IBOutlet weak var loginBtnSetup: UIButton!
     @IBAction func loginBtn(_ sender: UIButton) {
-//        print("login pressed")
+        let email = emailInput.text!
+        let password = passwordInput.text!
+        
+        if email != "" && password != ""{
+            Auth.auth().signIn(withEmail: email, password: password){
+                (error, refrence) in
+                
+                if error != nil{
+                    print("Login Error!!!!: ", error!)
+                }else{
+                    print("login Succesful!!!")
+                    self.performSegue(withIdentifier: "ProfileSegueLogin", sender: self)
+                }
+            }
+        }else{
+            print("error logging in!")
+        }
+        
     }
     
     override func viewDidLoad() {
@@ -63,6 +80,7 @@ class LoginProfileViewController: UIViewController {
             
             if user != nil {
                 print("user!!!!: ", user!.uid)
+                self.performSegue(withIdentifier: "ProfileSegueLogin", sender: self)
                 
                 
             }else{
