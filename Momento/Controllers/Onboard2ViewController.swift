@@ -110,8 +110,17 @@ class Onboard2ViewController: UIViewController {
             let uid = Auth.auth().currentUser!.uid
             
             for item in designTypes{
-                userDB.child(uid).child("Design Types").child(item).setValue(true)
+                userDB.child(uid).child("Design Types").child(item).setValue(true){
+                    (error, refrence) in
+                    
+                    if error != nil{
+                        print("Error!", error!)
+                    }else{
+                        print("Success!")
+                    }
+                }
             }
+            performSegue(withIdentifier: "ProfileSegueOnboard", sender: self)
         }
     }
     

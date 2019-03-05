@@ -198,6 +198,7 @@
                         <outlet property="emailInput" destination="hWX-Im-euL" id="AXI-fW-ajg"/>
                         <outlet property="loginBtnSetup" destination="mDl-xs-7us" id="Ub0-mT-mCo"/>
                         <outlet property="passwordInput" destination="y5p-Xf-moL" id="mSE-1A-mvH"/>
+                        <segue destination="8cD-Z6-jIx" kind="presentation" identifier="ProfileSegueLogin" id="nZK-1W-mIA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="i2B-LG-wmg" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -443,6 +444,33 @@
             </objects>
             <point key="canvasLocation" x="2221.739130434783" y="1455.8035714285713"/>
         </scene>
+        <!--Profile View Controller-->
+        <scene sceneID="Tbz-Os-gpy">
+            <objects>
+                <viewController id="8cD-Z6-jIx" customClass="ProfileViewController" customModule="Momento" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="pGt-wW-a02">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Profile" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mgp-su-cZT">
+                                <rect key="frame" x="182.66666666666666" y="437.66666666666669" width="49" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="mgp-su-cZT" firstAttribute="centerX" secondItem="pGt-wW-a02" secondAttribute="centerX" id="ILn-JM-3M4"/>
+                            <constraint firstItem="mgp-su-cZT" firstAttribute="centerY" secondItem="pGt-wW-a02" secondAttribute="centerY" id="QW9-Gx-g5y"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="T3w-vy-Jw5"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cMm-DI-toY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1511.5942028985507" y="2132.8125"/>
+        </scene>
         <!--Onboard2 View Controller-->
         <scene sceneID="3Zf-Xr-Kpb">
             <objects>
@@ -575,6 +603,7 @@
                     <size key="freeformSize" width="414" height="1000"/>
                     <connections>
                         <outlet property="signupBtnSetup" destination="4i3-E7-rtJ" id="vne-h0-JY7"/>
+                        <segue destination="8cD-Z6-jIx" kind="show" identifier="ProfileSegueOnboard" id="5X8-iX-xaf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="prl-Ok-dBb" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -628,5 +657,8 @@
         <image name="momentoLettermark" width="2000" height="377"/>
         <image name="second" width="30" height="30"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="5X8-iX-xaf"/>
+    </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.98039215690000003" green="0.63529411759999999" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
 </document>

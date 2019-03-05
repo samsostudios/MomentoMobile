@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		222C33ED2225A72700A6536A /* Onboard1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 222C33EC2225A72700A6536A /* Onboard1ViewController.swift */; };
+		223C423E222E5C60006DCCF1 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223C423D222E5C60006DCCF1 /* ProfileViewController.swift */; };
 		22440219222C6C5A004D089E /* OnBoardButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22440218222C6C5A004D089E /* OnBoardButton.swift */; };
 		2244021C222C925C004D089E /* YellowGradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2244021B222C925C004D089E /* YellowGradient.swift */; };
 		2244021E222C941E004D089E /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2244021D222C941E004D089E /* Colors.swift */; };
@@ -26,6 +27,7 @@
 
 /* Begin PBXFileReference section */
 		222C33EC2225A72700A6536A /* Onboard1ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboard1ViewController.swift; sourceTree = "<group>"; };
+		223C423D222E5C60006DCCF1 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		22440218222C6C5A004D089E /* OnBoardButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardButton.swift; sourceTree = "<group>"; };
 		2244021B222C925C004D089E /* YellowGradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YellowGradient.swift; sourceTree = "<group>"; };
 		2244021D222C941E004D089E /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
@@ -117,6 +119,7 @@
 				228E56662221DEA6001AF3F0 /* SignupProfileViewController.swift */,
 				222C33EC2225A72700A6536A /* Onboard1ViewController.swift */,
 				228DC9B7222D86E500E34A21 /* Onboard2ViewController.swift */,
+				223C423D222E5C60006DCCF1 /* ProfileViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -288,6 +291,7 @@
 				228E56672221DEA6001AF3F0 /* SignupProfileViewController.swift in Sources */,
 				222C33ED2225A72700A6536A /* Onboard1ViewController.swift in Sources */,
 				224751CF22151F3D004DFA77 /* CommunityViewController.swift in Sources */,
+				223C423E222E5C60006DCCF1 /* ProfileViewController.swift in Sources */,
 				224751CB22151F1D004DFA77 /* FeedViewController.swift in Sources */,
 				22440219222C6C5A004D089E /* OnBoardButton.swift in Sources */,
 				224751B522151CA5004DFA77 /* AppDelegate.swift in Sources */,
