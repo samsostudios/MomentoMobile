@@ -18,7 +18,6 @@ class Onboard2ViewController: UIViewController {
     let bgImage = UIImageView()
     @IBAction func graphicDesignBtn(_ sender: Any) {
         buttonsSelected[1] = true
-//        print(buttonsSelected[1]!)
     }
     @IBAction func uxBtn(_ sender: UIButton) {
         buttonsSelected[2] = true
@@ -48,7 +47,7 @@ class Onboard2ViewController: UIViewController {
     @IBOutlet weak var signupBtnSetup: UIButton!
     @IBAction func signupBtn(_ sender: UIButton) {
         var designTypes: [String] = []
-//        print(buttonsSelected)
+
         for (key, value) in buttonsSelected{
             switch key {
             case 1:

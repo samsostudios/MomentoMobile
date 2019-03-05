@@ -338,53 +338,50 @@
                                 <color key="textColor" red="0.95686274510000002" green="0.95686274510000002" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Full Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="A0A-4u-rQL">
-                                <rect key="frame" x="20" y="129" width="374" height="35"/>
-                                <color key="backgroundColor" red="0.1176470588" green="0.1176470588" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="35" id="rpz-fe-jiK"/>
-                                </constraints>
-                                <color key="textColor" red="0.95686274510000002" green="0.95686274510000002" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="_placeholderLabel.textColor">
-                                        <color key="value" red="0.98039215690000003" green="0.63529411759999999" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Phone Number" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Q0f-zr-rID">
-                                <rect key="frame" x="20" y="189" width="374" height="35"/>
-                                <color key="backgroundColor" red="0.1176470588" green="0.1176470588" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="35" id="xVQ-DX-SzK"/>
-                                </constraints>
-                                <color key="textColor" red="0.95686274510000002" green="0.95686274510000002" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="_placeholderLabel.textColor">
-                                        <color key="value" red="0.98039215690000003" green="0.63529411759999999" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </textField>
-                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="YoX-Po-DnO">
-                                <rect key="frame" x="0.0" y="334" width="414" height="216"/>
-                                <date key="date" timeIntervalSinceReferenceDate="573341494.60946202">
-                                    <!--2019-03-03 21:31:34 +0000-->
-                                </date>
-                                <date key="minimumDate" timeIntervalSinceReferenceDate="-978267600">
-                                    <!--1970-01-01 11:00:00 +0000-->
-                                </date>
-                                <date key="maximumDate" timeIntervalSinceReferenceDate="599482800">
-                                    <!--2019-12-31 11:00:00 +0000-->
-                                </date>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="textColor">
-                                        <color key="value" red="0.95686274510000002" green="0.95686274510000002" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </datePicker>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="UNe-yQ-yLt">
+                                <rect key="frame" x="20" y="124" width="374" height="140"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Full Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="A0A-4u-rQL">
+                                        <rect key="frame" x="0.0" y="0.0" width="374" height="30"/>
+                                        <color key="backgroundColor" red="0.1176470588" green="0.1176470588" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="textColor" red="0.95686274510000002" green="0.95686274510000002" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="_placeholderLabel.textColor">
+                                                <color key="value" red="0.98039215690000003" green="0.63529411759999999" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VXk-HT-dxd">
+                                        <rect key="frame" x="0.0" y="55" width="374" height="30"/>
+                                        <color key="backgroundColor" red="0.1176470588" green="0.1176470588" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="textColor" red="0.95686274510000002" green="0.95686274510000002" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="_placeholderLabel.textColor">
+                                                <color key="value" red="0.98039215690000003" green="0.63529411759999999" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="usernameInput:" destination="K2e-3V-LxO" eventType="editingDidEnd" id="KsF-d8-xQs"/>
+                                        </connections>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Phone Number" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Q0f-zr-rID">
+                                        <rect key="frame" x="0.0" y="110" width="374" height="30"/>
+                                        <color key="backgroundColor" red="0.1176470588" green="0.1176470588" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="textColor" red="0.95686274510000002" green="0.95686274510000002" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="_placeholderLabel.textColor">
+                                                <color key="value" red="0.98039215690000003" green="0.63529411759999999" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </textField>
+                                </subviews>
+                            </stackView>
                             <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q72-Jo-bAw">
                                 <rect key="frame" x="75" y="787" width="264" height="50"/>
                                 <color key="backgroundColor" red="0.98039215690000003" green="0.63529411759999999" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
@@ -400,35 +397,45 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date of birth:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GSE-ft-Wto">
-                                <rect key="frame" x="20" y="274" width="306" height="35"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="306" id="eyO-dY-RRS"/>
-                                    <constraint firstAttribute="height" constant="35" id="iOd-XS-nH8"/>
-                                </constraints>
+                                <rect key="frame" x="20" y="294" width="147.66666666666666" height="30"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="25"/>
                                 <color key="textColor" red="0.95686274510000002" green="0.95686274510000002" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="YoX-Po-DnO">
+                                <rect key="frame" x="0.0" y="349" width="414" height="216"/>
+                                <date key="date" timeIntervalSinceReferenceDate="573341494.60946202">
+                                    <!--2019-03-03 21:31:34 +0000-->
+                                </date>
+                                <date key="minimumDate" timeIntervalSinceReferenceDate="-978267600">
+                                    <!--1970-01-01 11:00:00 +0000-->
+                                </date>
+                                <date key="maximumDate" timeIntervalSinceReferenceDate="599482800">
+                                    <!--2019-12-31 11:00:00 +0000-->
+                                </date>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="textColor">
+                                        <color key="value" red="0.95686274510000002" green="0.95686274510000002" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </datePicker>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="A0A-4u-rQL" firstAttribute="trailing" secondItem="wNd-Pc-EjL" secondAttribute="trailingMargin" id="2to-yQ-1Sh"/>
-                            <constraint firstItem="YoX-Po-DnO" firstAttribute="trailing" secondItem="tvI-PC-t7V" secondAttribute="trailing" id="4lD-FX-5nS"/>
-                            <constraint firstItem="Q0f-zr-rID" firstAttribute="trailing" secondItem="wNd-Pc-EjL" secondAttribute="trailingMargin" id="66Z-ut-IDY"/>
+                            <constraint firstItem="GSE-ft-Wto" firstAttribute="top" secondItem="UNe-yQ-yLt" secondAttribute="bottom" constant="30" id="EIB-fW-ekH"/>
                             <constraint firstItem="4bm-er-tOx" firstAttribute="leading" secondItem="wNd-Pc-EjL" secondAttribute="leadingMargin" id="Gxh-0c-Jjz"/>
-                            <constraint firstItem="GSE-ft-Wto" firstAttribute="leading" secondItem="tvI-PC-t7V" secondAttribute="leading" constant="20" id="Li1-Mp-Smx"/>
+                            <constraint firstItem="YoX-Po-DnO" firstAttribute="leading" secondItem="tvI-PC-t7V" secondAttribute="leading" id="LDA-Qp-N8Z"/>
+                            <constraint firstItem="tvI-PC-t7V" firstAttribute="trailing" secondItem="UNe-yQ-yLt" secondAttribute="trailing" constant="20" id="QM7-7B-T80"/>
                             <constraint firstItem="tvI-PC-t7V" firstAttribute="bottom" secondItem="q72-Jo-bAw" secondAttribute="bottom" constant="25" id="ReO-oz-LSO"/>
-                            <constraint firstItem="GSE-ft-Wto" firstAttribute="top" secondItem="Q0f-zr-rID" secondAttribute="bottom" constant="50" id="Vvg-sq-rTD"/>
-                            <constraint firstItem="A0A-4u-rQL" firstAttribute="top" secondItem="4bm-er-tOx" secondAttribute="bottom" constant="30" id="Xj7-IA-RO9"/>
-                            <constraint firstItem="Q0f-zr-rID" firstAttribute="top" secondItem="A0A-4u-rQL" secondAttribute="bottom" constant="25" id="Xud-kt-jZQ"/>
-                            <constraint firstItem="YoX-Po-DnO" firstAttribute="leading" secondItem="tvI-PC-t7V" secondAttribute="leading" id="Yrb-bd-d4z"/>
+                            <constraint firstItem="UNe-yQ-yLt" firstAttribute="top" secondItem="4bm-er-tOx" secondAttribute="bottom" constant="25" id="ULB-je-bfl"/>
                             <constraint firstItem="4bm-er-tOx" firstAttribute="top" secondItem="tvI-PC-t7V" secondAttribute="top" constant="5" id="Zcm-WL-BoQ"/>
-                            <constraint firstItem="A0A-4u-rQL" firstAttribute="leading" secondItem="wNd-Pc-EjL" secondAttribute="leadingMargin" id="fFP-qo-kiR"/>
-                            <constraint firstItem="Q0f-zr-rID" firstAttribute="leading" secondItem="wNd-Pc-EjL" secondAttribute="leadingMargin" id="i8S-hI-ffg"/>
+                            <constraint firstItem="YoX-Po-DnO" firstAttribute="top" secondItem="GSE-ft-Wto" secondAttribute="bottom" constant="25" id="aie-f3-0kM"/>
+                            <constraint firstItem="UNe-yQ-yLt" firstAttribute="leading" secondItem="tvI-PC-t7V" secondAttribute="leading" constant="20" id="hSB-Nh-Bny"/>
+                            <constraint firstItem="YoX-Po-DnO" firstAttribute="trailing" secondItem="tvI-PC-t7V" secondAttribute="trailing" id="iwV-4G-E5b"/>
                             <constraint firstItem="4bm-er-tOx" firstAttribute="trailing" secondItem="wNd-Pc-EjL" secondAttribute="trailingMargin" id="ixP-M8-IV8"/>
                             <constraint firstItem="q72-Jo-bAw" firstAttribute="leading" secondItem="tvI-PC-t7V" secondAttribute="leading" constant="75" id="jpz-Jj-Xo9"/>
-                            <constraint firstItem="YoX-Po-DnO" firstAttribute="top" secondItem="GSE-ft-Wto" secondAttribute="bottom" constant="25" id="myp-9b-ZPc"/>
                             <constraint firstItem="tvI-PC-t7V" firstAttribute="trailing" secondItem="q72-Jo-bAw" secondAttribute="trailing" constant="75" id="vM6-O7-9Ll"/>
+                            <constraint firstItem="GSE-ft-Wto" firstAttribute="leading" secondItem="tvI-PC-t7V" secondAttribute="leading" constant="20" id="y2c-HH-jfR"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="tvI-PC-t7V"/>
                     </view>
@@ -437,6 +444,7 @@
                         <outlet property="dobPicker" destination="YoX-Po-DnO" id="wjU-fJ-j62"/>
                         <outlet property="nameInput" destination="A0A-4u-rQL" id="QNj-8N-vMS"/>
                         <outlet property="phoneInput" destination="Q0f-zr-rID" id="7sn-Yu-A4A"/>
+                        <outlet property="usernameInput" destination="VXk-HT-dxd" id="FpP-sq-Bvu"/>
                         <segue destination="eJB-hj-gUe" kind="show" identifier="onboard2Segue" id="JP0-ik-EMg"/>
                     </connections>
                 </viewController>

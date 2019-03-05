@@ -14,6 +14,16 @@ class Onboard1ViewController: UIViewController {
     let bgImage = UIImageView()
 
     @IBOutlet weak var nameInput: UITextField!
+    @IBAction func usernameInput(_ sender: UITextField) {
+        let username = sender.text!
+        
+        let usernameDB = Database.database().reference().child("Usernames")
+        
+        usernameDB.observeSingleEvent(of: .value, with: { (DataSnapshot) in
+            
+        })
+        
+    }
     @IBOutlet weak var phoneInput: UITextField!
     
     @IBOutlet weak var dobPicker: UIDatePicker!
