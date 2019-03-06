@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 
-class SignupProfileViewController: UIViewController {
+class SignupProfileViewController: UIViewController, UITextFieldDelegate {
     
     let bgImage = UIImageView()
 
@@ -21,6 +21,21 @@ class SignupProfileViewController: UIViewController {
         super.viewDidLoad()
         setBG()
         setNavBar()
+        
+        emailInput.delegate = self
+        passwordInput.delegate = self
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        textField.resignFirstResponder()
+        //or
+        //self.view.endEditing(true)
+        return true
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
     }
     
     override func viewDidLayoutSubviews() {

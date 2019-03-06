@@ -108,7 +108,7 @@
                                 </constraints>
                                 <color key="textColor" red="0.95686274510000002" green="0.95686274510000002" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" keyboardAppearance="alert" secureTextEntry="YES" textContentType="password"/>
+                                <textInputTraits key="textInputTraits" keyboardAppearance="alert" returnKeyType="done" secureTextEntry="YES" textContentType="password"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="_placeholderLabel.textColor">
                                         <color key="value" red="1" green="0.78823529410000004" blue="0.33333333329999998" alpha="1" colorSpace="calibratedRGB"/>
@@ -155,7 +155,6 @@
                                 </state>
                                 <connections>
                                     <action selector="signupBtn:" destination="hC3-Gt-Y54" eventType="touchUpInside" id="u2y-DP-YaA"/>
-                                    <segue destination="eJV-ts-m5n" kind="show" id="h7n-YR-4jm"/>
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="momentoLettermark" translatesAutoresizingMaskIntoConstraints="NO" id="zfg-7y-1PT">
@@ -199,6 +198,7 @@
                         <outlet property="loginBtnSetup" destination="mDl-xs-7us" id="Ub0-mT-mCo"/>
                         <outlet property="passwordInput" destination="y5p-Xf-moL" id="mSE-1A-mvH"/>
                         <segue destination="8cD-Z6-jIx" kind="show" identifier="ProfileSegueLogin" id="nZK-1W-mIA"/>
+                        <segue destination="eJV-ts-m5n" kind="show" identifier="SignUpSegue" id="qNj-Ni-cQV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="i2B-LG-wmg" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -270,7 +270,7 @@
                                 </constraints>
                                 <color key="textColor" red="0.95686274510000002" green="0.95686274510000002" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress" keyboardAppearance="alert" enablesReturnKeyAutomatically="YES" textContentType="email"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress" keyboardAppearance="alert" returnKeyType="done" enablesReturnKeyAutomatically="YES" textContentType="email"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="_placeholderLabel.textColor">
                                         <color key="value" red="0.98039215690000003" green="0.63529411759999999" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
@@ -346,7 +346,7 @@
                                         <color key="backgroundColor" red="0.1176470588" green="0.1176470588" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
                                         <color key="textColor" red="0.95686274510000002" green="0.95686274510000002" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" keyboardAppearance="alert" returnKeyType="done"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="color" keyPath="_placeholderLabel.textColor">
                                                 <color key="value" red="0.98039215690000003" green="0.63529411759999999" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
@@ -358,14 +358,14 @@
                                         <color key="backgroundColor" red="0.1176470588" green="0.1176470588" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
                                         <color key="textColor" red="0.95686274510000002" green="0.95686274510000002" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" keyboardAppearance="alert" returnKeyType="done"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="color" keyPath="_placeholderLabel.textColor">
                                                 <color key="value" red="0.98039215690000003" green="0.63529411759999999" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <action selector="usernameInput:" destination="K2e-3V-LxO" eventType="editingDidEnd" id="KsF-d8-xQs"/>
+                                            <action selector="usernameCheck:" destination="K2e-3V-LxO" eventType="editingDidEnd" id="kZn-ni-mRu"/>
                                         </connections>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Phone Number" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Q0f-zr-rID">
@@ -373,7 +373,7 @@
                                         <color key="backgroundColor" red="0.1176470588" green="0.1176470588" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
                                         <color key="textColor" red="0.95686274510000002" green="0.95686274510000002" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="numberPad" keyboardAppearance="alert" returnKeyType="done"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="color" keyPath="_placeholderLabel.textColor">
                                                 <color key="value" red="0.98039215690000003" green="0.63529411759999999" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
@@ -444,7 +444,7 @@
                         <outlet property="dobPicker" destination="YoX-Po-DnO" id="wjU-fJ-j62"/>
                         <outlet property="nameInput" destination="A0A-4u-rQL" id="QNj-8N-vMS"/>
                         <outlet property="phoneInput" destination="Q0f-zr-rID" id="7sn-Yu-A4A"/>
-                        <outlet property="usernameInput" destination="VXk-HT-dxd" id="FpP-sq-Bvu"/>
+                        <outlet property="usernameInput" destination="VXk-HT-dxd" id="djj-Fu-exp"/>
                         <segue destination="eJB-hj-gUe" kind="show" identifier="onboard2Segue" id="JP0-ik-EMg"/>
                     </connections>
                 </viewController>

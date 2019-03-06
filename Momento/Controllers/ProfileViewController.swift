@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 
-class ProfileViewController: UIViewController {
+class ProfileViewController: UIViewController, UITextViewDelegate {
 
     @IBAction func logoutBtn(_ sender: UIButton) {
         do{

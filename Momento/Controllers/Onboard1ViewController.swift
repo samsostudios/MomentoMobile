@@ -9,21 +9,47 @@
 import UIKit
 import Firebase
 
-class Onboard1ViewController: UIViewController {
+class Onboard1ViewController: UIViewController, UITextFieldDelegate {
     
     let bgImage = UIImageView()
 
     @IBOutlet weak var nameInput: UITextField!
-    @IBAction func usernameInput(_ sender: UITextField) {
-        let username = sender.text!
+    
+    @IBOutlet weak var usernameInput: UITextField!
+    @IBAction func usernameCheck(_ sender: UITextField) {
+        let username = usernameInput.text!
+        print("username:", username)
         
-        let usernameDB = Database.database().reference().child("Usernames")
+        let uid = Auth.auth().currentUser!.uid
+        let userDB = Database.database().reference().child("Users")
+        let usernamesDB = Database.database().reference().child("Usernames")
         
-        usernameDB.observeSingleEvent(of: .value, with: { (DataSnapshot) in
+        usernamesDB.observeSingleEvent(of: .value) {snapshot in
+            print("snapshot!", snapshot.childrenCount)
             
-        })
-        
+            var nameTaken = false
+            
+            for item in snapshot.children.allObjects as! [DataSnapshot]{
+                print("database items: ", item.value!)
+                
+                let usernameItemCheck = item.value as! String
+                
+                if usernameItemCheck == username{
+                    nameTaken = true
+                }
+            }
+            
+            print("nameTaken: ", nameTaken)
+            
+            if nameTaken == true{
+                print("ADD ALERT for username taken")
+            }else{
+                userDB.child(uid).child("Username").setValue(username)
+                usernamesDB.child(uid).setValue(username)
+            }
+        }
     }
+    
     @IBOutlet weak var phoneInput: UITextField!
     
     @IBOutlet weak var dobPicker: UIDatePicker!
@@ -91,7 +117,23 @@ class Onboard1ViewController: UIViewController {
         
         setBG()
         setInput()
+        
+        nameInput.delegate = self
+        usernameInput.delegate = self
+        phoneInput.delegate = self
         // Do any additional setup after loading the view.
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        textField.resignFirstResponder()
+        //or
+        //self.view.endEditing(true)
+        return true
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
     }
     
     override func viewDidLayoutSubviews() {
@@ -114,6 +156,10 @@ class Onboard1ViewController: UIViewController {
         nameInput.layer.cornerRadius = 5;
         nameInput.layer.borderColor = #colorLiteral(red: 0.9901060462, green: 0.6932173967, blue: 0.1471862197, alpha: 1)
         nameInput.layer.borderWidth = 1
+        
+        usernameInput.layer.cornerRadius = 5;
+        usernameInput.layer.borderColor = #colorLiteral(red: 0.9901060462, green: 0.6932173967, blue: 0.1471862197, alpha: 1)
+        usernameInput.layer.borderWidth = 1
         
         phoneInput.layer.cornerRadius = 5;
         phoneInput.layer.borderColor = #colorLiteral(red: 0.9901060462, green: 0.6932173967, blue: 0.1471862197, alpha: 1)

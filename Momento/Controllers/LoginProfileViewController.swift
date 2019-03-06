@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 
-class LoginProfileViewController: UIViewController {
+class LoginProfileViewController: UIViewController, UITextFieldDelegate {
     
     let bgImage = UIImageView()
 
@@ -19,7 +19,7 @@ class LoginProfileViewController: UIViewController {
     var userHandler: AuthStateDidChangeListenerHandle?
     
     @IBAction func signupBtn(_ sender: UIButton) {
-//        print("signup pressed")
+        performSegue(withIdentifier: "SignUpSegue", sender: self)
     }
     
     @IBOutlet weak var loginBtnSetup: UIButton!
@@ -47,9 +47,22 @@ class LoginProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setBG()
-        
+        emailInput.delegate = self
+        passwordInput.delegate = self
         self.navigationController?.setNavigationBarHidden(true, animated: true)
         // Do any additional setup after loading the view.
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        textField.resignFirstResponder()
+        //or
+        //self.view.endEditing(true)
+        return true
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
     }
     
     override func viewDidLayoutSubviews() {
