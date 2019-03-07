@@ -102,6 +102,7 @@ class LoginProfileViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
+    
     override func viewWillDisappear(_ animated: Bool) {
         Auth.auth().removeStateDidChangeListener(userHandler!)
     }

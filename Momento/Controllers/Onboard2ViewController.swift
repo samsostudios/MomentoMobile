@@ -180,6 +180,7 @@ class Onboard2ViewController: UIViewController {
         
         let userDB = Database.database().reference().child("Users")
         let designTypesDB = Database.database().reference().child("Design Types")
+        let usernamesDB = Database.database().reference().child("Usernames")
         
         Auth.auth().createUser(withEmail: signupInfo["Email"]!, password: signupInfo["Password"]!){
             (user, error) in
@@ -198,7 +199,11 @@ class Onboard2ViewController: UIViewController {
                     userDB.child(uid).child("Design Types").child(key).setValue(true)
                     designTypesDB.child(key).child("Members").child(uid).setValue(true)
                 }
-                
+                for (key, value) in otherInfo{
+                    if key == "Username"{
+                        usernamesDB.child(uid).setValue(value)
+                    }
+                }
                 self.performSegue(withIdentifier: "ProfileSegueOnboard", sender: self)
             }
         }
