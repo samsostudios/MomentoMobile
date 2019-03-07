@@ -12,6 +12,8 @@ import Firebase
 class SignupProfileViewController: UIViewController, UITextFieldDelegate {
     
     let bgImage = UIImageView()
+    
+    var userInfo = [String: String]()
 
     @IBOutlet weak var emailInput: UITextField!
     @IBOutlet weak var passwordInput: UITextField!
@@ -46,39 +48,18 @@ class SignupProfileViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var signupBtnSetup: UIButton!
     @IBAction func signUp(_ sender: UIButton) {
         print("sign up btn pressed!")
-//        self.performSegue(withIdentifier: "onboardSegue", sender: self)
-        let userDB = Database.database().reference().child("Users")
         
-        Auth.auth().createUser(withEmail: emailInput.text!, password: passwordInput.text!){
-            (user, error) in
-
-            if error != nil{
-                print("error", error!)
-            }else{
-                print("signed up!")
-
-                let uid = Auth.auth().currentUser!.uid
-                print("UID!!!!: ", uid)
-
-                let userSignupInfo = ["email": self.emailInput.text, "password": self.passwordInput.text]
-
-                userDB.child(uid).setValue(userSignupInfo){
-                    (error, refrence) in
-
-                    if error != nil{
-                        print("error!!! ", error!)
-                    }else{
-                        print("signed up!")
-
-                        self.emailInput.text = ""
-                        self.passwordInput.text = ""
-
-                    }
-                }
-
-                self.performSegue(withIdentifier: "onboardSegue", sender: self)
-
-            }
+        print("userInfo: ", self.userInfo)
+        
+        let email = self.emailInput.text!
+        let password = self.passwordInput.text!
+        
+        if email == "" || password == "" {
+            print("ADD ALERT for email and password, user firebase error for password")
+        }else{
+            self.userInfo = ["Email": email, "Password": password]
+//            print("userInfo: ", self.userInfo)
+            self.performSegue(withIdentifier: "onboardSegue", sender: self)
         }
     }
     
@@ -108,6 +89,11 @@ class SignupProfileViewController: UIViewController, UITextFieldDelegate {
         signupBtnSetup.setGradient(colorOne: Colors.lightYellow, colorTwo: Colors.darkYellow)
         signupBtnSetup.clipsToBounds = true
         signupBtnSetup.layer.cornerRadius = 15
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let onBoard1VC = segue.destination as! Onboard1ViewController
+        onBoard1VC.userInfo = self.userInfo
     }
     
     

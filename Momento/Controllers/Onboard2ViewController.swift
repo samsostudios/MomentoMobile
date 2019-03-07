@@ -11,6 +11,8 @@ import Firebase
 
 class Onboard2ViewController: UIViewController {
     
+    var userInfo = [String: String]()
+    
     var buttonsSelected = [1: false, 2: false, 3: false,
                            4: false, 5: false, 6: false,
                            7: false, 8: false]
@@ -47,47 +49,56 @@ class Onboard2ViewController: UIViewController {
     @IBOutlet weak var signupBtnSetup: UIButton!
     @IBAction func signupBtn(_ sender: UIButton) {
         var designTypes: [String] = []
-
+//        print("buttons selected:", self.buttonsSelected)
+        
         for (key, value) in buttonsSelected{
+            
             switch key {
             case 1:
                 if value == true{
                     designTypes.append("Graphic Design")
+                    self.userInfo["Graphic Design"] = ""
                 }
             case 2:
                 if value == true{
                     designTypes.append("UX Design")
+                    self.userInfo["UX Design"] = ""
                 }
             case 3:
                 if value == true{
                     designTypes.append("Web Design")
+                    self.userInfo["Web Design"] = ""
                 }
             case 4:
                 if value == true{
                     designTypes.append("App Design")
+                    self.userInfo["App Design"] = ""
                 }
             case 5:
                 if value == true{
                     designTypes.append("Photography")
+                    self.userInfo["Photography"] = ""
                 }
             case 6:
                 if value == true{
                     designTypes.append("Videography")
+                    self.userInfo["Videography"] = ""
                 }
             case 7:
                 if value == true{
                     designTypes.append("Illustration")
+                    self.userInfo["Illustration"] = ""
                 }
             case 8:
                 if value == true{
                     designTypes.append("Animation")
+                    self.userInfo["Animation"] = ""
                 }
             default:
                 print("error")
             }
         }
         
-        print(designTypes)
         
         if designTypes.count == 0{
             print("Please select a design type")
@@ -105,27 +116,26 @@ class Onboard2ViewController: UIViewController {
             present(alert, animated: true, completion: nil)
         }
         else{
-            let userDB = Database.database().reference().child("Users")
-            let uid = Auth.auth().currentUser!.uid
             
-            for item in designTypes{
-                userDB.child(uid).child("Design Types").child(item).setValue(true){
-                    (error, refrence) in
-                    
-                    if error != nil{
-                        print("Error!", error!)
-                    }else{
-                        print("Success!")
-                    }
+            var signupInfo = [String: String]()
+            var types  = [String: Bool]()
+            var otherInfo = [String: String]()
+            
+            for (key, value) in self.userInfo{
+//                print("items:", key, value)
+                
+                if key == "Email" || key == "Password" {
+                    signupInfo[key] = value
+                }
+                if value == ""{
+                    types[key] = true
+                }
+                else{
+                    otherInfo[key] = value
                 }
             }
-            performSegue(withIdentifier: "ProfileSegueOnboard", sender: self)
             
-            let designTypesDB = Database.database().reference().child("Design Types")
-            
-            for item in designTypes{
-                designTypesDB.child(item).child("Members").child(uid).setValue(true)
-            }
+            signIn(signupInfo: signupInfo, types: types, otherInfo: otherInfo)
             
         }
     }
@@ -137,6 +147,7 @@ class Onboard2ViewController: UIViewController {
         print(buttonsSelected[1]!)
         
         setBG()
+//        print("OB@ user info: ", self.userInfo)
         // Do any additional setup after loading the view.
     }
     
@@ -162,6 +173,36 @@ class Onboard2ViewController: UIViewController {
         signupBtnSetup.layer.cornerRadius = 15
     }
     
+    func signIn(signupInfo: [String: String], types: [String: Bool], otherInfo: [String: String]){
+        print("SUinfo", signupInfo)
+        print("types", types)
+        print("other", otherInfo)
+        
+        let userDB = Database.database().reference().child("Users")
+        let designTypesDB = Database.database().reference().child("Design Types")
+        
+        Auth.auth().createUser(withEmail: signupInfo["Email"]!, password: signupInfo["Password"]!){
+            (user, error) in
+            
+            if error != nil {
+                print("ADD ALERR info not good")
+            }else{
+                print("sign up good!")
+                let uid = Auth.auth().currentUser!.uid
+                
+                userDB.child(uid).setValue(signupInfo)
+                userDB.child(uid).setValue(otherInfo)
+                
+                for (key, value) in types{
+                    print("types", key, value)
+                    userDB.child(uid).child("Design Types").child(key).setValue(true)
+                    designTypesDB.child(key).child("Members").child(uid).setValue(true)
+                }
+                
+                self.performSegue(withIdentifier: "ProfileSegueOnboard", sender: self)
+            }
+        }
+    }
 
     /*
     // MARK: - Navigation

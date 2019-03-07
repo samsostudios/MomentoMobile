@@ -12,6 +12,8 @@ import Firebase
 class Onboard1ViewController: UIViewController, UITextFieldDelegate {
     
     let bgImage = UIImageView()
+    
+    var userInfo = [String: String]()
 
     @IBOutlet weak var nameInput: UITextField!
     
@@ -20,8 +22,7 @@ class Onboard1ViewController: UIViewController, UITextFieldDelegate {
         let username = usernameInput.text!
         print("username:", username)
         
-        let uid = Auth.auth().currentUser!.uid
-        let userDB = Database.database().reference().child("Users")
+
         let usernamesDB = Database.database().reference().child("Usernames")
         
         usernamesDB.observeSingleEvent(of: .value) {snapshot in
@@ -30,7 +31,7 @@ class Onboard1ViewController: UIViewController, UITextFieldDelegate {
             var nameTaken = false
             
             for item in snapshot.children.allObjects as! [DataSnapshot]{
-                print("database items: ", item.value!)
+//                print("database items: ", item.value!)
                 
                 let usernameItemCheck = item.value as! String
                 
@@ -39,13 +40,12 @@ class Onboard1ViewController: UIViewController, UITextFieldDelegate {
                 }
             }
             
-            print("nameTaken: ", nameTaken)
             
             if nameTaken == true{
                 print("ADD ALERT for username taken")
             }else{
-                userDB.child(uid).child("Username").setValue(username)
-                usernamesDB.child(uid).setValue(username)
+                self.userInfo["Username"] = username
+                
             }
         }
     }
@@ -56,8 +56,6 @@ class Onboard1ViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var continueBtn: UIButton!
     @IBAction func continueBtnSegue(_ sender: UIButton) {
-        let userDB = Database.database().reference().child("Users")
-        let uid = Auth.auth().currentUser!.uid
         
         let fullName = nameInput.text!
         let phoneNumber = phoneInput.text!
@@ -70,41 +68,17 @@ class Onboard1ViewController: UIViewController, UITextFieldDelegate {
         if fullName == ""{
             print("Please Add Name!")
         }else{
-            userDB.child(uid).child("Name").setValue(fullName){
-                (error, refrence) in
-                
-                if error != nil{
-                    print("Error!", error!)
-                }else{
-                    print("Success!")
-                }
-            }
+            self.userInfo["Name"] = fullName
         }
         if phoneNumber == ""{
            print("Please Add Phone Number!")
         }else{
-            userDB.child(uid).child("Phone Number").setValue(phoneNumber){
-                (error, refrence) in
-                
-                if error != nil{
-                    print("Error!", error!)
-                }else{
-                    print("Success!")
-                }
-            }
+            self.userInfo["Phone Number"] = phoneNumber
         }
         if selectedDate == ""{
             print("Please Add Date of Birth!")
         }else{
-            userDB.child(uid).child("Birth Date").setValue(selectedDate){
-                (error, refrence) in
-                
-                if error != nil{
-                    print("Error!", error!)
-                }else{
-                    print("Success!")
-                }
-            }
+            self.userInfo["Birth Date"] = selectedDate
         }
         
         performSegue(withIdentifier: "onboard2Segue", sender: self)
@@ -121,6 +95,7 @@ class Onboard1ViewController: UIViewController, UITextFieldDelegate {
         nameInput.delegate = self
         usernameInput.delegate = self
         phoneInput.delegate = self
+        
         // Do any additional setup after loading the view.
     }
     
@@ -170,6 +145,11 @@ class Onboard1ViewController: UIViewController, UITextFieldDelegate {
         continueBtn.setGradient(colorOne: Colors.lightYellow, colorTwo: Colors.darkYellow)
         continueBtn.clipsToBounds = true
         continueBtn.layer.cornerRadius = 15
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let onBoard2VC = segue.destination as! Onboard2ViewController
+        onBoard2VC.userInfo = self.userInfo
     }
 
     /*
