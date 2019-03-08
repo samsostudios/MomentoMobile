@@ -9,12 +9,12 @@
 /* Begin PBXBuildFile section */
 		482827BC2232F51B007F4D75 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482827BB2232F51B007F4D75 /* AppDelegate.swift */; };
 		482827BE2232F51B007F4D75 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482827BD2232F51B007F4D75 /* ViewController.swift */; };
-		482827C12232F51B007F4D75 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 482827BF2232F51B007F4D75 /* Main.storyboard */; };
 		482827C32232F51B007F4D75 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 482827C22232F51B007F4D75 /* Assets.xcassets */; };
 		482827C62232F51B007F4D75 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 482827C42232F51B007F4D75 /* LaunchScreen.storyboard */; };
 		482827D12232F51B007F4D75 /* UploadImageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482827D02232F51B007F4D75 /* UploadImageTests.swift */; };
 		482827DC2232F51B007F4D75 /* UploadImageUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482827DB2232F51B007F4D75 /* UploadImageUITests.swift */; };
 		482827EA2232F765007F4D75 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 482827E92232F764007F4D75 /* GoogleService-Info.plist */; };
+		482827EE223303B6007F4D75 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 482827ED223303B6007F4D75 /* Main.storyboard */; };
 		7A7155A7C6029B7ED61F6951 /* Pods_UploadImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3E46DC90949F93439FCCB1F /* Pods_UploadImage.framework */; };
 		A4F6A97CEE02860320F37D68 /* Pods_UploadImageTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDA08757134C2C27F4615E80 /* Pods_UploadImageTests.framework */; };
 		F1D95C7F50C4D34754F15B4C /* Pods_UploadImageUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D5A1F8F78B4255F8871D042 /* Pods_UploadImageUITests.framework */; };
@@ -43,7 +43,6 @@
 		482827B82232F51A007F4D75 /* UploadImage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UploadImage.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		482827BB2232F51B007F4D75 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		482827BD2232F51B007F4D75 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		482827C02232F51B007F4D75 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		482827C22232F51B007F4D75 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		482827C52232F51B007F4D75 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		482827C72232F51B007F4D75 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -54,6 +53,7 @@
 		482827DB2232F51B007F4D75 /* UploadImageUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadImageUITests.swift; sourceTree = "<group>"; };
 		482827DD2232F51B007F4D75 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		482827E92232F764007F4D75 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		482827ED223303B6007F4D75 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		5941D25E16B4E96AD5CB4DD3 /* Pods-UploadImage.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UploadImage.debug.xcconfig"; path = "Target Support Files/Pods-UploadImage/Pods-UploadImage.debug.xcconfig"; sourceTree = "<group>"; };
 		652AE925C0D3DE4EE3EED4B8 /* Pods-UploadImageUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UploadImageUITests.debug.xcconfig"; path = "Target Support Files/Pods-UploadImageUITests/Pods-UploadImageUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		6D5A1F8F78B4255F8871D042 /* Pods_UploadImageUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UploadImageUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -118,7 +118,7 @@
 			children = (
 				482827BB2232F51B007F4D75 /* AppDelegate.swift */,
 				482827BD2232F51B007F4D75 /* ViewController.swift */,
-				482827BF2232F51B007F4D75 /* Main.storyboard */,
+				482827ED223303B6007F4D75 /* Main.storyboard */,
 				482827C22232F51B007F4D75 /* Assets.xcassets */,
 				482827C42232F51B007F4D75 /* LaunchScreen.storyboard */,
 				482827C72232F51B007F4D75 /* Info.plist */,
@@ -155,7 +155,6 @@
 				652AE925C0D3DE4EE3EED4B8 /* Pods-UploadImageUITests.debug.xcconfig */,
 				D16ECFB8221ED529E20A0050 /* Pods-UploadImageUITests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -282,8 +281,8 @@
 			files = (
 				482827C62232F51B007F4D75 /* LaunchScreen.storyboard in Resources */,
 				482827EA2232F765007F4D75 /* GoogleService-Info.plist in Resources */,
+				482827EE223303B6007F4D75 /* Main.storyboard in Resources */,
 				482827C32232F51B007F4D75 /* Assets.xcassets in Resources */,
-				482827C12232F51B007F4D75 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -309,15 +308,11 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
 				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
 				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-UploadImageTests-checkManifestLockResult.txt",
 			);
@@ -331,15 +326,11 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
 				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
 				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-UploadImage-checkManifestLockResult.txt",
 			);
@@ -353,15 +344,11 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
 				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
 				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-UploadImageUITests-checkManifestLockResult.txt",
 			);
@@ -375,8 +362,6 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-UploadImage/Pods-UploadImage-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
@@ -384,8 +369,6 @@
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
@@ -440,14 +423,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		482827BF2232F51B007F4D75 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				482827C02232F51B007F4D75 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		482827C42232F51B007F4D75 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
