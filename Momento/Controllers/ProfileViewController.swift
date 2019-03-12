@@ -28,7 +28,6 @@ class ProfileViewController: UIViewController, UITextViewDelegate, UINavigationC
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage{
-            print("image", image)
             guard let imageData = image.jpegData(compressionQuality: 0.75) else { return }
             
             let imageMetaData = StorageMetadata()
@@ -36,7 +35,7 @@ class ProfileViewController: UIViewController, UITextViewDelegate, UINavigationC
             let uid = Auth.auth().currentUser!.uid
             
             let userContentRef = Storage.storage().reference().child(uid)
-            let uploadTask = userContentRef.putData(imageData, metadata: imageMetaData) { (metaData, error) in
+            let uploadTask = userContentRef.child("images").putData(imageData, metadata: imageMetaData) { (metaData, error) in
                 
                 if error != nil{
                     print("ADD ALERT for failed upload")
