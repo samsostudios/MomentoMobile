@@ -8,9 +8,55 @@
 
 import UIKit
 import Firebase
+import FirebaseStorage
 
-class ProfileViewController: UIViewController, UITextViewDelegate {
-
+class ProfileViewController: UIViewController, UITextViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+    
+    @IBOutlet weak var imageView: UIImageView!
+    
+    @IBAction func importBtn(_ sender: UIButton) {
+        let image = UIImagePickerController()
+        image.delegate = self
+        
+        image.sourceType = UIImagePickerController.SourceType.photoLibrary
+        image.allowsEditing = false
+        
+        self.present(image, animated: true){
+            print("Upload comeplete")
+        }
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage{
+            print("image", image)
+            guard let imageData = image.jpegData(compressionQuality: 0.75) else { return }
+            
+            let imageMetaData = StorageMetadata()
+            imageMetaData.contentType = "image/jpg"
+            let uid = Auth.auth().currentUser!.uid
+            
+            let userContentRef = Storage.storage().reference().child(uid)
+            let uploadTask = userContentRef.putData(imageData, metadata: imageMetaData) { (metaData, error) in
+                
+                if error != nil{
+                    print("ADD ALERT for failed upload")
+                }else{
+                    print("Upload Complete!")
+                }
+            }
+            uploadTask.observe(.progress) { (snapshot) in
+                print(snapshot.progress ?? "NO MORE PROGRESS")
+            }
+            
+        }else{
+            print("ADD ALERT for failures")
+        }
+        
+        self.dismiss(animated: true, completion: nil)
+        
+        
+    }
+    
     @IBAction func logoutBtn(_ sender: UIButton) {
         do{
             try Auth.auth().signOut()

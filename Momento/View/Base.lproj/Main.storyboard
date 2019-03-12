@@ -422,20 +422,21 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="GSE-ft-Wto" firstAttribute="top" secondItem="UNe-yQ-yLt" secondAttribute="bottom" constant="30" id="EIB-fW-ekH"/>
+                            <constraint firstItem="GSE-ft-Wto" firstAttribute="leading" secondItem="tvI-PC-t7V" secondAttribute="leading" constant="20" id="EMF-z2-ZdL"/>
                             <constraint firstItem="4bm-er-tOx" firstAttribute="leading" secondItem="wNd-Pc-EjL" secondAttribute="leadingMargin" id="Gxh-0c-Jjz"/>
                             <constraint firstItem="YoX-Po-DnO" firstAttribute="leading" secondItem="tvI-PC-t7V" secondAttribute="leading" id="LDA-Qp-N8Z"/>
+                            <constraint firstItem="YoX-Po-DnO" firstAttribute="top" secondItem="GSE-ft-Wto" secondAttribute="bottom" constant="25" id="MJJ-JS-X4S"/>
+                            <constraint firstItem="GSE-ft-Wto" firstAttribute="top" secondItem="UNe-yQ-yLt" secondAttribute="bottom" constant="30" id="NAf-qZ-mIj"/>
                             <constraint firstItem="tvI-PC-t7V" firstAttribute="trailing" secondItem="UNe-yQ-yLt" secondAttribute="trailing" constant="20" id="QM7-7B-T80"/>
                             <constraint firstItem="tvI-PC-t7V" firstAttribute="bottom" secondItem="q72-Jo-bAw" secondAttribute="bottom" constant="25" id="ReO-oz-LSO"/>
                             <constraint firstItem="UNe-yQ-yLt" firstAttribute="top" secondItem="4bm-er-tOx" secondAttribute="bottom" constant="25" id="ULB-je-bfl"/>
                             <constraint firstItem="4bm-er-tOx" firstAttribute="top" secondItem="tvI-PC-t7V" secondAttribute="top" constant="5" id="Zcm-WL-BoQ"/>
-                            <constraint firstItem="YoX-Po-DnO" firstAttribute="top" secondItem="GSE-ft-Wto" secondAttribute="bottom" constant="25" id="aie-f3-0kM"/>
                             <constraint firstItem="UNe-yQ-yLt" firstAttribute="leading" secondItem="tvI-PC-t7V" secondAttribute="leading" constant="20" id="hSB-Nh-Bny"/>
                             <constraint firstItem="YoX-Po-DnO" firstAttribute="trailing" secondItem="tvI-PC-t7V" secondAttribute="trailing" id="iwV-4G-E5b"/>
                             <constraint firstItem="4bm-er-tOx" firstAttribute="trailing" secondItem="wNd-Pc-EjL" secondAttribute="trailingMargin" id="ixP-M8-IV8"/>
                             <constraint firstItem="q72-Jo-bAw" firstAttribute="leading" secondItem="tvI-PC-t7V" secondAttribute="leading" constant="75" id="jpz-Jj-Xo9"/>
                             <constraint firstItem="tvI-PC-t7V" firstAttribute="trailing" secondItem="q72-Jo-bAw" secondAttribute="trailing" constant="75" id="vM6-O7-9Ll"/>
-                            <constraint firstItem="GSE-ft-Wto" firstAttribute="leading" secondItem="tvI-PC-t7V" secondAttribute="leading" constant="20" id="y2c-HH-jfR"/>
+                            <constraint firstItem="tvI-PC-t7V" firstAttribute="trailing" secondItem="GSE-ft-Wto" secondAttribute="trailing" constant="246.33000000000001" id="vg8-3b-vYh"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="tvI-PC-t7V"/>
                     </view>
@@ -488,22 +489,46 @@
                                     <action selector="logoutBtn:" destination="8cD-Z6-jIx" eventType="touchUpInside" id="vRo-KO-EuI"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="spV-yO-VYW">
+                                <rect key="frame" x="102" y="617" width="211" height="49"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="31"/>
+                                <state key="normal" title="Upload">
+                                    <color key="titleColor" red="0.98039215690000003" green="0.63529411759999999" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="importBtn:" destination="8cD-Z6-jIx" eventType="touchUpInside" id="Xu4-GR-Hrm"/>
+                                </connections>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="MomentoLogo" translatesAutoresizingMaskIntoConstraints="NO" id="UzO-Qo-iJx">
+                                <rect key="frame" x="87" y="292" width="240" height="214"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="240" id="Bqg-nd-XBD"/>
+                                    <constraint firstAttribute="height" constant="214" id="iiB-Nd-zuj"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="fSJ-Lv-2Ot" firstAttribute="leading" secondItem="T3w-vy-Jw5" secondAttribute="leading" constant="143" id="54N-uQ-34l"/>
+                            <constraint firstItem="UzO-Qo-iJx" firstAttribute="leading" secondItem="T3w-vy-Jw5" secondAttribute="leading" constant="87" id="5jl-s5-80n"/>
+                            <constraint firstItem="T3w-vy-Jw5" firstAttribute="trailing" secondItem="UzO-Qo-iJx" secondAttribute="trailing" constant="87" id="6KI-wo-wNk"/>
                             <constraint firstItem="mgp-su-cZT" firstAttribute="top" secondItem="T3w-vy-Jw5" secondAttribute="top" constant="41" id="8KB-Nv-Fmc"/>
+                            <constraint firstItem="UzO-Qo-iJx" firstAttribute="top" secondItem="hxM-x9-JcJ" secondAttribute="bottom" constant="76" id="CgE-P0-2I7"/>
                             <constraint firstItem="mgp-su-cZT" firstAttribute="leading" secondItem="T3w-vy-Jw5" secondAttribute="leading" constant="162" id="Fl6-qi-BEg"/>
                             <constraint firstItem="hxM-x9-JcJ" firstAttribute="top" secondItem="mgp-su-cZT" secondAttribute="bottom" constant="31" id="JfN-dW-yCx"/>
                             <constraint firstItem="T3w-vy-Jw5" firstAttribute="trailing" secondItem="fSJ-Lv-2Ot" secondAttribute="trailing" constant="142" id="L6I-xR-lgF"/>
                             <constraint firstItem="T3w-vy-Jw5" firstAttribute="trailing" secondItem="hxM-x9-JcJ" secondAttribute="trailing" constant="101" id="LYI-YE-01m"/>
+                            <constraint firstItem="spV-yO-VYW" firstAttribute="leading" secondItem="T3w-vy-Jw5" secondAttribute="leading" constant="102" id="PXb-9n-tZl"/>
+                            <constraint firstItem="fSJ-Lv-2Ot" firstAttribute="top" secondItem="spV-yO-VYW" secondAttribute="bottom" constant="71" id="dVU-od-gip"/>
                             <constraint firstItem="T3w-vy-Jw5" firstAttribute="bottom" secondItem="fSJ-Lv-2Ot" secondAttribute="bottom" constant="50" id="ePe-rG-rLk"/>
                             <constraint firstItem="T3w-vy-Jw5" firstAttribute="trailing" secondItem="mgp-su-cZT" secondAttribute="trailing" constant="162" id="jCp-22-oRq"/>
                             <constraint firstItem="hxM-x9-JcJ" firstAttribute="leading" secondItem="T3w-vy-Jw5" secondAttribute="leading" constant="102" id="sFC-ep-YEA"/>
+                            <constraint firstItem="T3w-vy-Jw5" firstAttribute="trailing" secondItem="spV-yO-VYW" secondAttribute="trailing" constant="101" id="zya-uH-5AW"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="T3w-vy-Jw5"/>
                     </view>
                     <connections>
+                        <outlet property="imageView" destination="UzO-Qo-iJx" id="H3A-XF-Zkb"/>
                         <segue destination="hC3-Gt-Y54" kind="show" identifier="LogoutProfileSegue" id="rcm-Sf-ia9"/>
                     </connections>
                 </viewController>
@@ -693,6 +718,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="MomentoLogo" width="500" height="500"/>
         <image name="first" width="30" height="30"/>
         <image name="momentoLettermark" width="2000" height="377"/>
         <image name="second" width="30" height="30"/>
