@@ -22,6 +22,7 @@
 		228E56632221CCE1001AF3F0 /* LoginProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228E56622221CCE1001AF3F0 /* LoginProfileViewController.swift */; };
 		228E56652221CDBD001AF3F0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 228E56642221CDBD001AF3F0 /* GoogleService-Info.plist */; };
 		228E56672221DEA6001AF3F0 /* SignupProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228E56662221DEA6001AF3F0 /* SignupProfileViewController.swift */; };
+		22A2CCB42242F2410066D4F3 /* ProfileCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A2CCB32242F2410066D4F3 /* ProfileCollectionViewCell.swift */; };
 		AB59B2BDB05E747A0A4EC165 /* Pods_Momento.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C389EF7EA72E80F41196C660 /* Pods_Momento.framework */; };
 /* End PBXBuildFile section */
 
@@ -43,6 +44,7 @@
 		228E56622221CCE1001AF3F0 /* LoginProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginProfileViewController.swift; sourceTree = "<group>"; };
 		228E56642221CDBD001AF3F0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		228E56662221DEA6001AF3F0 /* SignupProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupProfileViewController.swift; sourceTree = "<group>"; };
+		22A2CCB32242F2410066D4F3 /* ProfileCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCollectionViewCell.swift; sourceTree = "<group>"; };
 		37CB4C58577D45E936E2C972 /* Pods-Momento.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Momento.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Momento/Pods-Momento.debug.xcconfig"; sourceTree = "<group>"; };
 		AA5D474D56CE39B6B2C3877A /* Pods-Momento.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Momento.release.xcconfig"; path = "Pods/Target Support Files/Pods-Momento/Pods-Momento.release.xcconfig"; sourceTree = "<group>"; };
 		C389EF7EA72E80F41196C660 /* Pods_Momento.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Momento.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -65,6 +67,7 @@
 			children = (
 				22440218222C6C5A004D089E /* OnBoardButton.swift */,
 				2244021B222C925C004D089E /* YellowGradient.swift */,
+				22A2CCB32242F2410066D4F3 /* ProfileCollectionViewCell.swift */,
 			);
 			path = CustomElements;
 			sourceTree = "<group>";
@@ -295,6 +298,7 @@
 				224751CB22151F1D004DFA77 /* FeedViewController.swift in Sources */,
 				22440219222C6C5A004D089E /* OnBoardButton.swift in Sources */,
 				224751B522151CA5004DFA77 /* AppDelegate.swift in Sources */,
+				22A2CCB42242F2410066D4F3 /* ProfileCollectionViewCell.swift in Sources */,
 				228DC9B8222D86E500E34A21 /* Onboard2ViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

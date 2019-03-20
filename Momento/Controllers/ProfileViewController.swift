@@ -11,7 +11,9 @@ import Firebase
 import FirebaseStorage
 import Photos
 
-class ProfileViewController: UIViewController, UITextViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+class ProfileViewController: UIViewController, UITextViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, UICollectionViewDataSource, UICollectionViewDelegate {
+    
+    @IBOutlet weak var collectionView: UICollectionView!
     
     @IBOutlet weak var imageView: UIImageView!
     
@@ -143,8 +145,27 @@ class ProfileViewController: UIViewController, UITextViewDelegate, UINavigationC
         self.userImages.append(image)
         print("user images", self.userImages)
         
-        self.imageView.image = self.userImages[0]
+        self.collectionView?.reloadData()
     }
+    
+    //Setup for collection view
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        var count = self.userImages.count
+        print("count", count)
+        return count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let imageCell = collectionView.dequeueReusableCell(withReuseIdentifier: "imgCell", for: indexPath) as! ProfileCollectionViewCell
+        
+        imageCell.cellImage.image = self.userImages[indexPath.row]
+        
+        return imageCell
+    }
+    
+//    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+//        let imageCell = collectionView.dequeueReusableCell(withReuseIdentifier: "imgCell", for: indexPath)
+//    }
     
 
     /*
