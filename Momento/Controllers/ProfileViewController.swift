@@ -106,31 +106,35 @@ class ProfileViewController: UIViewController, UITextViewDelegate, UINavigationC
     
     
     override func viewWillAppear(_ animated: Bool) {
-        let uid = Auth.auth().currentUser!.uid
-        let contentDBRef = Database.database().reference().child("Content").child(uid).child("Images")
         
-        print("userInfo", self.userImages)
-        
-        contentDBRef.observe(.childAdded, with: {
-            (snapshot) in
-            
-//            print("child added")
-            print("SNAPSHOT", snapshot.value!)
-            
-            
-//            let downloadLink = snapshot.value as! String
-//
-//            self.getUserImages(downloadLink: downloadLink)
-//
-//            print("USER IAMGES", self.userImages)
-            
-        })
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.setNavigationBarHidden(true, animated: true)
         
+        
+        let uid = Auth.auth().currentUser!.uid
+        let contentDBRef = Database.database().reference().child("Content").child(uid).child("Images")
+        
+        print("userInfo", self.userImages)
+        
+        print("view will appear")
+        
+        contentDBRef.observe(.childAdded, with: {
+            (snapshot) in
+            
+            //            print("child added")
+            print("SNAPSHOT", snapshot)
+            
+            
+            let downloadLink = snapshot.value as! String
+
+            self.getUserImages(downloadLink: downloadLink)
+
+            print("USER IAMGES", self.userImages)
+            
+        })
     }
     
     func getUserImages(downloadLink: String) {
@@ -144,6 +148,8 @@ class ProfileViewController: UIViewController, UITextViewDelegate, UINavigationC
                 let data = try Data(contentsOf: url!)
 
                 let newImage = UIImage(data: data as Data)
+                
+//                self.userImages.removeAll()
 
                 DispatchQueue.main.async {
                     self.displayImages(image: newImage!)
