@@ -34,36 +34,42 @@ class ProfileViewController: UIViewController, UITextViewDelegate, UINavigationC
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         var imageName = ""
         
-        if let asset = info[UIImagePickerController.InfoKey.phAsset] as? PHAsset {
-            let assetResources = PHAssetResource.assetResources(for: asset)
-            
-            print("FILENAME", assetResources.first!.originalFilename)
-            
-            imageName = assetResources.first!.originalFilename
-        }
+        
+        
+//        if let asset = info[UIImagePickerController.InfoKey.phAsset] as? PHAsset {
+//            let assetResources = PHAssetResource.assetResources(for: asset)
+//
+//            print("FILENAME", assetResources.first!.originalFilename)
+//
+//            imageName = assetResources.first!.originalFilename
+//        }else{
+//            print("error getting filename")
+//        }
         
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage{
+            print("image", image)
             
             guard let imageData = image.jpegData(compressionQuality: 0.75) else { return }
             
             let imageMetaData = StorageMetadata()
             imageMetaData.contentType = "image/jpg"
             
-            let imgNameSeperated = imageName.components(separatedBy: ".")
-            print("SEPERATED!", imgNameSeperated)
             
             let uid = Auth.auth().currentUser!.uid
-            let userContentRef = Storage.storage().reference().child(uid).child("images")
-            let contentDBRef = Database.database().reference().child("Users").child(uid).child("Content").child(imgNameSeperated[0])
+            let contentStorageRef = Storage.storage().reference().child(uid).child("images")
+            let contentDBRef = Database.database().reference().child("Content").child(uid).child("Images")
+            
+            let postID = UUID().uuidString
+            print(postID)
             
             
-            let uploadTask = userContentRef.child(imageName).putData(imageData, metadata: imageMetaData) { (metaData, error) in
+            let uploadTask = contentStorageRef.child(postID).putData(imageData, metadata: imageMetaData) { (metaData, error) in
                 
                 if error != nil{
                     print("ADD ALERT for failed upload")
                 }else{
                     print("Upload Complete!")
-                    userContentRef.child(imageName).downloadURL {
+                    contentStorageRef.child(postID).downloadURL {
                         (imgURL, error) in
                         
                         if error != nil{
@@ -71,7 +77,7 @@ class ProfileViewController: UIViewController, UITextViewDelegate, UINavigationC
                         }else{
                             print("URL:", imgURL!)
                             let downloadUrl = imgURL?.absoluteString
-                            contentDBRef.setValue(downloadUrl)
+                            contentDBRef.child(postID).setValue(downloadUrl)
                         }
                     }
                 }
@@ -100,44 +106,79 @@ class ProfileViewController: UIViewController, UITextViewDelegate, UINavigationC
     
     
     override func viewWillAppear(_ animated: Bool) {
+        let uid = Auth.auth().currentUser!.uid
+        let contentDBRef = Database.database().reference().child("Content").child(uid).child("Images")
         
+        print("userInfo", self.userImages)
+        
+        contentDBRef.observe(.childAdded, with: {
+            (snapshot) in
+            
+//            print("child added")
+            print("SNAPSHOT", snapshot.value!)
+            
+            
+//            let downloadLink = snapshot.value as! String
+//
+//            self.getUserImages(downloadLink: downloadLink)
+//
+//            print("USER IAMGES", self.userImages)
+            
+        })
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.setNavigationBarHidden(true, animated: true)
         
-        getUserImages()
     }
     
-    func getUserImages() {
-        print("getting images")
+    func getUserImages(downloadLink: String) {
+        print("download link", downloadLink)
         let uid = Auth.auth().currentUser!.uid
-        let contentDBRef = Database.database().reference().child("Users").child(uid).child("Content")
+        let contentDBRef = Database.database().reference().child("Content").child(uid).child("Images")
         
-        contentDBRef.observeSingleEvent(of: .value, with: {(snapshot) in
-            
-            for item in snapshot.children.allObjects as! [DataSnapshot]{
-                
-                let downloadLink = item.value as! String
-                let storageRef = Storage.storage().reference(forURL: downloadLink)
-                
-                storageRef.downloadURL(completion: { (url, error) in
-                    do{
-                        let data = try Data(contentsOf: url!)
-                        
-                        let newImage = UIImage(data: data as Data)
-                        
-                        DispatchQueue.main.async {
-                            self.displayImages(image: newImage!)
-                        }
-                        
-                    }catch{
-                        print("error with data")
-                    }
-                })
+        let storageRef = Storage.storage().reference(forURL: downloadLink)
+        storageRef.downloadURL(completion: { (url, error) in
+            do{
+                let data = try Data(contentsOf: url!)
+
+                let newImage = UIImage(data: data as Data)
+
+                DispatchQueue.main.async {
+                    self.displayImages(image: newImage!)
+                }
+
+            }catch{
+                print("error with data")
             }
         })
+        
+        
+//        contentDBRef.observeSingleEvent(of: .value, with: {(snapshot) in
+//
+//            for item in snapshot.children.allObjects as! [DataSnapshot]{
+//                print("ITEM", item)
+//
+//                let downloadLink = item.value as! String
+//                let storageRef = Storage.storage().reference(forURL: downloadLink)
+//
+//                storageRef.downloadURL(completion: { (url, error) in
+//                    do{
+//                        let data = try Data(contentsOf: url!)
+//
+//                        let newImage = UIImage(data: data as Data)
+//
+//                        DispatchQueue.main.async {
+//                            self.displayImages(image: newImage!)
+//                        }
+//
+//                    }catch{
+//                        print("error with data")
+//                    }
+//                })
+//            }
+//        })
     }
     
     func displayImages(image: UIImage) {
@@ -150,7 +191,7 @@ class ProfileViewController: UIViewController, UITextViewDelegate, UINavigationC
     
     //Setup for collection view
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        var count = self.userImages.count
+        let count = self.userImages.count
         print("count", count)
         return count
     }
