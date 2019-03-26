@@ -11,11 +11,12 @@ import Firebase
 import FirebaseStorage
 import Photos
 
-class ProfileViewController: UIViewController, UITextViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, UICollectionViewDataSource, UICollectionViewDelegate {
+class ProfileViewController: UIViewController, UITextViewDelegate, UINavigationControllerDelegate,
+                                UIImagePickerControllerDelegate, UICollectionViewDataSource, UICollectionViewDelegate {
     
     @IBOutlet weak var collectionView: UICollectionView!
     
-    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var headerPhoto: UIImageView!
     
     var userImages = [UIImage]()
     
@@ -32,19 +33,6 @@ class ProfileViewController: UIViewController, UITextViewDelegate, UINavigationC
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        var imageName = ""
-        
-        
-        
-//        if let asset = info[UIImagePickerController.InfoKey.phAsset] as? PHAsset {
-//            let assetResources = PHAssetResource.assetResources(for: asset)
-//
-//            print("FILENAME", assetResources.first!.originalFilename)
-//
-//            imageName = assetResources.first!.originalFilename
-//        }else{
-//            print("error getting filename")
-//        }
         
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage{
             print("image", image)
@@ -113,13 +101,19 @@ class ProfileViewController: UIViewController, UITextViewDelegate, UINavigationC
         super.viewDidLoad()
         self.navigationController?.setNavigationBarHidden(true, animated: true)
         
+        let imageBlur = UIBlurEffect(style: .regular)
+        let blurView = UIVisualEffectView(effect: imageBlur)
+        blurView.frame = headerPhoto.bounds
+        blurView.alpha = 0.6
+        headerPhoto.addSubview(blurView)
+        
         
         let uid = Auth.auth().currentUser!.uid
         let contentDBRef = Database.database().reference().child("Content").child(uid).child("Images")
         
         print("userInfo", self.userImages)
         
-        print("view will appear")
+        let dGroup = DispatchGroup()
         
         contentDBRef.observe(.childAdded, with: {
             (snapshot) in
@@ -129,71 +123,83 @@ class ProfileViewController: UIViewController, UITextViewDelegate, UINavigationC
             
             
             let downloadLink = snapshot.value as! String
+            
+            DispatchQueue.global(qos: .background).async(group: dGroup) {
+                dGroup.enter()
+                print("ENTER")
+                
+                print("download link", downloadLink)
+                
+                let storageRef = Storage.storage().reference(forURL: downloadLink)
+                storageRef.downloadURL(completion: { (url, error) in
+                    do{
+                        let data = try Data(contentsOf: url!)
+                        
+                        print("DATA", data)
+                        
+                        let newImage = UIImage(data: data as Data)
+                        
+                        //                self.userImages.removeAll()
+                        
+                        self.userImages.append(newImage!)
+                        
+                    }catch{
+                        print("error with data")
+                    }
+                })
+                
+                dGroup.leave()
+                print("LEAVE")
+            }
+            
+            dGroup.notify(queue: .main) {
+                print("Download complete")
+            }
 
-            self.getUserImages(downloadLink: downloadLink)
+//            self.getUserImages(downloadLink: downloadLink)
 
             print("USER IAMGES", self.userImages)
             
         })
     }
     
-    func getUserImages(downloadLink: String) {
-        print("download link", downloadLink)
-        let uid = Auth.auth().currentUser!.uid
-        let contentDBRef = Database.database().reference().child("Content").child(uid).child("Images")
-        
-        let storageRef = Storage.storage().reference(forURL: downloadLink)
-        storageRef.downloadURL(completion: { (url, error) in
-            do{
-                let data = try Data(contentsOf: url!)
-
-                let newImage = UIImage(data: data as Data)
-                
-//                self.userImages.removeAll()
-
-                DispatchQueue.main.async {
-                    self.displayImages(image: newImage!)
-                }
-
-            }catch{
-                print("error with data")
-            }
-        })
-        
-        
-//        contentDBRef.observeSingleEvent(of: .value, with: {(snapshot) in
+//    func getUserImages(downloadLink: String) {
 //
-//            for item in snapshot.children.allObjects as! [DataSnapshot]{
-//                print("ITEM", item)
 //
-//                let downloadLink = item.value as! String
-//                let storageRef = Storage.storage().reference(forURL: downloadLink)
 //
-//                storageRef.downloadURL(completion: { (url, error) in
-//                    do{
-//                        let data = try Data(contentsOf: url!)
-//
-//                        let newImage = UIImage(data: data as Data)
-//
-//                        DispatchQueue.main.async {
-//                            self.displayImages(image: newImage!)
-//                        }
-//
-//                    }catch{
-//                        print("error with data")
-//                    }
-//                })
-//            }
-//        })
-    }
+////        contentDBRef.observeSingleEvent(of: .value, with: {(snapshot) in
+////
+////            for item in snapshot.children.allObjects as! [DataSnapshot]{
+////                print("ITEM", item)
+////
+////                let downloadLink = item.value as! String
+////                let storageRef = Storage.storage().reference(forURL: downloadLink)
+////
+////                storageRef.downloadURL(completion: { (url, error) in
+////                    do{
+////                        let data = try Data(contentsOf: url!)
+////
+////                        let newImage = UIImage(data: data as Data)
+////
+////                        DispatchQueue.main.async {
+////                            self.displayImages(image: newImage!)
+////                        }
+////
+////                    }catch{
+////                        print("error with data")
+////                    }
+////                })
+////            }
+////        })
+//    }
     
-    func displayImages(image: UIImage) {
-        print("display images", image)
-        self.userImages.append(image)
-        print("user images", self.userImages)
-        
-        self.collectionView?.reloadData()
-    }
+//    func displayImages(image: UIImage) {
+//        print("display images", image)
+//        self.userImages.append(image)
+//        print("user images", self.userImages)
+//
+//        self.collectionView?.reloadData()
+//    }
     
     //Setup for collection view
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -226,3 +232,4 @@ class ProfileViewController: UIViewController, UITextViewDelegate, UINavigationC
     */
 
 }
+
