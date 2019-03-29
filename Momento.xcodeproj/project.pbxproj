@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		222C33ED2225A72700A6536A /* Onboard1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 222C33EC2225A72700A6536A /* Onboard1ViewController.swift */; };
+		2235351C224EAF4C0000788B /* CustomCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2235351B224EAF4C0000788B /* CustomCollectionView.swift */; };
 		223C423E222E5C60006DCCF1 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223C423D222E5C60006DCCF1 /* ProfileViewController.swift */; };
 		22440219222C6C5A004D089E /* OnBoardButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22440218222C6C5A004D089E /* OnBoardButton.swift */; };
 		2244021C222C925C004D089E /* YellowGradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2244021B222C925C004D089E /* YellowGradient.swift */; };
@@ -28,6 +29,7 @@
 
 /* Begin PBXFileReference section */
 		222C33EC2225A72700A6536A /* Onboard1ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboard1ViewController.swift; sourceTree = "<group>"; };
+		2235351B224EAF4C0000788B /* CustomCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCollectionView.swift; sourceTree = "<group>"; };
 		223C423D222E5C60006DCCF1 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		22440218222C6C5A004D089E /* OnBoardButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardButton.swift; sourceTree = "<group>"; };
 		2244021B222C925C004D089E /* YellowGradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YellowGradient.swift; sourceTree = "<group>"; };
@@ -68,6 +70,7 @@
 				22440218222C6C5A004D089E /* OnBoardButton.swift */,
 				2244021B222C925C004D089E /* YellowGradient.swift */,
 				22A2CCB32242F2410066D4F3 /* ProfileCollectionViewCell.swift */,
+				2235351B224EAF4C0000788B /* CustomCollectionView.swift */,
 			);
 			path = CustomElements;
 			sourceTree = "<group>";
@@ -293,6 +296,7 @@
 				2244021C222C925C004D089E /* YellowGradient.swift in Sources */,
 				228E56672221DEA6001AF3F0 /* SignupProfileViewController.swift in Sources */,
 				222C33ED2225A72700A6536A /* Onboard1ViewController.swift in Sources */,
+				2235351C224EAF4C0000788B /* CustomCollectionView.swift in Sources */,
 				224751CF22151F3D004DFA77 /* CommunityViewController.swift in Sources */,
 				223C423E222E5C60006DCCF1 /* ProfileViewController.swift in Sources */,
 				224751CB22151F1D004DFA77 /* FeedViewController.swift in Sources */,

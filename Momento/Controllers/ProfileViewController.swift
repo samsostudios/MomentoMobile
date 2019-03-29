@@ -12,13 +12,23 @@ import FirebaseStorage
 import Photos
 
 class ProfileViewController: UIViewController, UITextViewDelegate, UINavigationControllerDelegate,
-                                UIImagePickerControllerDelegate, UICollectionViewDataSource, UICollectionViewDelegate {
+                                UIImagePickerControllerDelegate {
     
     @IBOutlet weak var collectionView: UICollectionView!
     
     @IBOutlet weak var headerPhoto: UIImageView!
     
     var userImages = [UIImage]()
+    
+    let imageCache = NSCache<NSString, UIImage>()
+    
+    let testImage1 = #imageLiteral(resourceName: "7R8A0139")
+    let testImage2 = #imageLiteral(resourceName: "7R8A9956 2")
+    let testImage3 = #imageLiteral(resourceName: "7R8A9987Crop")
+    
+    var testImages: [UIImage] = []
+    
+    let group = DispatchGroup()
     
     @IBAction func importBtn(_ sender: UIButton) {
         let image = UIImagePickerController()
@@ -92,11 +102,6 @@ class ProfileViewController: UIViewController, UITextViewDelegate, UINavigationC
         }
     }
     
-    
-    override func viewWillAppear(_ animated: Bool) {
-        
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.setNavigationBarHidden(true, animated: true)
@@ -107,129 +112,70 @@ class ProfileViewController: UIViewController, UITextViewDelegate, UINavigationC
         blurView.alpha = 0.6
         headerPhoto.addSubview(blurView)
         
+        self.testImages.append(testImage1)
+        self.testImages.append(testImage2)
+        self.testImages.append(testImage3)
+        
+        if let layout = collectionView?.collectionViewLayout as? PinterestLayout {
+            layout.delegate = self
+        }
         
         let uid = Auth.auth().currentUser!.uid
         let contentDBRef = Database.database().reference().child("Content").child(uid).child("Images")
         
-        print("userInfo", self.userImages)
-        
-        let dGroup = DispatchGroup()
-        
         contentDBRef.observe(.childAdded, with: {
             (snapshot) in
-            
-            //            print("child added")
-            print("SNAPSHOT", snapshot)
-            
-            
+    
             let downloadLink = snapshot.value as! String
             
-            DispatchQueue.global(qos: .background).async(group: dGroup) {
-                dGroup.enter()
-                print("ENTER")
+            let storageRef = Storage.storage().reference(forURL: downloadLink)
+            storageRef.downloadURL(completion: {
+                (url, error) in
                 
-                print("download link", downloadLink)
-                
-                let storageRef = Storage.storage().reference(forURL: downloadLink)
-                storageRef.downloadURL(completion: { (url, error) in
-                    do{
-                        let data = try Data(contentsOf: url!)
-                        
-                        print("DATA", data)
-                        
-                        let newImage = UIImage(data: data as Data)
-                        
-                        //                self.userImages.removeAll()
-                        
-                        self.userImages.append(newImage!)
-                        
-                    }catch{
-                        print("error with data")
+                do{
+                    let data = try Data(contentsOf: url!)
+                    let newImage = UIImage(data: data as Data)
+                    
+                    print("Image", newImage!)
+                    
+                    self.userImages.append(newImage!)
+                    
+                    print("user images", self.userImages)
+                    
+                    DispatchQueue.main.async {
+                        print("reloading")
+                        self.collectionView?.reloadData()
                     }
-                })
-                
-                dGroup.leave()
-                print("LEAVE")
-            }
-            
-            dGroup.notify(queue: .main) {
-                print("Download complete")
-            }
-
-//            self.getUserImages(downloadLink: downloadLink)
-
-            print("USER IAMGES", self.userImages)
+                    
+                }catch{
+                    print("error with data")
+                }
+            })
             
         })
     }
-    
-//    func getUserImages(downloadLink: String) {
-//
-//
-//
-////        contentDBRef.observeSingleEvent(of: .value, with: {(snapshot) in
-////
-////            for item in snapshot.children.allObjects as! [DataSnapshot]{
-////                print("ITEM", item)
-////
-////                let downloadLink = item.value as! String
-////                let storageRef = Storage.storage().reference(forURL: downloadLink)
-////
-////                storageRef.downloadURL(completion: { (url, error) in
-////                    do{
-////                        let data = try Data(contentsOf: url!)
-////
-////                        let newImage = UIImage(data: data as Data)
-////
-////                        DispatchQueue.main.async {
-////                            self.displayImages(image: newImage!)
-////                        }
-////
-////                    }catch{
-////                        print("error with data")
-////                    }
-////                })
-////            }
-////        })
-//    }
-    
-//    func displayImages(image: UIImage) {
-//        print("display images", image)
-//        self.userImages.append(image)
-//        print("user images", self.userImages)
-//
-//        self.collectionView?.reloadData()
-//    }
-    
-    //Setup for collection view
+
+}
+extension ProfileViewController: PinterestLayoutDelegate {
+    func collectionView(_ collectionView: UICollectionView, heightForPhotoAtIndexPath indexPath: IndexPath) -> CGFloat {
+        let image = self.testImages[indexPath.item]
+        let height = (image.size.height)/10
+        print("height", height)
+        return height
+    }
+}
+extension ProfileViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        let count = self.userImages.count
-        print("count", count)
-        return count
+        print("count", self.testImages.count)
+        return self.testImages.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let imageCell = collectionView.dequeueReusableCell(withReuseIdentifier: "imgCell", for: indexPath) as! ProfileCollectionViewCell
-        
-        imageCell.cellImage.image = self.userImages[indexPath.row]
-        
-        return imageCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "imgCell", for: indexPath) as! ProfileCollectionViewCell
+        let image = self.testImages[indexPath.row]
+        cell.cellImage.image = image
+        return cell
     }
     
-//    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-//        let imageCell = collectionView.dequeueReusableCell(withReuseIdentifier: "imgCell", for: indexPath)
-//    }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
-

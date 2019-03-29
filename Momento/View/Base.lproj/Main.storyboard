@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="49e-Tb-3d3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="49e-Tb-3d3">
     <device id="retina6_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -461,63 +461,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="spV-yO-VYW">
-                                <rect key="frame" x="159" y="395" width="97" height="69"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="31"/>
-                                <state key="normal" title="Upload">
-                                    <color key="titleColor" red="0.98039215690000003" green="0.63529411759999999" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="importBtn:" destination="8cD-Z6-jIx" eventType="touchUpInside" id="Xu4-GR-Hrm"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fSJ-Lv-2Ot">
-                                <rect key="frame" x="183" y="472" width="48" height="30"/>
+                                <rect key="frame" x="169" y="333" width="48" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Logout"/>
                                 <connections>
                                     <action selector="logoutBtn:" destination="8cD-Z6-jIx" eventType="touchUpInside" id="vRo-KO-EuI"/>
                                 </connections>
                             </button>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="2Vq-No-u96">
-                                <rect key="frame" x="0.0" y="475" width="414" height="387"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Qnd-Zt-ckx">
-                                    <size key="itemSize" width="318" height="329"/>
-                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                </collectionViewFlowLayout>
-                                <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="imgCell" id="SPn-CW-30u" customClass="ProfileCollectionViewCell" customModule="Momento" customModuleProvider="target">
-                                        <rect key="frame" x="48" y="0.0" width="318" height="329"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                                            <rect key="frame" x="0.0" y="0.0" width="318" height="329"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YlL-Vo-3aY">
-                                                    <rect key="frame" x="0.0" y="0.0" width="318" height="329"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                </imageView>
-                                            </subviews>
-                                        </view>
-                                        <size key="customSize" width="318" height="329"/>
-                                        <connections>
-                                            <outlet property="cellImage" destination="YlL-Vo-3aY" id="PHJ-yy-Ixs"/>
-                                        </connections>
-                                    </collectionViewCell>
-                                </cells>
-                                <connections>
-                                    <outlet property="dataSource" destination="8cD-Z6-jIx" id="OIw-zx-SYs"/>
-                                </connections>
-                            </collectionView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image1" translatesAutoresizingMaskIntoConstraints="NO" id="1p4-1c-o5m">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="350"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="300"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="350" id="PYp-XB-4Vp"/>
+                                    <constraint firstAttribute="height" constant="300" id="PYp-XB-4Vp"/>
                                 </constraints>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="MomentoLogo" translatesAutoresizingMaskIntoConstraints="NO" id="fIG-wR-QqB">
@@ -527,9 +482,64 @@
                                     <constraint firstAttribute="height" constant="120" id="hDk-gn-zE6"/>
                                 </constraints>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="spV-yO-VYW">
+                                <rect key="frame" x="45" y="308" width="97" height="69"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="31"/>
+                                <state key="normal" title="Upload">
+                                    <color key="titleColor" red="0.98039215690000003" green="0.63529411759999999" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="importBtn:" destination="8cD-Z6-jIx" eventType="touchUpInside" id="Xu4-GR-Hrm"/>
+                                </connections>
+                            </button>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="2Vq-No-u96">
+                                <rect key="frame" x="0.0" y="408" width="414" height="444"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="444" id="0Uy-nC-pSM"/>
+                                </constraints>
+                                <collectionViewLayout key="collectionViewLayout" id="SWW-MZ-5w3" customClass="PinterestLayout" customModule="Momento" customModuleProvider="target"/>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="imgCell" id="SPn-CW-30u" customClass="ProfileCollectionViewCell" customModule="Momento" customModuleProvider="target">
+                                        <rect key="frame" x="79.666666666666671" y="0.0" width="255" height="263"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                            <rect key="frame" x="0.0" y="0.0" width="255" height="263"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="7R8A0139" translatesAutoresizingMaskIntoConstraints="NO" id="YlL-Vo-3aY">
+                                                    <rect key="frame" x="0.0" y="0.0" width="255" height="263"/>
+                                                </imageView>
+                                            </subviews>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="YlL-Vo-3aY" secondAttribute="bottom" id="4cI-Ci-evZ"/>
+                                            <constraint firstItem="YlL-Vo-3aY" firstAttribute="top" secondItem="SPn-CW-30u" secondAttribute="top" id="8r3-u1-niv"/>
+                                            <constraint firstAttribute="trailing" secondItem="YlL-Vo-3aY" secondAttribute="trailing" id="Wfy-bg-oSX"/>
+                                            <constraint firstItem="YlL-Vo-3aY" firstAttribute="leading" secondItem="SPn-CW-30u" secondAttribute="leading" id="xfd-1G-JPc"/>
+                                        </constraints>
+                                        <size key="customSize" width="255" height="263"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="15"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <outlet property="cellImage" destination="YlL-Vo-3aY" id="PHJ-yy-Ixs"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="8cD-Z6-jIx" id="OIw-zx-SYs"/>
+                                </connections>
+                            </collectionView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="T3w-vy-Jw5" firstAttribute="bottom" secondItem="2Vq-No-u96" secondAttribute="bottom" constant="10" id="2Bd-bY-XyR"/>
+                            <constraint firstItem="2Vq-No-u96" firstAttribute="leading" secondItem="T3w-vy-Jw5" secondAttribute="leading" id="5vl-yR-mfi"/>
+                            <constraint firstItem="2Vq-No-u96" firstAttribute="trailing" secondItem="T3w-vy-Jw5" secondAttribute="trailing" id="ACF-hh-FQP"/>
                             <constraint firstItem="1p4-1c-o5m" firstAttribute="leading" secondItem="T3w-vy-Jw5" secondAttribute="leading" id="F96-Bt-9Dd"/>
                             <constraint firstItem="fIG-wR-QqB" firstAttribute="leading" secondItem="T3w-vy-Jw5" secondAttribute="leading" constant="10" id="FIn-i6-EYS"/>
                             <constraint firstItem="fIG-wR-QqB" firstAttribute="top" secondItem="T3w-vy-Jw5" secondAttribute="top" constant="10" id="P90-Z7-zg4"/>
@@ -731,10 +741,11 @@
         </scene>
     </scenes>
     <resources>
+        <image name="7R8A0139" width="4800" height="3200"/>
         <image name="Home" width="25" height="25"/>
         <image name="MomentoLogo" width="500" height="500"/>
-        <image name="image1" width="864" height="648"/>
-        <image name="momentoLettermark" width="2000" height="377"/>
+        <image name="image1" width="4800" height="3600"/>
+        <image name="momentoLettermark" width="1000" height="188.5"/>
         <image name="second" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
