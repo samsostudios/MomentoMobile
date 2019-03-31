@@ -24,6 +24,7 @@ class ProfileViewController: UIViewController, UITextViewDelegate, UINavigationC
     let imagePicker = UIImagePickerController()
     
     var username: String = ""
+    var designTypes = [String]()
     
     @IBOutlet weak var imageUploadBtn: UIButton!
     
@@ -207,7 +208,6 @@ class ProfileViewController: UIViewController, UITextViewDelegate, UINavigationC
             snapshot in
             
             var username: String = ""
-            var designTypes = [String]()
             
             print("SNAPSHOT \(snapshot.key)")
             
@@ -241,6 +241,14 @@ class ProfileViewController: UIViewController, UITextViewDelegate, UINavigationC
                             print("Error with header photo")
                         }
                     })
+                }
+            }
+            if snapshot.key == "Design Types" {
+                let typesObejct = snapshot.value as! NSDictionary
+                
+                for item in typesObejct {
+                    print("TYPE", item.key)
+                    self.designTypes.append(item.key as! String)
                 }
             }
             
@@ -301,6 +309,10 @@ class ProfileViewController: UIViewController, UITextViewDelegate, UINavigationC
             imageDetail.selectedImage = self.testImages[(imageSelected?.row)!]
             print("Username from segue", username)
             imageDetail.username = username
+            print("TYPES", self.designTypes)
+            
+            imageDetail.types = self.designTypes
+            
         }
     }
 }

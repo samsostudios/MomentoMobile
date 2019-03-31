@@ -13,9 +13,11 @@ class ProfileDetailViewController: UIViewController {
     var selectedImage: UIImage = UIImage()
     var postID: String = ""
     var username = ""
+    var types = [String]()
 
     @IBOutlet weak var detailImageView: UIImageView!
     @IBOutlet weak var usernameLabel: UILabel!
+    @IBOutlet weak var typesLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,6 +32,17 @@ class ProfileDetailViewController: UIViewController {
         
         print("USERNAME", username)
         usernameLabel.text = username
+        
+        var displayTypes: String = ""
+        
+        for item in types {
+            print("item", item)
+            displayTypes = displayTypes + item + ", "
+            
+            print("Display types", displayTypes)
+            
+            typesLabel.text = displayTypes
+        }
         // Do any additional setup after loading the view.
     }
     

@@ -593,19 +593,28 @@
                                 <color key="textColor" red="0.95686274510000002" green="0.95686274510000002" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mbb-Sm-vGy">
+                                <rect key="frame" x="10" y="551" width="49" height="28"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-UltraLight" family="Avenir Next" pointSize="20"/>
+                                <color key="textColor" red="0.95686274510000002" green="0.95686274510000002" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="TGo-0X-J5T" firstAttribute="leading" secondItem="p1H-Gk-cmz" secondAttribute="leading" id="6Sb-NP-lOb"/>
+                            <constraint firstItem="mbb-Sm-vGy" firstAttribute="top" secondItem="1Lk-hU-cp4" secondAttribute="bottom" constant="15" id="IAd-OW-osV"/>
                             <constraint firstItem="TGo-0X-J5T" firstAttribute="top" secondItem="wfV-3z-b8I" secondAttribute="top" id="SqA-tA-k0Y"/>
                             <constraint firstItem="TGo-0X-J5T" firstAttribute="trailing" secondItem="p1H-Gk-cmz" secondAttribute="trailing" id="fx5-EE-s7s"/>
                             <constraint firstItem="1Lk-hU-cp4" firstAttribute="leading" secondItem="p1H-Gk-cmz" secondAttribute="leading" constant="10" id="ku5-em-a0u"/>
                             <constraint firstItem="1Lk-hU-cp4" firstAttribute="top" secondItem="TGo-0X-J5T" secondAttribute="bottom" constant="20" id="vPI-xO-e4a"/>
+                            <constraint firstItem="mbb-Sm-vGy" firstAttribute="leading" secondItem="p1H-Gk-cmz" secondAttribute="leading" constant="10" id="zkh-sG-nI0"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="p1H-Gk-cmz"/>
                     </view>
                     <connections>
                         <outlet property="detailImageView" destination="TGo-0X-J5T" id="QZA-fB-g8O"/>
+                        <outlet property="typesLabel" destination="mbb-Sm-vGy" id="Wxi-Mr-spf"/>
                         <outlet property="usernameLabel" destination="1Lk-hU-cp4" id="CGs-BL-dBh"/>
                     </connections>
                 </viewController>
