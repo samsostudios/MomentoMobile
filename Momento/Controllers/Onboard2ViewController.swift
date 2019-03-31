@@ -18,6 +18,7 @@ class Onboard2ViewController: UIViewController {
                            7: false, 8: false]
     
     let bgImage = UIImageView()
+    
     @IBAction func graphicDesignBtn(_ sender: Any) {
         buttonsSelected[1] = true
     }

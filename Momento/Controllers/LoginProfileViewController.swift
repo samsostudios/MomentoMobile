@@ -56,8 +56,6 @@ class LoginProfileViewController: UIViewController, UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
         textField.resignFirstResponder()
-        //or
-        //self.view.endEditing(true)
         return true
     }
     

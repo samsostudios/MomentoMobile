@@ -54,7 +54,7 @@ class PinterestLayout: UICollectionViewLayout {
         var column = 0
         var yOffset = [CGFloat](repeating: 0, count: numberOfColumns)
         
-        print("collection view", collectionView.numberOfItems(inSection: 0))
+//        print("collection view", collectionView.numberOfItems(inSection: 0))
         // 3. Iterates through the list of items in the first section
         for item in 0 ..< collectionView.numberOfItems(inSection: 0) {
             

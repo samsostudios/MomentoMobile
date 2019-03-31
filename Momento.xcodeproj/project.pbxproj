@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		222C33ED2225A72700A6536A /* Onboard1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 222C33EC2225A72700A6536A /* Onboard1ViewController.swift */; };
+		2234AA48225069ED00B0588D /* ProfileSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2234AA47225069EC00B0588D /* ProfileSettingsViewController.swift */; };
+		2234AA4A22506F0400B0588D /* ProfileDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2234AA4922506F0400B0588D /* ProfileDetailViewController.swift */; };
 		2235351C224EAF4C0000788B /* CustomCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2235351B224EAF4C0000788B /* CustomCollectionView.swift */; };
 		223C423E222E5C60006DCCF1 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223C423D222E5C60006DCCF1 /* ProfileViewController.swift */; };
 		22440219222C6C5A004D089E /* OnBoardButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22440218222C6C5A004D089E /* OnBoardButton.swift */; };
@@ -29,6 +31,8 @@
 
 /* Begin PBXFileReference section */
 		222C33EC2225A72700A6536A /* Onboard1ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboard1ViewController.swift; sourceTree = "<group>"; };
+		2234AA47225069EC00B0588D /* ProfileSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSettingsViewController.swift; sourceTree = "<group>"; };
+		2234AA4922506F0400B0588D /* ProfileDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDetailViewController.swift; sourceTree = "<group>"; };
 		2235351B224EAF4C0000788B /* CustomCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCollectionView.swift; sourceTree = "<group>"; };
 		223C423D222E5C60006DCCF1 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		22440218222C6C5A004D089E /* OnBoardButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardButton.swift; sourceTree = "<group>"; };
@@ -126,6 +130,8 @@
 				222C33EC2225A72700A6536A /* Onboard1ViewController.swift */,
 				228DC9B7222D86E500E34A21 /* Onboard2ViewController.swift */,
 				223C423D222E5C60006DCCF1 /* ProfileViewController.swift */,
+				2234AA47225069EC00B0588D /* ProfileSettingsViewController.swift */,
+				2234AA4922506F0400B0588D /* ProfileDetailViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -251,6 +257,7 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-Momento/Pods-Momento-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
+				"${BUILT_PRODUCTS_DIR}/Pulley/Pulley.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
@@ -258,6 +265,7 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Pulley.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
@@ -294,12 +302,14 @@
 				228E56632221CCE1001AF3F0 /* LoginProfileViewController.swift in Sources */,
 				2244021E222C941E004D089E /* Colors.swift in Sources */,
 				2244021C222C925C004D089E /* YellowGradient.swift in Sources */,
+				2234AA48225069ED00B0588D /* ProfileSettingsViewController.swift in Sources */,
 				228E56672221DEA6001AF3F0 /* SignupProfileViewController.swift in Sources */,
 				222C33ED2225A72700A6536A /* Onboard1ViewController.swift in Sources */,
 				2235351C224EAF4C0000788B /* CustomCollectionView.swift in Sources */,
 				224751CF22151F3D004DFA77 /* CommunityViewController.swift in Sources */,
 				223C423E222E5C60006DCCF1 /* ProfileViewController.swift in Sources */,
 				224751CB22151F1D004DFA77 /* FeedViewController.swift in Sources */,
+				2234AA4A22506F0400B0588D /* ProfileDetailViewController.swift in Sources */,
 				22440219222C6C5A004D089E /* OnBoardButton.swift in Sources */,
 				224751B522151CA5004DFA77 /* AppDelegate.swift in Sources */,
 				22A2CCB42242F2410066D4F3 /* ProfileCollectionViewCell.swift in Sources */,
