@@ -157,6 +157,7 @@ class ProfileViewController: UIViewController, UITextViewDelegate, UINavigationC
         self.navigationController?.navigationBar.isTranslucent = true
         self.navigationController?.view.backgroundColor = .clear
         
+        self.navigationController?.isNavigationBarHidden = true
         
         imageUploadBtn.alpha = 0.5
         

@@ -13,10 +13,9 @@ class ProfileDetailViewController: UIViewController {
     var selectedImage: UIImage = UIImage()
     var postID: String = ""
     var username = ""
-    
-    @IBOutlet weak var usernameLabel: UILabel!
-    
+
     @IBOutlet weak var detailImageView: UIImageView!
+    @IBOutlet weak var usernameLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
