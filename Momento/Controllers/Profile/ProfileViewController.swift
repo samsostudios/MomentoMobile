@@ -72,7 +72,7 @@ class ProfileViewController: UIViewController, UITextViewDelegate, UINavigationC
             let contentStorageRef = Storage.storage().reference().child(uid).child("images")
             let headerPhotoStorageRef = Storage.storage().reference().child(uid).child("headerPhoto")
             let contentDBRef = Database.database().reference().child("Content").child(uid).child("Images")
-            let userInfoDBRef = Database.database().reference().child("Users").child(uid).child("Header Photo")
+            let headerPhotoDBRef = Database.database().reference().child("Header Photos").child(uid)
             
             let postID = UUID().uuidString
             print(postID)
@@ -80,13 +80,13 @@ class ProfileViewController: UIViewController, UITextViewDelegate, UINavigationC
             if imagePickerButtonSelected == "header photo" {
                 print("header photo button pressed")
                 
-                let uploadTask = headerPhotoStorageRef.child(postID).putData(imageData, metadata: imageMetaData) {
+                let uploadTask = headerPhotoStorageRef.child("Photo").putData(imageData, metadata: imageMetaData) {
                     (metaData, error) in
                     
                     if error != nil {
                         print("ADD Alert for failed upload")
                     }else{
-                        headerPhotoStorageRef.child(postID).downloadURL {
+                        headerPhotoStorageRef.child("Photo").downloadURL {
                             (imgURL, error) in
                             
                             if error != nil {
@@ -95,7 +95,7 @@ class ProfileViewController: UIViewController, UITextViewDelegate, UINavigationC
                                 print("URL", imgURL!)
                                 
                                 let downloadUrl = imgURL?.absoluteString
-                                userInfoDBRef.child("Photo Link").setValue(downloadUrl)
+                                headerPhotoDBRef.child("Photo").setValue(downloadUrl)
                             }
                         }
                     }
@@ -152,13 +152,6 @@ class ProfileViewController: UIViewController, UITextViewDelegate, UINavigationC
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        self.navigationController?.navigationBar.shadowImage = UIImage()
-        self.navigationController?.setNavigationBarHidden(true, animated: true)
-        self.navigationController?.navigationBar.isTranslucent = true
-        self.navigationController?.view.backgroundColor = .clear
-        
-        self.navigationController?.isNavigationBarHidden = true
         
         imageUploadBtn.alpha = 0.5
         
@@ -190,44 +183,30 @@ class ProfileViewController: UIViewController, UITextViewDelegate, UINavigationC
         let headerDBRef = Database.database().reference().child("Users").child(uid).child("headerPhoto")
         let contentDBRef = Database.database().reference().child("Content").child(uid).child("Images")
         let userDBRef = Database.database().reference().child("Users").child(uid)
+        let headerPhotoDBRef = Database.database().reference().child("Header Photos").child(uid)
         
         let usernameRef = Database.database().reference().child("Usernames").child(uid)
-        usernameRef.observeSingleEvent(of: .value, with: {
-            (snapshot) in
-            
-            print("SNAP", snapshot)
-            
-            DispatchQueue.main.async {
-                self.username = snapshot.value as! String
-                
-                print("user", self.username)
-            }
-        })
         
-        userDBRef.observe(.childAdded, with: {
+        headerPhotoDBRef.observeSingleEvent(of: .value) {
             snapshot in
             
-            var username: String = ""
+            let snap = snapshot.children.allObjects
+            print("snap", type(of: snap))
             
-            print("SNAPSHOT \(snapshot.key)")
-            
-            if snapshot.key == "Username"{
-                username = snapshot.value as! String
-                self.usernameField.text = username
-            }
-            if snapshot.key == "Header Photo" {
-//                print("Header link", snapshot.value!)
-                let headerObject = snapshot.value! as! NSDictionary
-                var downloadLink: String = ""
+            if snap.isEmpty {
+                print("No header photo")
+                self.headerPhoto.image = UIImage(named: "image1")
                 
-                for item in headerObject {
-                    print(item.value)
-                    downloadLink = item.value as! String
+            }else{
+                print("Header photo")
+                let downloadObject = snapshot.value as! NSDictionary
+                
+                for item in downloadObject {
+                    let downloadLink = item.value as! String
                     
                     let headerStorageRef = Storage.storage().reference(forURL: downloadLink)
                     headerStorageRef.downloadURL(completion: {
                         (url, error) in
-                        print("header url", url)
                         
                         do {
                             let data = try Data(contentsOf: url!)
@@ -243,11 +222,100 @@ class ProfileViewController: UIViewController, UITextViewDelegate, UINavigationC
                     })
                 }
             }
+        }
+        
+        headerPhotoDBRef.observe(.childAdded){
+            snapshot in
+            
+            print("SNAP", snapshot.value!)
+            let downloadLink = snapshot.value! as! String
+            
+            let headerStorageRef = Storage.storage().reference(forURL: downloadLink)
+            headerStorageRef.downloadURL(completion: {
+                (url, error) in
+                
+                do {
+                    let data = try Data(contentsOf: url!)
+                    let headerImage = UIImage(data: data as Data)
+                    
+                    DispatchQueue.main.async {
+                        self.headerPhoto.image = headerImage
+                    }
+                }
+                catch {
+                    print("Error with header photo")
+                }
+            })
+        }
+        
+        headerPhotoDBRef.observe(.childChanged, with: {
+            snapshot in
+            
+            print("SNAP", snapshot.value!)
+            let downloadLink = snapshot.value! as! String
+            
+            let headerStorageRef = Storage.storage().reference(forURL: downloadLink)
+            headerStorageRef.downloadURL(completion: {
+                (url, error) in
+                
+                do {
+                    let data = try Data(contentsOf: url!)
+                    let headerImage = UIImage(data: data as Data)
+                    
+                    DispatchQueue.main.async {
+                        self.headerPhoto.image = headerImage
+                    }
+                }
+                catch {
+                    print("Error with header photo")
+                }
+            })
+        })
+        
+        userDBRef.observe(.childAdded, with: {
+            snapshot in
+            
+            var username: String = ""
+            
+//            print("SNAPSHOT \(snapshot.key)")
+            
+            if snapshot.key == "Username"{
+                username = snapshot.value as! String
+                self.usernameField.text = username
+            }
+//            if snapshot.key == "Header Photo" {
+////                print("Header link", snapshot.value!)
+//                let headerObject = snapshot.value! as! NSDictionary
+//                var downloadLink: String = ""
+//
+//                for item in headerObject {
+//                    print(item.value)
+//                    downloadLink = item.value as! String
+//
+//                    let headerStorageRef = Storage.storage().reference(forURL: downloadLink)
+//                    headerStorageRef.downloadURL(completion: {
+//                        (url, error) in
+//                        print("header url", url)
+//
+//                        do {
+//                            let data = try Data(contentsOf: url!)
+//                            let headerImage = UIImage(data: data as Data)
+//
+//                            DispatchQueue.main.async {
+//                                self.headerPhoto.image = headerImage
+//                            }
+//                        }
+//                        catch {
+//                            print("Error with header photo")
+//                        }
+//                    })
+//                }
+//            }
             if snapshot.key == "Design Types" {
                 let typesObejct = snapshot.value as! NSDictionary
                 
                 for item in typesObejct {
-                    print("TYPE", item.key)
+//                    print("TYPE", item.key)
                     self.designTypes.append(item.key as! String)
                 }
             }
@@ -284,6 +352,21 @@ class ProfileViewController: UIViewController, UITextViewDelegate, UINavigationC
 //        })
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        setNavBar()
+    }
+    
+    func setNavBar(){
+        //      Navigation Bar Styling
+        print("Setting navbar")
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.navigationBar.isTranslucent = true
+        self.navigationController?.view.backgroundColor = UIColor.clear
+        
+    }
+    
     func setBG (){
         view.addSubview(bgImage)
         bgImage.translatesAutoresizingMaskIntoConstraints = false
@@ -299,20 +382,24 @@ class ProfileViewController: UIViewController, UITextViewDelegate, UINavigationC
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let uid = Auth.auth().currentUser?.uid
         
-        print("uid", uid!, "username", username)
-        
-        if segue.identifier == "showDetail" {
-            let imageSelected = collectionView?.indexPath(for: sender as! ProfileCollectionViewCell)
-            print("SELECTED IMAGE", type(of: imageSelected!.row))
-            let imageDetail = segue.destination as! ProfileDetailViewController
+        if uid == nil {
+            print("no user")
+        }else{
+            print("uid", uid!, "username", username)
             
-            imageDetail.selectedImage = self.testImages[(imageSelected?.row)!]
-            print("Username from segue", username)
-            imageDetail.username = username
-            print("TYPES", self.designTypes)
-            
-            imageDetail.types = self.designTypes
-            
+            if segue.identifier == "showDetail" {
+                let imageSelected = collectionView?.indexPath(for: sender as! ProfileCollectionViewCell)
+                print("SELECTED IMAGE", type(of: imageSelected!.row))
+                let imageDetail = segue.destination as! ProfileDetailViewController
+                
+                imageDetail.selectedImage = self.testImages[(imageSelected?.row)!]
+                print("Username from segue", username)
+                imageDetail.username = username
+                print("TYPES", self.designTypes)
+                
+                imageDetail.types = self.designTypes
+                
+            }
         }
     }
 }

@@ -7,14 +7,27 @@
 //
 
 import UIKit
+import Firebase
 
 class CommunityViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        self.view.backgroundColor = Colors.darkBlack
+        
+        let backButtonImage = UIImage(named: "back")
+        self.navigationController?.navigationBar.backIndicatorImage = backButtonImage
+        self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = backButtonImage
+        
+        let backButton = UIBarButtonItem()
+        backButton.title = " "
+        self.navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
+    }
+    
     
 
     /*

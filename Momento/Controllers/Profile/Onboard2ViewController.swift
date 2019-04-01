@@ -187,7 +187,7 @@ class Onboard2ViewController: UIViewController {
             (user, error) in
             
             if error != nil {
-                print("ADD ALERR info not good")
+                print("ADD ALERR info not good", error!)
             }else{
                 print("sign up good!")
                 let uid = Auth.auth().currentUser!.uid
