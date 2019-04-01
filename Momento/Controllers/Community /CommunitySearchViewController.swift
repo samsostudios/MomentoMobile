@@ -9,26 +9,30 @@
 import UIKit
 import Firebase
 
-class CommunitySearchViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class CommunitySearchViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
     
     
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
     
-    var initialUsernamesForSearch = [String]()
-    var usernamesAfterFilter = [String]()
-    var userPhoto = [UIImage]()
+    var userArray = [users]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = Colors.darkBlack
 
+        self.searchBar.delegate = self
+        
         // NAV Setup
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.isTranslucent = true
         self.navigationController?.view.backgroundColor = UIColor.clear
+        
+        let backButton = UIBarButtonItem()
+        backButton.title = " "
+        self.navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
         
         //TableView Setup
         self.tableView.backgroundColor = Colors.darkBlack
@@ -47,18 +51,27 @@ class CommunitySearchViewController: UIViewController, UITableViewDelegate, UITa
                 let usernameObject = snapshot.value! as! NSDictionary
                 for (uid, username) in usernameObject {
                     
-                    self.initialUsernamesForSearch.append(username as! String)
-                    self.usernamesAfterFilter = self.initialUsernamesForSearch
+                    //Vars for storing data
+                    var uidStore = ""
+                    var usernameStore = ""
+                    var userImageStore = UIImage()
+                    
+                    usernameStore = username as! String
                     
                     let id = uid as! String
-                    print("ID", id)
+//                    print("ID", id))
+                    
+                    uidStore = id
+                    
                     
                     let headerPhotoDBRef = Database.database().reference().child("Header Photos").child(id).child("Photo")
                     headerPhotoDBRef.observeSingleEvent(of: .value) {
                         snapshot in
                         
-                        print("SNAP", snapshot.value!)
+                        
+//                        print("SNAP", snapshot.value!)
                         let downloadLink = snapshot.value! as! String
+                        print("DL LINK", downloadLink)
                         
                         if downloadLink != nil{
                             print("GETTING USER PHOTOS")
@@ -70,9 +83,14 @@ class CommunitySearchViewController: UIViewController, UITableViewDelegate, UITa
                                     let data = try Data(contentsOf: url!)
                                     let headerImage = UIImage(data: data as Data)
                                     
-                                    self.userPhoto.append(headerImage!)
+                                    userImageStore = headerImage!
                                     
                                     DispatchQueue.main.async {
+                                        
+                                        self.userArray.append(users(uid: uidStore, username: usernameStore, userImage: userImageStore))
+                                        
+                                        print("USER ARRAY", self.userArray)
+                                        
                                         print("Reloading")
                                         self.tableView.reloadData()
                                     }
@@ -84,26 +102,10 @@ class CommunitySearchViewController: UIViewController, UITableViewDelegate, UITa
                             })
                         }else{
                             print("NOT GETTING PHOTOS")
+                            
+                            
                         }
                     }
-//                    let headerPhotoDBRef = Database.database().reference().child("Users").child(id).child("Header Photo")
-////                    print("LINK", headerPhotoDBRef)
-//                    var downloadLink: String = ""
-//
-//                    headerPhotoDBRef.observeSingleEvent(of: .value) {
-//                        (snapshot, error) in
-//
-//                        if error != nil{
-//                            print("error downloading header photo")
-//                        }else{
-//                            let dlObject = snapshot.value as! NSDictionary
-//                            for link in dlObject {
-//                                downloadLink = link.value as! String
-//                            }
-//                            print("SNAP", dlObject)
-//                            print("link", downloadLink)
-//                        }
-//                    }
 
                     DispatchQueue.main.async {
                         self.tableView.reloadData()
@@ -113,30 +115,76 @@ class CommunitySearchViewController: UIViewController, UITableViewDelegate, UITa
         }
     }
     
+    //MARK: TableView Setup
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        print("count", self.usernamesAfterFilter.count)
-        return usernamesAfterFilter.count
+        print("COUNT", self.userArray.count)
+        return userArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "searchTableView") as! CommunitySearchTableViewCell
         
-//        print("user photos", self.userPhoto[indexPath.row])
-        
-        var image = UIImage()
-        
-        if self.userPhoto.count == 0 {
-            print("no current images")
-        }else{
-            image = self.userPhoto[indexPath.row]
-        }
+        cell.userImage.image = userArray[indexPath.row].userImage
+        cell.usernameLabel.text = userArray[indexPath.row].username
         
         cell.backgroundColor = UIColor.clear
-        cell.usernameLabel.text = self.usernamesAfterFilter[indexPath.row]
-        cell.userImage.image = image
+//        cell.usernameLabel.text = self.usernamesAfterFilter[indexPath.row]
+//        cell.userImage.image = image
         return cell
     }
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        return 50
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        let username = usernamesAfterFilter[indexPath.row]
+//        print("USERNAME SELECTED", username)
+//        let userImage = userPhoto[indexPath.row]
+//        let uid = userIdentifiers[indexPath.row]
+//        print("ID", uid)
+//
+//        userDataPassToDetail["uid"] = uid
+//        userDataPassToDetail["username"] = username
+//        userDataPassToDetail["headerPhoto"] = userImage
+//
+//        print("USER INFO DICT", userDataPassToDetail)
+//
+//        performSegue(withIdentifier: "CommunitySeachDetail", sender: self)
+//
 //    }
+    
+    //NARK: SearchBar Setup
+//    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+//        print("SEARCH BAR EDITING")
+//        guard !searchText.isEmpty else{
+//            usernamesAfterFilter = initialUsernamesForSearch
+//            print("usernames after filter")
+//            tableView.reloadData()
+//            return
+//        }
+//
+//        usernamesAfterFilter = initialUsernamesForSearch.filter({ (initialUsernamesForSearch: String) -> Bool in
+//            initialUsernamesForSearch.contains(searchText.lowercased())
+//
+//        })
+//
+//        tableView.reloadData()
+//    }
+    
+    //MARK: Segue Setup
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if segue.identifier == "CommunitySeachDetail"{
+//            let searchDetail = segue.destination as! SearchDetailViewController
+//
+//            searchDetail.incomingUserInfo = self.userDataPassToDetail
+//        }
+//    }
+}
+
+class users {
+    let uid: String
+    let username: String
+    let userImage: UIImage
+    
+    init(uid: String, username: String, userImage: UIImage) {
+        self.uid = uid
+        self.username = username
+        self.userImage = userImage
+    }
 }

@@ -21,6 +21,7 @@
 		224751C122151CA5004DFA77 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 224751BF22151CA5004DFA77 /* LaunchScreen.storyboard */; };
 		224751CB22151F1D004DFA77 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224751CA22151F1D004DFA77 /* FeedViewController.swift */; };
 		224751CF22151F3D004DFA77 /* CommunityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224751CE22151F3D004DFA77 /* CommunityViewController.swift */; };
+		2259D8092252990D0088FD06 /* SearchDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2259D8082252990D0088FD06 /* SearchDetailViewController.swift */; };
 		228DC9B8222D86E500E34A21 /* Onboard2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228DC9B7222D86E500E34A21 /* Onboard2ViewController.swift */; };
 		228E56632221CCE1001AF3F0 /* LoginProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228E56622221CCE1001AF3F0 /* LoginProfileViewController.swift */; };
 		228E56652221CDBD001AF3F0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 228E56642221CDBD001AF3F0 /* GoogleService-Info.plist */; };
@@ -48,6 +49,7 @@
 		224751C222151CA5004DFA77 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		224751CA22151F1D004DFA77 /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		224751CE22151F3D004DFA77 /* CommunityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityViewController.swift; sourceTree = "<group>"; };
+		2259D8082252990D0088FD06 /* SearchDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDetailViewController.swift; sourceTree = "<group>"; };
 		228DC9B7222D86E500E34A21 /* Onboard2ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboard2ViewController.swift; sourceTree = "<group>"; };
 		228E56622221CCE1001AF3F0 /* LoginProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginProfileViewController.swift; sourceTree = "<group>"; };
 		228E56642221CDBD001AF3F0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -171,6 +173,7 @@
 			children = (
 				224751CE22151F3D004DFA77 /* CommunityViewController.swift */,
 				22CDEFF02251975300BCA766 /* CommunitySearchViewController.swift */,
+				2259D8082252990D0088FD06 /* SearchDetailViewController.swift */,
 			);
 			path = "Community ";
 			sourceTree = "<group>";
@@ -345,6 +348,7 @@
 				22440219222C6C5A004D089E /* OnBoardButton.swift in Sources */,
 				224751B522151CA5004DFA77 /* AppDelegate.swift in Sources */,
 				22A2CCB42242F2410066D4F3 /* ProfileCollectionViewCell.swift in Sources */,
+				2259D8092252990D0088FD06 /* SearchDetailViewController.swift in Sources */,
 				228DC9B8222D86E500E34A21 /* Onboard2ViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -145,6 +145,7 @@
                     <connections>
                         <outlet property="searchBar" destination="Rf9-JH-2fe" id="kbA-kG-opF"/>
                         <outlet property="tableView" destination="5Sl-9d-PtL" id="A94-i8-Nv5"/>
+                        <segue destination="tuV-NG-HK8" kind="show" identifier="CommunitySeachDetail" id="wnQ-5C-iPW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XW3-nk-y4D" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -751,6 +752,21 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="l8S-sK-h8J" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2223" y="2922"/>
+        </scene>
+        <!--Search Detail View Controller-->
+        <scene sceneID="Rvg-Cd-1Ps">
+            <objects>
+                <viewController id="tuV-NG-HK8" customClass="SearchDetailViewController" customModule="Momento" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="NZo-FQ-Zvp">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="caX-xQ-5wb"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Roi-Kq-TFK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="706" y="2133"/>
         </scene>
         <!--Onboard2 View Controller-->
         <scene sceneID="3Zf-Xr-Kpb">
