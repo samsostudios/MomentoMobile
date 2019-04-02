@@ -16,6 +16,8 @@ class CommunitySearchViewController: UIViewController, UITableViewDelegate, UITa
     @IBOutlet weak var tableView: UITableView!
     
     var userArray = [users]()
+    var filteredUsersArray = [users]()
+    var dataPassDetail = [String: Any]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -89,6 +91,8 @@ class CommunitySearchViewController: UIViewController, UITableViewDelegate, UITa
                                         
                                         self.userArray.append(users(uid: uidStore, username: usernameStore, userImage: userImageStore))
                                         
+                                        self.filteredUsersArray = self.userArray
+                                        
                                         print("USER ARRAY", self.userArray)
                                         
                                         print("Reloading")
@@ -117,64 +121,58 @@ class CommunitySearchViewController: UIViewController, UITableViewDelegate, UITa
     
     //MARK: TableView Setup
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print("COUNT", self.userArray.count)
-        return userArray.count
+//        print("COUNT", self.userArray.count)
+        return filteredUsersArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "searchTableView") as! CommunitySearchTableViewCell
         
-        cell.userImage.image = userArray[indexPath.row].userImage
-        cell.usernameLabel.text = userArray[indexPath.row].username
+        cell.userImage.image = filteredUsersArray[indexPath.row].userImage
+        cell.usernameLabel.text = filteredUsersArray[indexPath.row].username
         
         cell.backgroundColor = UIColor.clear
 //        cell.usernameLabel.text = self.usernamesAfterFilter[indexPath.row]
 //        cell.userImage.image = image
         return cell
     }
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        let username = usernamesAfterFilter[indexPath.row]
-//        print("USERNAME SELECTED", username)
-//        let userImage = userPhoto[indexPath.row]
-//        let uid = userIdentifiers[indexPath.row]
-//        print("ID", uid)
-//
-//        userDataPassToDetail["uid"] = uid
-//        userDataPassToDetail["username"] = username
-//        userDataPassToDetail["headerPhoto"] = userImage
-//
-//        print("USER INFO DICT", userDataPassToDetail)
-//
-//        performSegue(withIdentifier: "CommunitySeachDetail", sender: self)
-//
-//    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let username = filteredUsersArray[indexPath.row].username
+        let uid = filteredUsersArray[indexPath.row].uid
+        let image = filteredUsersArray[indexPath.row].userImage
+        
+        dataPassDetail["username"] = username
+        dataPassDetail["uid"] = uid
+        dataPassDetail["image"] = image
+
+        print("USER INFO DICT", dataPassDetail)
+
+        performSegue(withIdentifier: "CommunitySeachDetail", sender: self)
+
+    }
     
     //NARK: SearchBar Setup
-//    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-//        print("SEARCH BAR EDITING")
-//        guard !searchText.isEmpty else{
-//            usernamesAfterFilter = initialUsernamesForSearch
-//            print("usernames after filter")
-//            tableView.reloadData()
-//            return
-//        }
-//
-//        usernamesAfterFilter = initialUsernamesForSearch.filter({ (initialUsernamesForSearch: String) -> Bool in
-//            initialUsernamesForSearch.contains(searchText.lowercased())
-//
-//        })
-//
-//        tableView.reloadData()
-//    }
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        guard !searchText.isEmpty else {
+            filteredUsersArray = userArray
+            tableView.reloadData()
+            return
+        }
+        filteredUsersArray = userArray.filter( {user -> Bool in
+            user.username.lowercased().contains(searchText.lowercased())
+        })
+        tableView.reloadData()
+    }
     
     //MARK: Segue Setup
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if segue.identifier == "CommunitySeachDetail"{
-//            let searchDetail = segue.destination as! SearchDetailViewController
-//
-//            searchDetail.incomingUserInfo = self.userDataPassToDetail
-//        }
-//    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "CommunitySeachDetail"{
+            let searchDetail = segue.destination as! SearchDetailViewController
+
+            searchDetail.incomingUserInfo = dataPassDetail
+        }
+    }
 }
 
 class users {
