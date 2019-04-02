@@ -784,7 +784,6 @@
                                     <constraint firstAttribute="height" constant="40" id="7Op-wJ-83i"/>
                                     <constraint firstAttribute="width" constant="40" id="ofO-en-ef4"/>
                                 </constraints>
-                                <state key="normal" image="followButon"/>
                                 <connections>
                                     <action selector="followButton:" destination="tuV-NG-HK8" eventType="touchUpInside" id="fF1-0A-yut"/>
                                 </connections>
@@ -801,7 +800,7 @@
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="hpG-l3-vhI">
                                 <rect key="frame" x="0.0" y="416" width="414" height="397"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <collectionViewLayout key="collectionViewLayout" id="4lL-OC-Kpc" customClass="PinterestLayout" customModule="Momento" customModuleProvider="target"/>
+                                <collectionViewLayout key="collectionViewLayout" id="yPl-C9-jTr" customClass="PinterestLayout" customModule="Momento" customModuleProvider="target"/>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="SerachDetailCell" id="OXS-LH-LgO" customClass="SearchDetailCollectionViewCell" customModule="Momento" customModuleProvider="target">
                                         <rect key="frame" x="95" y="0.0" width="224" height="189"/>
@@ -859,6 +858,7 @@
                     <connections>
                         <outlet property="collectionView" destination="hpG-l3-vhI" id="84Q-PU-gOJ"/>
                         <outlet property="designTypesLabel" destination="CbA-Oo-seV" id="ndV-ua-sXS"/>
+                        <outlet property="followButtonSetup" destination="cX2-Hw-XwO" id="mS8-CC-zsL"/>
                         <outlet property="headerPhoto" destination="a5a-8W-7GZ" id="SaT-RM-qpq"/>
                         <outlet property="usernameLabel" destination="hAb-QF-lAe" id="BHL-8W-3hq"/>
                     </connections>
@@ -1075,7 +1075,6 @@
         <image name="7R8A0139" width="4800" height="3200"/>
         <image name="7R8A9956-2" width="4800" height="2700"/>
         <image name="Home" width="25" height="25"/>
-        <image name="followButon" width="32.666667938232422" height="32.666667938232422"/>
         <image name="imageUpload" width="512" height="512"/>
         <image name="momentoLettermark" width="1000" height="188.5"/>
         <image name="searchSmall" width="200" height="200"/>

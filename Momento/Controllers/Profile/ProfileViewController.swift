@@ -181,7 +181,6 @@ class ProfileViewController: UIViewController, UITextViewDelegate, UINavigationC
         
         let uid = Auth.auth().currentUser!.uid
         let contentDBRef = Database.database().reference().child("Content").child(uid).child("Images")
-//        let contentDBRef = Database.database().reference().child("Content").child(uid).child("Images")
         let userDBRef = Database.database().reference().child("Users").child(uid)
         let headerPhotoDBRef = Database.database().reference().child("Header Photos").child(uid)
         
@@ -292,7 +291,7 @@ class ProfileViewController: UIViewController, UITextViewDelegate, UINavigationC
                     let headerStorageRef = Storage.storage().reference(forURL: downloadLink)
                     headerStorageRef.downloadURL(completion: {
                         (url, error) in
-                        print("header url", url)
+                        print("header url", url!)
 
                         do {
                             let data = try Data(contentsOf: url!)
@@ -323,14 +322,14 @@ class ProfileViewController: UIViewController, UITextViewDelegate, UINavigationC
         contentDBRef.observe(.childAdded, with: {
             (snapshot) in
             
-            print("SNAP!!!!", snapshot.value)
+            print("SNAP!!!!", snapshot.value!)
             let downloadLink = snapshot.value as! String
             
             let storageRef = Storage.storage().reference(forURL: downloadLink)
             storageRef.downloadURL(completion: {
                 (url, error) in
                 
-                print("URL", url)
+                print("URL", url!)
                 
                 do{
                     let data = try Data(contentsOf: url!)

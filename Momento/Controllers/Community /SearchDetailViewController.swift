@@ -12,21 +12,25 @@ import Firebase
 class SearchDetailViewController: UIViewController {
     
     var incomingUserInfo  = [String: Any]()
+    var userImages = [UIImage]()
     
     var userImage = UIImage()
     var userName = ""
     var userID = ""
+    
+    var followButtonSelected = Bool()
     
     let testImage1 = #imageLiteral(resourceName: "7R8A0139")
     let testImage2 = #imageLiteral(resourceName: "7R8A9956 2")
     let testImage3 = #imageLiteral(resourceName: "7R8A9987Crop")
     
     var testImages: [UIImage] = []
-    
+
     @IBOutlet weak var headerPhoto: UIImageView!
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var designTypesLabel: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var followButtonSetup: UIButton!
     
     @IBAction func followButton(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
@@ -37,12 +41,16 @@ class SearchDetailViewController: UIViewController {
         let currentUserDBRef = Database.database().reference().child("Followings").child(currentUserId!).child("Following")
         
         if sender.isSelected == true {
+            followButtonSetup.setBackgroundImage(#imageLiteral(resourceName: "followButon") , for: UIControl.State.normal)
+            followButtonSelected = true
             //add follower for selected user
             selectedUserfollowingDBRef.child(currentUserId!).setValue("true")
             
             //add following for current user
             currentUserDBRef.child(userID).setValue("true")
         }else{
+            followButtonSetup.setBackgroundImage(#imageLiteral(resourceName: "followButtonUN"), for: UIControl.State.normal)
+            followButtonSelected = false
             //delete follower for selected user
             selectedUserfollowingDBRef.child(currentUserId!).removeValue(completionBlock: {
                 (error, snapshot) in
@@ -80,8 +88,6 @@ class SearchDetailViewController: UIViewController {
             layout.delegate = self
         }
         
-        print("test images", self.testImages)
-        
         userImage = incomingUserInfo["image"] as! UIImage
         headerPhoto.image = userImage
         
@@ -90,9 +96,42 @@ class SearchDetailViewController: UIViewController {
         
         userID = incomingUserInfo["uid"] as! String
         
+        print("follow button selected", followButtonSelected)
+        
         var userTypesLabel: String = ""
         
+        let currentUserId = Auth.auth().currentUser?.uid
+        let followingDBRef = Database.database().reference().child("Followings").child(userID).child("Followers")
         let designTypesDBRef = Database.database().reference().child("Design Types")
+        let contentDBRef = Database.database().reference().child("Content").child(userID).child("Images")
+        
+        print("Current user", currentUserId)
+        
+        var userFollowing = [String]()
+        
+        followingDBRef.observeSingleEvent(of: .value, with: {
+            snapshot in
+            
+            print("SNAP", snapshot.key)
+            
+            if snapshot.key == currentUserId {
+                userFollowing.append(snapshot.key)
+            }
+            DispatchQueue.main.async {
+                print("users following", userFollowing)
+                if userFollowing.contains(currentUserId!) {
+                    print("Following")
+                    self.followButtonSetup.setBackgroundImage(#imageLiteral(resourceName: "followButon"), for: UIControl.State.normal)
+                }else{
+                    print("not following")
+                    self.followButtonSetup.setBackgroundImage(#imageLiteral(resourceName: "followButtonUN"), for: UIControl.State.normal)
+                }
+            }
+        })
+        
+        
+        
+        
         designTypesDBRef.observe(.childAdded, with: {
             snapshot in
             
@@ -118,6 +157,35 @@ class SearchDetailViewController: UIViewController {
             self.designTypesLabel.text = userTypesLabel
             
         })
+        
+        contentDBRef.observe(.childAdded, with: {
+            snapshot in
+            
+            print("snap", snapshot.value!)
+            let downloadLink = snapshot.value as! String
+            let storageRef = Storage.storage().reference(forURL: downloadLink)
+            storageRef.downloadURL(completion: {
+                (url, error) in
+                
+                print("url", url!)
+                
+                do{
+                    let data = try Data(contentsOf: url!)
+                    let newImage = UIImage(data: data as Data)
+                    
+                    self.userImages.append(newImage!)
+                    
+                    DispatchQueue.main.async {
+                        print("reloading")
+                        self.collectionView.reloadData()
+                    }
+                    
+                }catch{
+                    print("error with data")
+                }
+            })
+            
+        })
     }
     
     
@@ -137,21 +205,24 @@ class SearchDetailViewController: UIViewController {
 // MARK :: Custom Collection view setup
 extension SearchDetailViewController: PinterestLayoutDelegate {
     func collectionView(_ collectionView: UICollectionView, heightForPhotoAtIndexPath indexPath: IndexPath) -> CGFloat {
-        let image = self.testImages[indexPath.item]
-        let height = (image.size.height)/14
-        
+
+        let image = self.userImages[indexPath.item]
+        let height = (image.size.height)/10
+
         return height
     }
 }
 extension SearchDetailViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        print("count", self.testImages.count)
-        return self.testImages.count
+        print("count", self.userImages.count)
+        return self.userImages.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SerachDetailCell", for: indexPath) as! SearchDetailCollectionViewCell
-        let image = self.testImages[indexPath.row]
+        
+        print("userImages", self.userImages)
+        let image = self.userImages[indexPath.row]
         cell.cellImage.image = image
         return cell
     }
