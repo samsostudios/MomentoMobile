@@ -41,9 +41,10 @@ class CommunitySearchViewController: UIViewController, UITableViewDelegate, UITa
         self.tableView.separatorColor = Colors.darkYellow
         
         let usernamesDBRef = Database.database().reference().child("Usernames")
-        
+        print("detail ref", usernamesDBRef)
         usernamesDBRef.observeSingleEvent(of: .value) {
             (snapshot, error) in
+            
             
             if error != nil {
                 print("error reading usernames")

@@ -18,6 +18,8 @@ class SearchDetailViewController: UIViewController {
     var userName = ""
     var userID = ""
     
+    var userTypesLabel: String = ""
+    
     var followButtonSelected = Bool()
     
     let testImage1 = #imageLiteral(resourceName: "7R8A0139")
@@ -98,7 +100,7 @@ class SearchDetailViewController: UIViewController {
         
         print("follow button selected", followButtonSelected)
         
-        var userTypesLabel: String = ""
+        
         
         let currentUserId = Auth.auth().currentUser?.uid
         let followingDBRef = Database.database().reference().child("Followings").child(userID).child("Followers")
@@ -146,7 +148,7 @@ class SearchDetailViewController: UIViewController {
                     if uid.key as! String == self.userID {
                         
                         let appendText = snapshot.key
-                        userTypesLabel = userTypesLabel + appendText + ", "
+                        self.userTypesLabel = self.userTypesLabel + appendText + ", "
                     }else{
 //                        print("error getting types")
                     }
@@ -154,7 +156,7 @@ class SearchDetailViewController: UIViewController {
             }
             
 //            print("user label", userTypesLabel)
-            self.designTypesLabel.text = userTypesLabel
+            self.designTypesLabel.text = self.userTypesLabel
             
         })
         
@@ -188,18 +190,17 @@ class SearchDetailViewController: UIViewController {
         })
     }
     
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "SeachShowPhoto" {
+            let imageSelected = collectionView?.indexPath(for: sender as! SearchDetailCollectionViewCell)
+            print("SELECTED IMAGE", imageSelected!.row)
+            let imageDetail = segue.destination as! SearchDetailPhotoViewController
+            
+            imageDetail.selectedImage = self.userImages[(imageSelected?.row)!]
+            imageDetail.username = userName
+        }
+        
     }
-    */
-
 }
 
 // MARK :: Custom Collection view setup
@@ -226,6 +227,4 @@ extension SearchDetailViewController: UICollectionViewDataSource {
         cell.cellImage.image = image
         return cell
     }
-    
-    
 }

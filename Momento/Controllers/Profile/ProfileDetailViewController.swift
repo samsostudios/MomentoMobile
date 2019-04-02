@@ -21,14 +21,12 @@ class ProfileDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = Colors.darkBlack
         
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         
-        
         print("SELECTED", selectedImage)
         detailImageView.image = selectedImage
-        
-        self.view.backgroundColor = Colors.darkBlack
         
         print("USERNAME", username)
         usernameLabel.text = username

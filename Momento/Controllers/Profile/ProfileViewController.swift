@@ -377,7 +377,7 @@ class ProfileViewController: UIViewController, UITextViewDelegate, UINavigationC
                 print("SELECTED IMAGE", type(of: imageSelected!.row))
                 let imageDetail = segue.destination as! ProfileDetailViewController
                 
-                imageDetail.selectedImage = self.testImages[(imageSelected?.row)!]
+                imageDetail.selectedImage = self.userImages[(imageSelected?.row)!]
                 print("Username from segue", username)
                 imageDetail.username = username
                 print("TYPES", self.designTypes)
@@ -409,6 +409,4 @@ extension ProfileViewController: UICollectionViewDataSource {
         cell.cellImage.image = image
         return cell
     }
-    
-    
 }

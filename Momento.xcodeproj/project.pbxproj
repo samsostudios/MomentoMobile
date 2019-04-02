@@ -23,6 +23,8 @@
 		224751CF22151F3D004DFA77 /* CommunityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224751CE22151F3D004DFA77 /* CommunityViewController.swift */; };
 		2259D8092252990D0088FD06 /* SearchDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2259D8082252990D0088FD06 /* SearchDetailViewController.swift */; };
 		2259D80B2252F7750088FD06 /* SearchDetailCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2259D80A2252F7750088FD06 /* SearchDetailCollectionViewCell.swift */; };
+		2259D80E225330340088FD06 /* SearchDetailPhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2259D80D225330340088FD06 /* SearchDetailPhotoViewController.swift */; };
+		2259D81522534D910088FD06 /* CommuniytCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2259D81422534D910088FD06 /* CommuniytCollectionViewCell.swift */; };
 		228DC9B8222D86E500E34A21 /* Onboard2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228DC9B7222D86E500E34A21 /* Onboard2ViewController.swift */; };
 		228E56632221CCE1001AF3F0 /* LoginProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228E56622221CCE1001AF3F0 /* LoginProfileViewController.swift */; };
 		228E56652221CDBD001AF3F0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 228E56642221CDBD001AF3F0 /* GoogleService-Info.plist */; };
@@ -52,6 +54,8 @@
 		224751CE22151F3D004DFA77 /* CommunityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityViewController.swift; sourceTree = "<group>"; };
 		2259D8082252990D0088FD06 /* SearchDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDetailViewController.swift; sourceTree = "<group>"; };
 		2259D80A2252F7750088FD06 /* SearchDetailCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDetailCollectionViewCell.swift; sourceTree = "<group>"; };
+		2259D80D225330340088FD06 /* SearchDetailPhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDetailPhotoViewController.swift; sourceTree = "<group>"; };
+		2259D81422534D910088FD06 /* CommuniytCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommuniytCollectionViewCell.swift; sourceTree = "<group>"; };
 		228DC9B7222D86E500E34A21 /* Onboard2ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboard2ViewController.swift; sourceTree = "<group>"; };
 		228E56622221CCE1001AF3F0 /* LoginProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginProfileViewController.swift; sourceTree = "<group>"; };
 		228E56642221CDBD001AF3F0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -79,12 +83,10 @@
 		22440217222C6C10004D089E /* CustomElements */ = {
 			isa = PBXGroup;
 			children = (
+				2259D81122533FB90088FD06 /* CustomeCellls */,
 				22440218222C6C5A004D089E /* OnBoardButton.swift */,
 				2244021B222C925C004D089E /* YellowGradient.swift */,
-				22A2CCB32242F2410066D4F3 /* ProfileCollectionViewCell.swift */,
 				2235351B224EAF4C0000788B /* CustomCollectionView.swift */,
-				22CDEFF22251A7DA00BCA766 /* CommunitySearchTableViewCell.swift */,
-				2259D80A2252F7750088FD06 /* SearchDetailCollectionViewCell.swift */,
 			);
 			path = CustomElements;
 			sourceTree = "<group>";
@@ -149,6 +151,17 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		2259D81122533FB90088FD06 /* CustomeCellls */ = {
+			isa = PBXGroup;
+			children = (
+				22CDEFF22251A7DA00BCA766 /* CommunitySearchTableViewCell.swift */,
+				22A2CCB32242F2410066D4F3 /* ProfileCollectionViewCell.swift */,
+				2259D80A2252F7750088FD06 /* SearchDetailCollectionViewCell.swift */,
+				2259D81422534D910088FD06 /* CommuniytCollectionViewCell.swift */,
+			);
+			path = CustomeCellls;
+			sourceTree = "<group>";
+		};
 		22CDEFED2251887D00BCA766 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
@@ -177,6 +190,7 @@
 				224751CE22151F3D004DFA77 /* CommunityViewController.swift */,
 				22CDEFF02251975300BCA766 /* CommunitySearchViewController.swift */,
 				2259D8082252990D0088FD06 /* SearchDetailViewController.swift */,
+				2259D80D225330340088FD06 /* SearchDetailPhotoViewController.swift */,
 			);
 			path = "Community ";
 			sourceTree = "<group>";
@@ -341,10 +355,12 @@
 				2234AA48225069ED00B0588D /* ProfileSettingsViewController.swift in Sources */,
 				228E56672221DEA6001AF3F0 /* SignupProfileViewController.swift in Sources */,
 				222C33ED2225A72700A6536A /* Onboard1ViewController.swift in Sources */,
+				2259D80E225330340088FD06 /* SearchDetailPhotoViewController.swift in Sources */,
 				2259D80B2252F7750088FD06 /* SearchDetailCollectionViewCell.swift in Sources */,
 				22CDEFF32251A7DA00BCA766 /* CommunitySearchTableViewCell.swift in Sources */,
 				2235351C224EAF4C0000788B /* CustomCollectionView.swift in Sources */,
 				224751CF22151F3D004DFA77 /* CommunityViewController.swift in Sources */,
+				2259D81522534D910088FD06 /* CommuniytCollectionViewCell.swift in Sources */,
 				22CDEFF12251975300BCA766 /* CommunitySearchViewController.swift in Sources */,
 				223C423E222E5C60006DCCF1 /* ProfileViewController.swift in Sources */,
 				224751CB22151F1D004DFA77 /* FeedViewController.swift in Sources */,

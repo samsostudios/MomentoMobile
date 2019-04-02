@@ -9,11 +9,20 @@
 import UIKit
 import Firebase
 
-class CommunityViewController: UIViewController {
+class CommunityViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
 
+    
+    @IBOutlet weak var communityCollectionView: UICollectionView!
+    
+    var communityNames = [String]()
+    var communityArray = [communities]()
+    
     override func viewDidLoad() {
+        print("community did load")
         super.viewDidLoad()
         self.view.backgroundColor = Colors.darkBlack
+        
+        self.communityCollectionView.backgroundColor = UIColor(white: 1, alpha: 0)
         
         let backButtonImage = UIImage(named: "back")
         self.navigationController?.navigationBar.backIndicatorImage = backButtonImage
@@ -22,22 +31,68 @@ class CommunityViewController: UIViewController {
         let backButton = UIBarButtonItem()
         backButton.title = " "
         self.navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
+        
+        let communitiesDBRef = Database.database().reference().child("Communities")
+        print("communtiy ref", communitiesDBRef)
+        communitiesDBRef.observe(.childAdded, with: {
+            snapshot in
+            
+            var cName = ""
+            var cDescription = ""
+//            print("SNAP!!!", snapshot.value!)
+            
+            self.communityNames.append(snapshot.key)
+            cName = snapshot.key
+            
+            let communityObject = snapshot.value as! NSDictionary
+            for item in communityObject {
+                print("ITEM", item.key)
+                let itemTag = item.key as! String
+                
+                if itemTag == "Description" {
+                    print("item value", item.value)
+                    cDescription = item.value as! String
+                }
+                
+                
+            }
+            
+            DispatchQueue.main.async {
+                self.communityArray.append(communities(communityName: cName, communityDescriptions: cDescription))
+                self.communityCollectionView.reloadData()
+            }
+            
+        })
     }
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.setNavigationBarHidden(true, animated: true)
     }
     
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return communityArray.count
     }
-    */
-
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = communityCollectionView.dequeueReusableCell(withReuseIdentifier: "CommunityCell", for: indexPath) as! CommuniytCollectionViewCell
+        let communityName = communityArray[indexPath.row].communityName
+        cell.communityName.text = communityName
+        
+        let communityDescription = communityArray[indexPath.row].communityDescriptions
+        cell.communityDescription.text = communityDescription
+        
+        return cell
+    }
 }
+
+class communities {
+    let communityName: String
+    let communityDescriptions: String
+    
+    init(communityName: String, communityDescriptions: String) {
+        self.communityName = communityName
+        self.communityDescriptions = communityDescriptions
+    }
+}
+
+
