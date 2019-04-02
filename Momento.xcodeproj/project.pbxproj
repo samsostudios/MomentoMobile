@@ -22,6 +22,7 @@
 		224751CB22151F1D004DFA77 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224751CA22151F1D004DFA77 /* FeedViewController.swift */; };
 		224751CF22151F3D004DFA77 /* CommunityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224751CE22151F3D004DFA77 /* CommunityViewController.swift */; };
 		2259D8092252990D0088FD06 /* SearchDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2259D8082252990D0088FD06 /* SearchDetailViewController.swift */; };
+		2259D80B2252F7750088FD06 /* SearchDetailCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2259D80A2252F7750088FD06 /* SearchDetailCollectionViewCell.swift */; };
 		228DC9B8222D86E500E34A21 /* Onboard2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228DC9B7222D86E500E34A21 /* Onboard2ViewController.swift */; };
 		228E56632221CCE1001AF3F0 /* LoginProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228E56622221CCE1001AF3F0 /* LoginProfileViewController.swift */; };
 		228E56652221CDBD001AF3F0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 228E56642221CDBD001AF3F0 /* GoogleService-Info.plist */; };
@@ -50,6 +51,7 @@
 		224751CA22151F1D004DFA77 /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		224751CE22151F3D004DFA77 /* CommunityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityViewController.swift; sourceTree = "<group>"; };
 		2259D8082252990D0088FD06 /* SearchDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDetailViewController.swift; sourceTree = "<group>"; };
+		2259D80A2252F7750088FD06 /* SearchDetailCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDetailCollectionViewCell.swift; sourceTree = "<group>"; };
 		228DC9B7222D86E500E34A21 /* Onboard2ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboard2ViewController.swift; sourceTree = "<group>"; };
 		228E56622221CCE1001AF3F0 /* LoginProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginProfileViewController.swift; sourceTree = "<group>"; };
 		228E56642221CDBD001AF3F0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -82,6 +84,7 @@
 				22A2CCB32242F2410066D4F3 /* ProfileCollectionViewCell.swift */,
 				2235351B224EAF4C0000788B /* CustomCollectionView.swift */,
 				22CDEFF22251A7DA00BCA766 /* CommunitySearchTableViewCell.swift */,
+				2259D80A2252F7750088FD06 /* SearchDetailCollectionViewCell.swift */,
 			);
 			path = CustomElements;
 			sourceTree = "<group>";
@@ -338,6 +341,7 @@
 				2234AA48225069ED00B0588D /* ProfileSettingsViewController.swift in Sources */,
 				228E56672221DEA6001AF3F0 /* SignupProfileViewController.swift in Sources */,
 				222C33ED2225A72700A6536A /* Onboard1ViewController.swift in Sources */,
+				2259D80B2252F7750088FD06 /* SearchDetailCollectionViewCell.swift in Sources */,
 				22CDEFF32251A7DA00BCA766 /* CommunitySearchTableViewCell.swift in Sources */,
 				2235351C224EAF4C0000788B /* CustomCollectionView.swift in Sources */,
 				224751CF22151F3D004DFA77 /* CommunityViewController.swift in Sources */,

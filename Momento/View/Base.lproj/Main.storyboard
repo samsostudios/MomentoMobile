@@ -766,9 +766,14 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="300" id="5IP-pV-xmq"/>
                                 </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="20"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hAb-QF-lAe">
-                                <rect key="frame" x="20" y="310" width="76" height="41"/>
+                                <rect key="frame" x="10" y="305" width="76" height="41"/>
                                 <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="30"/>
                                 <color key="textColor" red="0.95686274510000002" green="0.95686274510000002" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -785,7 +790,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CbA-Oo-seV">
-                                <rect key="frame" x="20" y="361" width="294" height="50"/>
+                                <rect key="frame" x="10" y="351" width="304" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="QRi-Fl-l4m"/>
                                 </constraints>
@@ -793,23 +798,66 @@
                                 <color key="textColor" red="0.98039215690000003" green="0.63529411759999999" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="hpG-l3-vhI">
+                                <rect key="frame" x="0.0" y="416" width="414" height="397"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <collectionViewLayout key="collectionViewLayout" id="4lL-OC-Kpc" customClass="PinterestLayout" customModule="Momento" customModuleProvider="target"/>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="SerachDetailCell" id="OXS-LH-LgO" customClass="SearchDetailCollectionViewCell" customModule="Momento" customModuleProvider="target">
+                                        <rect key="frame" x="95" y="0.0" width="224" height="189"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                            <rect key="frame" x="0.0" y="0.0" width="224" height="189"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5Bx-1c-xDo">
+                                                    <rect key="frame" x="0.0" y="0.0" width="224" height="189"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                            <integer key="value" value="20"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                </imageView>
+                                            </subviews>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="5Bx-1c-xDo" secondAttribute="bottom" id="3fz-if-xfj"/>
+                                            <constraint firstAttribute="trailing" secondItem="5Bx-1c-xDo" secondAttribute="trailing" id="88t-ec-tLo"/>
+                                            <constraint firstItem="5Bx-1c-xDo" firstAttribute="leading" secondItem="OXS-LH-LgO" secondAttribute="leading" id="GY5-20-AdQ"/>
+                                            <constraint firstItem="5Bx-1c-xDo" firstAttribute="top" secondItem="OXS-LH-LgO" secondAttribute="top" id="k5q-l1-Ixw"/>
+                                        </constraints>
+                                        <size key="customSize" width="224" height="189"/>
+                                        <connections>
+                                            <outlet property="cellImage" destination="5Bx-1c-xDo" id="tLZ-ex-IQZ"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="tuV-NG-HK8" id="IxN-fR-YLy"/>
+                                </connections>
+                            </collectionView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="hAb-QF-lAe" firstAttribute="top" secondItem="a5a-8W-7GZ" secondAttribute="bottom" constant="10" id="3RC-p8-T57"/>
-                            <constraint firstItem="CbA-Oo-seV" firstAttribute="top" secondItem="hAb-QF-lAe" secondAttribute="bottom" constant="10" id="ABq-7J-3qh"/>
+                            <constraint firstItem="hAb-QF-lAe" firstAttribute="top" secondItem="a5a-8W-7GZ" secondAttribute="bottom" constant="5" id="3RC-p8-T57"/>
+                            <constraint firstItem="hpG-l3-vhI" firstAttribute="top" secondItem="CbA-Oo-seV" secondAttribute="bottom" constant="15" id="4ti-36-x57"/>
+                            <constraint firstItem="CbA-Oo-seV" firstAttribute="top" secondItem="hAb-QF-lAe" secondAttribute="bottom" constant="5" id="ABq-7J-3qh"/>
                             <constraint firstItem="a5a-8W-7GZ" firstAttribute="leading" secondItem="caX-xQ-5wb" secondAttribute="leading" id="CiE-kz-d9p"/>
                             <constraint firstItem="caX-xQ-5wb" firstAttribute="trailing" secondItem="cX2-Hw-XwO" secondAttribute="trailing" constant="10" id="H1K-j2-JCi"/>
-                            <constraint firstItem="hAb-QF-lAe" firstAttribute="leading" secondItem="caX-xQ-5wb" secondAttribute="leading" constant="20" id="TFP-1u-mIX"/>
+                            <constraint firstItem="hpG-l3-vhI" firstAttribute="leading" secondItem="caX-xQ-5wb" secondAttribute="leading" id="Lfd-nq-Ma0"/>
+                            <constraint firstItem="hAb-QF-lAe" firstAttribute="leading" secondItem="caX-xQ-5wb" secondAttribute="leading" constant="10" id="TFP-1u-mIX"/>
+                            <constraint firstItem="hpG-l3-vhI" firstAttribute="bottom" secondItem="caX-xQ-5wb" secondAttribute="bottom" id="Y4y-6L-QfI"/>
                             <constraint firstItem="a5a-8W-7GZ" firstAttribute="top" secondItem="NZo-FQ-Zvp" secondAttribute="top" id="atw-Al-xsF"/>
                             <constraint firstItem="a5a-8W-7GZ" firstAttribute="trailing" secondItem="caX-xQ-5wb" secondAttribute="trailing" id="ck5-U6-CqB"/>
-                            <constraint firstItem="CbA-Oo-seV" firstAttribute="leading" secondItem="caX-xQ-5wb" secondAttribute="leading" constant="20" id="keY-0b-GIi"/>
+                            <constraint firstItem="hpG-l3-vhI" firstAttribute="trailing" secondItem="caX-xQ-5wb" secondAttribute="trailing" id="i3s-NW-zuB"/>
+                            <constraint firstItem="CbA-Oo-seV" firstAttribute="leading" secondItem="caX-xQ-5wb" secondAttribute="leading" constant="10" id="keY-0b-GIi"/>
                             <constraint firstItem="cX2-Hw-XwO" firstAttribute="top" secondItem="a5a-8W-7GZ" secondAttribute="bottom" constant="10" id="pJn-7f-5PB"/>
                             <constraint firstItem="caX-xQ-5wb" firstAttribute="trailing" secondItem="CbA-Oo-seV" secondAttribute="trailing" constant="100" id="zWA-gw-CHl"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="caX-xQ-5wb"/>
                     </view>
                     <connections>
+                        <outlet property="collectionView" destination="hpG-l3-vhI" id="84Q-PU-gOJ"/>
                         <outlet property="designTypesLabel" destination="CbA-Oo-seV" id="ndV-ua-sXS"/>
                         <outlet property="headerPhoto" destination="a5a-8W-7GZ" id="SaT-RM-qpq"/>
                         <outlet property="usernameLabel" destination="hAb-QF-lAe" id="BHL-8W-3hq"/>

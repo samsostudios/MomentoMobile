@@ -26,10 +26,11 @@ class SearchDetailViewController: UIViewController {
     @IBOutlet weak var headerPhoto: UIImageView!
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var designTypesLabel: UILabel!
+    @IBOutlet weak var collectionView: UICollectionView!
     
     @IBAction func followButton(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
-        print("selected", sender.isSelected)
+//        print("selected", sender.isSelected)
         
         let currentUserId = Auth.auth().currentUser?.uid
         let selectedUserfollowingDBRef = Database.database().reference().child("Followings").child(userID).child("Followers")
@@ -69,10 +70,17 @@ class SearchDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = Colors.darkBlack
+        self.collectionView.backgroundColor = UIColor(white: 1, alpha: 0)
         
         testImages.append(testImage1)
         testImages.append(testImage2)
         testImages.append(testImage3)
+        
+        if let layout = collectionView?.collectionViewLayout as? PinterestLayout {
+            layout.delegate = self
+        }
+        
+        print("test images", self.testImages)
         
         userImage = incomingUserInfo["image"] as! UIImage
         headerPhoto.image = userImage
@@ -101,12 +109,12 @@ class SearchDetailViewController: UIViewController {
                         let appendText = snapshot.key
                         userTypesLabel = userTypesLabel + appendText + ", "
                     }else{
-                        print("error getting types")
+//                        print("error getting types")
                     }
                 }
             }
             
-            print("user label", userTypesLabel)
+//            print("user label", userTypesLabel)
             self.designTypesLabel.text = userTypesLabel
             
         })
@@ -124,4 +132,29 @@ class SearchDetailViewController: UIViewController {
     }
     */
 
+}
+
+// MARK :: Custom Collection view setup
+extension SearchDetailViewController: PinterestLayoutDelegate {
+    func collectionView(_ collectionView: UICollectionView, heightForPhotoAtIndexPath indexPath: IndexPath) -> CGFloat {
+        let image = self.testImages[indexPath.item]
+        let height = (image.size.height)/14
+        
+        return height
+    }
+}
+extension SearchDetailViewController: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        print("count", self.testImages.count)
+        return self.testImages.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SerachDetailCell", for: indexPath) as! SearchDetailCollectionViewCell
+        let image = self.testImages[indexPath.row]
+        cell.cellImage.image = image
+        return cell
+    }
+    
+    
 }

@@ -159,7 +159,7 @@ class ProfileViewController: UIViewController, UITextViewDelegate, UINavigationC
         imagePicker.sourceType = UIImagePickerController.SourceType.photoLibrary
         imagePicker.allowsEditing = false
         
-//        setBG()
+
         self.view.backgroundColor = Colors.darkBlack
         self.collectionView.backgroundColor = UIColor(white: 1, alpha: 0)
         
@@ -180,18 +180,15 @@ class ProfileViewController: UIViewController, UITextViewDelegate, UINavigationC
         }
         
         let uid = Auth.auth().currentUser!.uid
-        let headerDBRef = Database.database().reference().child("Users").child(uid).child("headerPhoto")
         let contentDBRef = Database.database().reference().child("Content").child(uid).child("Images")
+//        let contentDBRef = Database.database().reference().child("Content").child(uid).child("Images")
         let userDBRef = Database.database().reference().child("Users").child(uid)
         let headerPhotoDBRef = Database.database().reference().child("Header Photos").child(uid)
-        
-        let usernameRef = Database.database().reference().child("Usernames").child(uid)
         
         headerPhotoDBRef.observeSingleEvent(of: .value) {
             snapshot in
             
             let snap = snapshot.children.allObjects
-            print("snap", type(of: snap))
             
             if snap.isEmpty {
                 print("No header photo")
@@ -251,7 +248,7 @@ class ProfileViewController: UIViewController, UITextViewDelegate, UINavigationC
         headerPhotoDBRef.observe(.childChanged, with: {
             snapshot in
             
-            print("SNAP", snapshot.value!)
+//            print("SNAP", snapshot.value!)
             let downloadLink = snapshot.value! as! String
             
             let headerStorageRef = Storage.storage().reference(forURL: downloadLink)
@@ -283,34 +280,34 @@ class ProfileViewController: UIViewController, UITextViewDelegate, UINavigationC
                 username = snapshot.value as! String
                 self.usernameField.text = username
             }
-//            if snapshot.key == "Header Photo" {
-////                print("Header link", snapshot.value!)
-//                let headerObject = snapshot.value! as! NSDictionary
-//                var downloadLink: String = ""
-//
-//                for item in headerObject {
-//                    print(item.value)
-//                    downloadLink = item.value as! String
-//
-//                    let headerStorageRef = Storage.storage().reference(forURL: downloadLink)
-//                    headerStorageRef.downloadURL(completion: {
-//                        (url, error) in
-//                        print("header url", url)
-//
-//                        do {
-//                            let data = try Data(contentsOf: url!)
-//                            let headerImage = UIImage(data: data as Data)
-//
-//                            DispatchQueue.main.async {
-//                                self.headerPhoto.image = headerImage
-//                            }
-//                        }
-//                        catch {
-//                            print("Error with header photo")
-//                        }
-//                    })
-//                }
-//            }
+            if snapshot.key == "Header Photo" {
+//                print("Header link", snapshot.value!)
+                let headerObject = snapshot.value! as! NSDictionary
+                var downloadLink: String = ""
+
+                for item in headerObject {
+                    print(item.value)
+                    downloadLink = item.value as! String
+
+                    let headerStorageRef = Storage.storage().reference(forURL: downloadLink)
+                    headerStorageRef.downloadURL(completion: {
+                        (url, error) in
+                        print("header url", url)
+
+                        do {
+                            let data = try Data(contentsOf: url!)
+                            let headerImage = UIImage(data: data as Data)
+
+                            DispatchQueue.main.async {
+                                self.headerPhoto.image = headerImage
+                            }
+                        }
+                        catch {
+                            print("Error with header photo")
+                        }
+                    })
+                }
+            }
             if snapshot.key == "Design Types" {
                 let typesObejct = snapshot.value as! NSDictionary
                 
@@ -323,33 +320,34 @@ class ProfileViewController: UIViewController, UITextViewDelegate, UINavigationC
 //            print("username", username)
         })
         
-//        contentDBRef.observe(.childAdded, with: {
-//            (snapshot) in
-//    
-//            let downloadLink = snapshot.value as! String
-//            
-//            let storageRef = Storage.storage().reference(forURL: downloadLink)
-//            storageRef.downloadURL(completion: {
-//                (url, error) in
-//                
-//                print("URL", url)
-//                
-//                do{
-////                    let data = try Data(contentsOf: url!)
-////                    let newImage = UIImage(data: data as Data)
-////
-////                    self.userImages.append(newImage!)
-//                    
-//                    DispatchQueue.main.async {
-////                        print("reloading")
-//                        self.collectionView?.reloadData()
-//                    }
-//                    
-//                }catch{
-//                    print("error with data")
-//                }
-//            })
-//        })
+        contentDBRef.observe(.childAdded, with: {
+            (snapshot) in
+            
+            print("SNAP!!!!", snapshot.value)
+            let downloadLink = snapshot.value as! String
+            
+            let storageRef = Storage.storage().reference(forURL: downloadLink)
+            storageRef.downloadURL(completion: {
+                (url, error) in
+                
+                print("URL", url)
+                
+                do{
+                    let data = try Data(contentsOf: url!)
+                    let newImage = UIImage(data: data as Data)
+
+                    self.userImages.append(newImage!)
+                    
+                    DispatchQueue.main.async {
+                        print("reloading")
+                        self.collectionView?.reloadData()
+                    }
+                    
+                }catch{
+                    print("error with data")
+                }
+            })
+        })
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -365,18 +363,6 @@ class ProfileViewController: UIViewController, UITextViewDelegate, UINavigationC
         self.navigationController?.navigationBar.isTranslucent = true
         self.navigationController?.view.backgroundColor = UIColor.clear
         
-    }
-    
-    func setBG (){
-        view.addSubview(bgImage)
-        bgImage.translatesAutoresizingMaskIntoConstraints = false
-        bgImage.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        bgImage.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-        bgImage.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        bgImage.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        bgImage.image = UIImage(named: "overlay")
-        
-        view.sendSubviewToBack(bgImage)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -407,7 +393,7 @@ class ProfileViewController: UIViewController, UITextViewDelegate, UINavigationC
 // MARK :: Custom Collection view setup
 extension ProfileViewController: PinterestLayoutDelegate {
     func collectionView(_ collectionView: UICollectionView, heightForPhotoAtIndexPath indexPath: IndexPath) -> CGFloat {
-        let image = self.testImages[indexPath.item]
+        let image = self.userImages[indexPath.item]
         let height = (image.size.height)/10
 
         return height
@@ -415,12 +401,12 @@ extension ProfileViewController: PinterestLayoutDelegate {
 }
 extension ProfileViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.testImages.count
+        return self.userImages.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "imgCell", for: indexPath) as! ProfileCollectionViewCell
-        let image = self.testImages[indexPath.row]
+        let image = self.userImages[indexPath.row]
         cell.cellImage.image = image
         return cell
     }
