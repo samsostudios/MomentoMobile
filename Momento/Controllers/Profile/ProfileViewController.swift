@@ -400,10 +400,12 @@ extension ProfileViewController: PinterestLayoutDelegate {
 }
 extension ProfileViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        print("count", self.userImages.count)
         return self.userImages.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        print("drawing cell")
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "imgCell", for: indexPath) as! ProfileCollectionViewCell
         let image = self.userImages[indexPath.row]
         cell.cellImage.image = image

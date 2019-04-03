@@ -24,8 +24,10 @@ class CommunityViewController: UIViewController, UICollectionViewDelegate, UICol
         
         self.communityCollectionView.backgroundColor = UIColor(white: 1, alpha: 0)
         
-        let backButtonImage = UIImage(named: "back")
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
+        let backButtonImage = UIImage(named: "backBlack")
         self.navigationController?.navigationBar.backIndicatorImage = backButtonImage
+    
         self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = backButtonImage
         
         let backButton = UIBarButtonItem()
@@ -63,6 +65,20 @@ class CommunityViewController: UIViewController, UICollectionViewDelegate, UICol
             }
             
         })
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "CommunityDetail" {
+            let imageSelected = communityCollectionView?.indexPath(for: sender as! CommuniytCollectionViewCell)
+            
+            let communityDetail = segue.destination as! CommunityDetailViewController
+            
+            communityDetail.comName = communityArray[(imageSelected?.row)!].communityName
+            
+            communityDetail.comDesc = communityArray[(imageSelected?.row)!].communityDescriptions
+            
+            print("SELECTED IMAGE", type(of: imageSelected!.row))
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {

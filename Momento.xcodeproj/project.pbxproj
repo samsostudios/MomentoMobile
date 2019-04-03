@@ -25,6 +25,10 @@
 		2259D80B2252F7750088FD06 /* SearchDetailCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2259D80A2252F7750088FD06 /* SearchDetailCollectionViewCell.swift */; };
 		2259D80E225330340088FD06 /* SearchDetailPhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2259D80D225330340088FD06 /* SearchDetailPhotoViewController.swift */; };
 		2259D81522534D910088FD06 /* CommuniytCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2259D81422534D910088FD06 /* CommuniytCollectionViewCell.swift */; };
+		2259D8172253B26D0088FD06 /* CommunityDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2259D8162253B26D0088FD06 /* CommunityDetailViewController.swift */; };
+		2259D8192253C7950088FD06 /* CommunityDetailCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2259D8182253C7950088FD06 /* CommunityDetailCollectionViewCell.swift */; };
+		2259D81B2253D79D0088FD06 /* FeedCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2259D81A2253D79D0088FD06 /* FeedCollectionViewCell.swift */; };
+		2259D81D2253D95D0088FD06 /* FeedDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2259D81C2253D95D0088FD06 /* FeedDetailViewController.swift */; };
 		228DC9B8222D86E500E34A21 /* Onboard2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228DC9B7222D86E500E34A21 /* Onboard2ViewController.swift */; };
 		228E56632221CCE1001AF3F0 /* LoginProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228E56622221CCE1001AF3F0 /* LoginProfileViewController.swift */; };
 		228E56652221CDBD001AF3F0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 228E56642221CDBD001AF3F0 /* GoogleService-Info.plist */; };
@@ -56,6 +60,10 @@
 		2259D80A2252F7750088FD06 /* SearchDetailCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDetailCollectionViewCell.swift; sourceTree = "<group>"; };
 		2259D80D225330340088FD06 /* SearchDetailPhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDetailPhotoViewController.swift; sourceTree = "<group>"; };
 		2259D81422534D910088FD06 /* CommuniytCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommuniytCollectionViewCell.swift; sourceTree = "<group>"; };
+		2259D8162253B26D0088FD06 /* CommunityDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityDetailViewController.swift; sourceTree = "<group>"; };
+		2259D8182253C7950088FD06 /* CommunityDetailCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityDetailCollectionViewCell.swift; sourceTree = "<group>"; };
+		2259D81A2253D79D0088FD06 /* FeedCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCollectionViewCell.swift; sourceTree = "<group>"; };
+		2259D81C2253D95D0088FD06 /* FeedDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedDetailViewController.swift; sourceTree = "<group>"; };
 		228DC9B7222D86E500E34A21 /* Onboard2ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboard2ViewController.swift; sourceTree = "<group>"; };
 		228E56622221CCE1001AF3F0 /* LoginProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginProfileViewController.swift; sourceTree = "<group>"; };
 		228E56642221CDBD001AF3F0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -158,6 +166,8 @@
 				22A2CCB32242F2410066D4F3 /* ProfileCollectionViewCell.swift */,
 				2259D80A2252F7750088FD06 /* SearchDetailCollectionViewCell.swift */,
 				2259D81422534D910088FD06 /* CommuniytCollectionViewCell.swift */,
+				2259D8182253C7950088FD06 /* CommunityDetailCollectionViewCell.swift */,
+				2259D81A2253D79D0088FD06 /* FeedCollectionViewCell.swift */,
 			);
 			path = CustomeCellls;
 			sourceTree = "<group>";
@@ -180,6 +190,7 @@
 			isa = PBXGroup;
 			children = (
 				224751CA22151F1D004DFA77 /* FeedViewController.swift */,
+				2259D81C2253D95D0088FD06 /* FeedDetailViewController.swift */,
 			);
 			path = Feed;
 			sourceTree = "<group>";
@@ -188,6 +199,7 @@
 			isa = PBXGroup;
 			children = (
 				224751CE22151F3D004DFA77 /* CommunityViewController.swift */,
+				2259D8162253B26D0088FD06 /* CommunityDetailViewController.swift */,
 				22CDEFF02251975300BCA766 /* CommunitySearchViewController.swift */,
 				2259D8082252990D0088FD06 /* SearchDetailViewController.swift */,
 				2259D80D225330340088FD06 /* SearchDetailPhotoViewController.swift */,
@@ -351,13 +363,16 @@
 			files = (
 				228E56632221CCE1001AF3F0 /* LoginProfileViewController.swift in Sources */,
 				2244021E222C941E004D089E /* Colors.swift in Sources */,
+				2259D81B2253D79D0088FD06 /* FeedCollectionViewCell.swift in Sources */,
 				2244021C222C925C004D089E /* YellowGradient.swift in Sources */,
+				2259D81D2253D95D0088FD06 /* FeedDetailViewController.swift in Sources */,
 				2234AA48225069ED00B0588D /* ProfileSettingsViewController.swift in Sources */,
 				228E56672221DEA6001AF3F0 /* SignupProfileViewController.swift in Sources */,
 				222C33ED2225A72700A6536A /* Onboard1ViewController.swift in Sources */,
 				2259D80E225330340088FD06 /* SearchDetailPhotoViewController.swift in Sources */,
 				2259D80B2252F7750088FD06 /* SearchDetailCollectionViewCell.swift in Sources */,
 				22CDEFF32251A7DA00BCA766 /* CommunitySearchTableViewCell.swift in Sources */,
+				2259D8192253C7950088FD06 /* CommunityDetailCollectionViewCell.swift in Sources */,
 				2235351C224EAF4C0000788B /* CustomCollectionView.swift in Sources */,
 				224751CF22151F3D004DFA77 /* CommunityViewController.swift in Sources */,
 				2259D81522534D910088FD06 /* CommuniytCollectionViewCell.swift in Sources */,
@@ -366,6 +381,7 @@
 				224751CB22151F1D004DFA77 /* FeedViewController.swift in Sources */,
 				2234AA4A22506F0400B0588D /* ProfileDetailViewController.swift in Sources */,
 				22440219222C6C5A004D089E /* OnBoardButton.swift in Sources */,
+				2259D8172253B26D0088FD06 /* CommunityDetailViewController.swift in Sources */,
 				224751B522151CA5004DFA77 /* AppDelegate.swift in Sources */,
 				22A2CCB42242F2410066D4F3 /* ProfileCollectionViewCell.swift in Sources */,
 				2259D8092252990D0088FD06 /* SearchDetailViewController.swift in Sources */,
