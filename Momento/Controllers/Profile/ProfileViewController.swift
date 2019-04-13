@@ -15,9 +15,7 @@ class ProfileViewController: UIViewController, UITextViewDelegate, UINavigationC
                                 UIImagePickerControllerDelegate {
     
     @IBOutlet weak var collectionView: UICollectionView!
-    
     @IBOutlet weak var headerPhoto: UIImageView!
-    
     @IBOutlet weak var usernameField: UILabel!
     
     var imagePickerButtonSelected: String = ""
@@ -45,8 +43,7 @@ class ProfileViewController: UIViewController, UITextViewDelegate, UINavigationC
     }
     
     var userImages = [UIImage]()
-    
-    let imageCache = NSCache<NSString, UIImage>()
+    var downloadLinksArray = [String]()
     
     let testImage1 = #imageLiteral(resourceName: "7R8A0139")
     let testImage2 = #imageLiteral(resourceName: "7R8A9956 2")
@@ -61,9 +58,9 @@ class ProfileViewController: UIViewController, UITextViewDelegate, UINavigationC
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage{
-            print("image", image)
+//            print("image", image)
             
-            guard let imageData = image.jpegData(compressionQuality: 0.75) else { return }
+            guard let imageData = image.jpegData(compressionQuality: 0.1) else { return }
             
             let imageMetaData = StorageMetadata()
             imageMetaData.contentType = "image/jpg"
@@ -223,7 +220,7 @@ class ProfileViewController: UIViewController, UITextViewDelegate, UINavigationC
         headerPhotoDBRef.observe(.childAdded){
             snapshot in
             
-            print("SNAP", snapshot.value!)
+            print("Header SNAP", snapshot.value!)
             let downloadLink = snapshot.value! as! String
             
             let headerStorageRef = Storage.storage().reference(forURL: downloadLink)
@@ -321,33 +318,50 @@ class ProfileViewController: UIViewController, UITextViewDelegate, UINavigationC
         
         contentDBRef.observe(.childAdded, with: {
             (snapshot) in
-            
-            print("SNAP!!!!", snapshot.value!)
+            Thread.printCurrent()
+//            print("SNAP!!!!", snapshot)
             let downloadLink = snapshot.value as! String
             
-            let storageRef = Storage.storage().reference(forURL: downloadLink)
-            storageRef.downloadURL(completion: {
-                (url, error) in
-                
-                print("URL", url!)
-                
-                do{
-                    let data = try Data(contentsOf: url!)
-                    let newImage = UIImage(data: data as Data)
-
-                    self.userImages.append(newImage!)
-                    
-                    DispatchQueue.main.async {
-                        print("reloading")
-                        self.collectionView?.reloadData()
-                    }
-                    
-                }catch{
-                    print("error with data")
-                }
-            })
+            DispatchQueue.global(qos: .userInteractive).async {
+                self.downloadImages(dlLink: downloadLink)
+            }
+            
+//            DispatchQueue.main.async {
+//
+//            }
         })
+//        print("USER IMAGES ARRAY", self.userImages)
+//        self.collectionView?.reloadData()
+
     }
+    
+    func downloadImages(dlLink: String) {
+        Thread.printCurrent()
+        let storageRef = Storage.storage().reference(forURL: dlLink)
+        storageRef.downloadURL(completion: {
+            (url, error) in
+            
+//            print("URL", url!)
+            
+            do{
+                let data = try Data(contentsOf: url!)
+                let newImage = UIImage(data: data as Data)
+                
+                self.userImages.append(newImage!)
+                
+                
+                
+                DispatchQueue.main.async {
+                    print("reloading")
+                    self.collectionView.reloadData()
+                }
+                
+            }catch{
+                print("error with data")
+            }
+        })
+        
+            }
     
     override func viewWillAppear(_ animated: Bool) {
         setNavBar()
@@ -392,6 +406,7 @@ class ProfileViewController: UIViewController, UITextViewDelegate, UINavigationC
 // MARK :: Custom Collection view setup
 extension ProfileViewController: PinterestLayoutDelegate {
     func collectionView(_ collectionView: UICollectionView, heightForPhotoAtIndexPath indexPath: IndexPath) -> CGFloat {
+        print("gettting image height")
         let image = self.userImages[indexPath.item]
         let height = (image.size.height)/10
 
@@ -410,5 +425,11 @@ extension ProfileViewController: UICollectionViewDataSource {
         let image = self.userImages[indexPath.row]
         cell.cellImage.image = image
         return cell
+    }
+}
+
+extension Thread {
+    class func printCurrent() {
+        print("\r⚡️: \(Thread.current)\r" + "🏭: \(OperationQueue.current?.underlyingQueue?.label ?? "None")\r")
     }
 }

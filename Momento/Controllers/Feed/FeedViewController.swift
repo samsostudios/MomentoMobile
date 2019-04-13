@@ -48,7 +48,8 @@ class FeedViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.setNavigationBarHidden(true, animated: true)
-        self.navigationController?.view.backgroundColor = Colors.darkYellow
+        //self.navigationController?.view.backgroundColor = Colors.darkYellow
+        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -85,6 +86,4 @@ extension FeedViewController: UICollectionViewDataSource {
         
         return cell
     }
-    
-
 }

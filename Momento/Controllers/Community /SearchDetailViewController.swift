@@ -13,6 +13,7 @@ class SearchDetailViewController: UIViewController {
     
     var incomingUserInfo  = [String: Any]()
     var userImages = [UIImage]()
+
     
     var userImage = UIImage()
     var userName = ""
