@@ -22,7 +22,6 @@ class Onboard1ViewController: UIViewController, UITextFieldDelegate {
         let username = usernameInput.text!
         print("username:", username)
         
-
         let usernamesDB = Database.database().reference().child("Usernames")
         
         usernamesDB.observeSingleEvent(of: .value) {snapshot in

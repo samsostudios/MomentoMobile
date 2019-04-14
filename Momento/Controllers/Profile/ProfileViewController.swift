@@ -15,6 +15,7 @@ class ProfileViewController: UIViewController, UITextViewDelegate, UINavigationC
                                 UIImagePickerControllerDelegate {
     
     @IBOutlet weak var collectionView: UICollectionView!
+//    @IBOutlet weak var headerPhoto: UIImageView!
     @IBOutlet weak var headerPhoto: UIImageView!
     @IBOutlet weak var usernameField: UILabel!
     

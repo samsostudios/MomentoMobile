@@ -101,14 +101,12 @@ class SearchDetailViewController: UIViewController {
         
         print("follow button selected", followButtonSelected)
         
-        
-        
         let currentUserId = Auth.auth().currentUser?.uid
         let followingDBRef = Database.database().reference().child("Followings").child(userID).child("Followers")
         let designTypesDBRef = Database.database().reference().child("Design Types")
         let contentDBRef = Database.database().reference().child("Content").child(userID).child("Images")
         
-        print("Current user", currentUserId)
+//        print("Current user", currentUserId)
         
         var userFollowing = [String]()
         

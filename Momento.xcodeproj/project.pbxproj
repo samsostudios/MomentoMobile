@@ -32,6 +32,8 @@
 		2259D8192253C7950088FD06 /* CommunityDetailCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2259D8182253C7950088FD06 /* CommunityDetailCollectionViewCell.swift */; };
 		2259D81B2253D79D0088FD06 /* FeedCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2259D81A2253D79D0088FD06 /* FeedCollectionViewCell.swift */; };
 		2259D81D2253D95D0088FD06 /* FeedDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2259D81C2253D95D0088FD06 /* FeedDetailViewController.swift */; };
+		22783F2022619BC400442580 /* UploadPhotoSectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22783F1F22619BC400442580 /* UploadPhotoSectionViewController.swift */; };
+		22789E302262C93700E680D0 /* UploadCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22789E2F2262C93700E680D0 /* UploadCollectionViewCell.swift */; };
 		228DC9B8222D86E500E34A21 /* Onboard2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228DC9B7222D86E500E34A21 /* Onboard2ViewController.swift */; };
 		228E56632221CCE1001AF3F0 /* LoginProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228E56622221CCE1001AF3F0 /* LoginProfileViewController.swift */; };
 		228E56652221CDBD001AF3F0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 228E56642221CDBD001AF3F0 /* GoogleService-Info.plist */; };
@@ -70,6 +72,8 @@
 		2259D8182253C7950088FD06 /* CommunityDetailCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityDetailCollectionViewCell.swift; sourceTree = "<group>"; };
 		2259D81A2253D79D0088FD06 /* FeedCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCollectionViewCell.swift; sourceTree = "<group>"; };
 		2259D81C2253D95D0088FD06 /* FeedDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedDetailViewController.swift; sourceTree = "<group>"; };
+		22783F1F22619BC400442580 /* UploadPhotoSectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadPhotoSectionViewController.swift; sourceTree = "<group>"; };
+		22789E2F2262C93700E680D0 /* UploadCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadCollectionViewCell.swift; sourceTree = "<group>"; };
 		228DC9B7222D86E500E34A21 /* Onboard2ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboard2ViewController.swift; sourceTree = "<group>"; };
 		228E56622221CCE1001AF3F0 /* LoginProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginProfileViewController.swift; sourceTree = "<group>"; };
 		228E56642221CDBD001AF3F0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -98,6 +102,7 @@
 			isa = PBXGroup;
 			children = (
 				2212788C225EA27100F58FDB /* UploadCameraRollViewController.swift */,
+				22783F1F22619BC400442580 /* UploadPhotoSectionViewController.swift */,
 			);
 			path = Upload;
 			sourceTree = "<group>";
@@ -193,6 +198,7 @@
 				2259D81422534D910088FD06 /* CommuniytCollectionViewCell.swift */,
 				2259D8182253C7950088FD06 /* CommunityDetailCollectionViewCell.swift */,
 				2259D81A2253D79D0088FD06 /* FeedCollectionViewCell.swift */,
+				22789E2F2262C93700E680D0 /* UploadCollectionViewCell.swift */,
 			);
 			path = CustomeCellls;
 			sourceTree = "<group>";
@@ -344,7 +350,10 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-Momento/Pods-Momento-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
-				"${BUILT_PRODUCTS_DIR}/Pulley/Pulley.framework",
+				"${BUILT_PRODUCTS_DIR}/ImagePicker/ImagePicker.framework",
+				"${BUILT_PRODUCTS_DIR}/PryntTrimmerView/PryntTrimmerView.framework",
+				"${BUILT_PRODUCTS_DIR}/SteviaLayout/Stevia.framework",
+				"${BUILT_PRODUCTS_DIR}/YPImagePicker/YPImagePicker.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
@@ -352,7 +361,10 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Pulley.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ImagePicker.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PryntTrimmerView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Stevia.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YPImagePicker.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
@@ -389,11 +401,13 @@
 				22127890225EBFC700F58FDB /* TabBar.swift in Sources */,
 				228E56632221CCE1001AF3F0 /* LoginProfileViewController.swift in Sources */,
 				2244021E222C941E004D089E /* Colors.swift in Sources */,
+				22783F2022619BC400442580 /* UploadPhotoSectionViewController.swift in Sources */,
 				2259D81B2253D79D0088FD06 /* FeedCollectionViewCell.swift in Sources */,
 				2244021C222C925C004D089E /* YellowGradient.swift in Sources */,
 				2259D81D2253D95D0088FD06 /* FeedDetailViewController.swift in Sources */,
 				2234AA48225069ED00B0588D /* ProfileSettingsViewController.swift in Sources */,
 				228E56672221DEA6001AF3F0 /* SignupProfileViewController.swift in Sources */,
+				22789E302262C93700E680D0 /* UploadCollectionViewCell.swift in Sources */,
 				2212788D225EA27100F58FDB /* UploadCameraRollViewController.swift in Sources */,
 				222C33ED2225A72700A6536A /* Onboard1ViewController.swift in Sources */,
 				2259D80E225330340088FD06 /* SearchDetailPhotoViewController.swift in Sources */,

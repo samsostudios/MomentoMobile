@@ -8,136 +8,165 @@
 
 import UIKit
 import Firebase
+import YPImagePicker
+import Photos
+import AVFoundation
+import AVKit
 
-class UploadCameraRollViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate{
-
+class UploadCameraRollViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, UITextViewDelegate {
+    
+    let testImage1 = #imageLiteral(resourceName: "7R8A9956-2")
+    let testImage2 = #imageLiteral(resourceName: "7R8A9956 2")
+    let testImage3 = #imageLiteral(resourceName: "image1")
+    
+    var testImages: [UIImage] = []
+    
+    var selectedImages = [UIImage]()
+    var selectedItems = [YPMediaItem]()
+    
+    let pickerNavColor = Colors.lightBlack
+    var importedImage = UIImage()
+    
+    @IBOutlet weak var commentView: UITextView!
+    
+    @IBAction func uploadButton(_ sender: UIBarButtonItem) {
+        print("UPLOAD CLICKED")
+    }
+    @IBOutlet weak var uploadCollectionView: UICollectionView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        showPicker()
+        
+        commentView.text = "Placeholder"
+        commentView.textColor = UIColor.lightGray
+        commentView.backgroundColor = Colors.white.withAlphaComponent(0.5)
+        
+        self.uploadCollectionView.backgroundColor = UIColor(white: 1, alpha: 0)
+        
+        let coloredImage = UIImage(named: "overlay")
+        UINavigationBar.appearance().setBackgroundImage(coloredImage, for: UIBarMetrics.default)
+        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor : Colors.white ]
+        UINavigationBar.appearance().tintColor = Colors.white
+        
+        let backButton = UIBarButtonItem()
+        backButton.title = " "
+        self.navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
         
         self.view.backgroundColor = Colors.darkBlack
-        
-        
-//        let imagePicker = UIImagePickerController()
-//        imagePicker.delegate = self
-//        imagePicker.sourceType = UIImagePickerControllerS
-        
-        
-        // Do any additional setup after loading the view.
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
-        let alert = UIAlertController(title: "Choose Image", message: nil, preferredStyle: .actionSheet)
-        alert.addAction(UIAlertAction(title: "Camera", style: .default, handler: { _ in
-            
-        }))
-        
-        alert.addAction(UIAlertAction(title: "Photos", style: .default, handler: { _ in
-            self.openPhotos()
-        }))
-        
-        alert.addAction(UIAlertAction.init(title: "Cancel", style: .cancel, handler: nil))
-        
-        self.present(alert, animated: true, completion: nil)
+        setNavBar()
     }
     
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        print("editing text view")
+        if commentView.textColor == UIColor.lightGray {
+            commentView.text = nil
+            commentView.textColor = UIColor.black
+        }
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        print("Text view eneded")
+    }
+
     func openCamera() {
-        
         let cameraController = UIImagePickerController()
         cameraController.delegate = self
-    
+
         cameraController.sourceType = UIImagePickerController.SourceType.camera
         cameraController.allowsEditing = false
-        
-        
     }
-    
+
     func openPhotos() {
         let photosController = UIImagePickerController()
         photosController.delegate = self
-        
+
         photosController.sourceType = UIImagePickerController.SourceType.photoLibrary
         photosController.allowsEditing = true
-        
+
         self.present(photosController, animated: true) {
-            
+
         }
     }
+
+    func setNavBar(){
+        //      Navigation Bar Styling
+        print("Setting navbar")
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.navigationBar.isTranslucent = true
+        self.navigationController?.view.backgroundColor = UIColor.clear
+
+    }
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-            guard let imageData = image.jpegData(compressionQuality: 0.1) else { return }
+    func showPicker() {
+        var config = YPImagePickerConfiguration()
+        config.shouldSaveNewPicturesToAlbum = false
+        config.startOnScreen = .library
+        config.screens = [.library, .photo]
+        config.video.libraryTimeLimit = 500.0
+        config.wordings.libraryTitle = "Gallery"
+        config.hidesStatusBar = false
+        config.hidesBottomBar = false
+        config.library.maxNumberOfItems = 3
+        config.overlayView?.backgroundColor = Colors.lightBlack
+        config.showsFilters = false
+        config.showsCrop = .none
+        config.bottomMenuItemSelectedColour = Colors.darkYellow
+        config.library.spacingBetweenItems = 0.5
+        config.colors.tintColor = Colors.darkYellow
+        config.colors.multipleItemsSelectedCircleColor = Colors.darkYellow
+        config.overlayView = UIView()
+        
+        let picker = YPImagePicker(configuration: config)
+        
+        picker.didFinishPicking { [unowned picker] items, cancelled in
             
-            let imageMetaData = StorageMetadata()
-            imageMetaData.contentType = "image/jpg"
+            if cancelled {
+                print("Picker was canceled")
+                picker.dismiss(animated: true, completion: nil)
+                return
+            }
+            _ = items.map { print("🧀 \($0)") }
             
-            let uid = Auth.auth().currentUser!.uid
-            let contentStorageRef = Storage.storage().reference().child(uid).child("images")
-            let contentDBRef = Database.database().reference().child("Content").child(uid).child("Images")
+            for item in items{
+//                print("ITEM", item)
+                switch item {
+                case .photo(let photo):
+                    print("PHOTO", photo.image)
+                    self.selectedImages.append(photo.image)
+                    self.uploadCollectionView.reloadData()
+                case .video(let video):
+                    print("VIDEO", video)
+                }
+                
+                print("SELECTED IMAGES", self.selectedImages)
+                
+                picker.dismiss(animated: true, completion: nil)
+            }
             
-            let postID = UUID().uuidString
-            print(postID)
-            
-            
-        }else{
-            print("ADD ALERT for failures")
         }
+        present(picker, animated: true, completion: nil)
     }
-    
-//    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-//        print("IN PICKER")
-//        if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage{
-//
-////            guard let imageData = image.jpegData(compressionQuality: 0.1) else { return }
-////
-////            let imageMetaData = StorageMetadata()
-////            imageMetaData.contentType = "image/jpg"
-////
-////            let uid = Auth.auth().currentUser!.uid
-////            let contentStorageRef = Storage.storage().reference().child(uid).child("images")
-////            let contentDBRef = Database.database().reference().child("Content").child(uid).child("Images")
-////
-////            let postID = UUID().uuidString
-////            print(postID)
-////
-////            let uploadTask = contentStorageRef.child(postID).putData(imageData, metadata: imageMetaData) { (metaData, error) in
-////
-////                if error != nil{
-////                    print("ADD ALERT for failed upload")
-////                }else{
-////                    print("Upload Complete!")
-////                    contentStorageRef.child(postID).downloadURL {
-////                        (imgURL, error) in
-////
-////                        if error != nil{
-////                            print("ADD ALERT for errors")
-////                        }else{
-////                            print("URL:", imgURL!)
-////                            let downloadUrl = imgURL?.absoluteString
-////                            contentDBRef.child(postID).setValue(downloadUrl)
-////                        }
-////                    }
-////                }
-////            }
-////            uploadTask.observe(.progress) { (snapshot) in
-////                print(snapshot.progress ?? "NO MORE PROGRESS")
-////            }
-//        }else{
-//            print("ADD ALERT for failures")
-//        }
-//
-//        self.dismiss(animated: true, completion: nil)
-//
-//    }
-    
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+}
+extension UploadCameraRollViewController: UICollectionViewDataSource{
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        print("COUNT", self.selectedImages.count)
+        return self.selectedImages.count
     }
-    */
+
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = uploadCollectionView.dequeueReusableCell(withReuseIdentifier: "UploadCollectionItem", for: indexPath) as! UploadCollectionViewCell
+
+        cell.uploadImageView.image = self.selectedImages[indexPath.row]
+
+        return cell
+    }
+
 
 }
