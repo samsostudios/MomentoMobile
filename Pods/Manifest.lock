@@ -68,7 +68,7 @@ PODS:
   - GoogleUtilities/UserDefaults (5.7.0):
     - GoogleUtilities/Logger
   - GTMSessionFetcher/Core (1.2.1)
-  - ImagePicker (3.1.0)
+  - Hero (1.4.0)
   - leveldb-library (1.20)
   - nanopb (0.3.901):
     - nanopb/decode (= 0.3.901)
@@ -86,7 +86,7 @@ DEPENDENCIES:
   - Firebase/Core
   - Firebase/Database
   - Firebase/Storage
-  - ImagePicker
+  - Hero
   - YPImagePicker
 
 SPEC CHECKSUMS:
@@ -101,13 +101,13 @@ SPEC CHECKSUMS:
   GoogleAppMeasurement: ffe513e90551844a739e7bcbb1d2aca1c28a4338
   GoogleUtilities: 273e67030e0de313e7304f6dcfa96fc5214f6c23
   GTMSessionFetcher: 32aeca0aa144acea523e1c8e053089dec2cb98ca
-  ImagePicker: db1fd7626337b2577c523bef5f499bbbe5a37079
+  Hero: bac92350d7201a1a940003e0767c7b52ce7c99a1
   leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
   PryntTrimmerView: 53ac64053c7ce63cb3e27f54090f52da0734891d
   SteviaLayout: 523469269059f2c6da02820bb2ff28a5fe0780aa
   YPImagePicker: 5dd3814b47b1208e9c8cc8f6ef77fe90db3723b6
 
-PODFILE CHECKSUM: 68bf3ff1ced4d4d4e0994024ece92fb218030e49
+PODFILE CHECKSUM: e531d5177bbfc3282c11a6d4ee6c79d3479feb9d
 
 COCOAPODS: 1.4.0

@@ -39,12 +39,7 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>ImagePicker-ImagePicker.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>ImagePicker.xcscheme</key>
+		<key>Hero.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>

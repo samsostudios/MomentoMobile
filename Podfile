@@ -12,6 +12,6 @@ pod 'Firebase/Auth'
 pod 'Firebase/Database'
 pod 'Firebase/Storage'
 pod 'YPImagePicker'
-pod 'ImagePicker'
+pod 'Hero'
 
 end
