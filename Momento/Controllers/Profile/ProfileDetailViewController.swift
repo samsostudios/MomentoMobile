@@ -36,16 +36,6 @@ class ProfileDetailViewController: UIViewController {
         var displayTypes: String = ""
         
         typesLabel.text = caption
-        
-//        for item in types {
-//            print("item", item)
-//            displayTypes = displayTypes + item + ", "
-//
-//            print("Display types", displayTypes)
-//
-//            typesLabel.text = displayTypes
-//        }
-        // Do any additional setup after loading the view.
     }
     
 

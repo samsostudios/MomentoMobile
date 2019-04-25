@@ -18,6 +18,7 @@ class SearchDetailViewController: UIViewController {
     var userImage = UIImage()
     var userName = ""
     var userID = ""
+    var userPosts = [userPost]()
     
     var userTypesLabel: String = ""
     
@@ -83,6 +84,8 @@ class SearchDetailViewController: UIViewController {
         self.view.backgroundColor = Colors.darkBlack
         self.collectionView.backgroundColor = UIColor(white: 1, alpha: 0)
         
+        print("INCOMING DATA", self.incomingUserInfo)
+        
         testImages.append(testImage1)
         testImages.append(testImage2)
         testImages.append(testImage3)
@@ -104,7 +107,7 @@ class SearchDetailViewController: UIViewController {
         let currentUserId = Auth.auth().currentUser?.uid
         let followingDBRef = Database.database().reference().child("Followings").child(userID).child("Followers")
         let designTypesDBRef = Database.database().reference().child("Design Types")
-        let contentDBRef = Database.database().reference().child("Content").child(userID).child("Images")
+        let contentDBRef = Database.database().reference().child("Content").child(userID).child("Posts")
         
 //        print("Current user", currentUserId)
         
@@ -113,7 +116,7 @@ class SearchDetailViewController: UIViewController {
         followingDBRef.observeSingleEvent(of: .value, with: {
             snapshot in
             
-            print("SNAP", snapshot.key)
+            print("SNAP", snapshot)
             
             if snapshot.key == currentUserId {
                 userFollowing.append(snapshot.key)
@@ -129,9 +132,6 @@ class SearchDetailViewController: UIViewController {
                 }
             }
         })
-        
-        
-        
         
         designTypesDBRef.observe(.childAdded, with: {
             snapshot in
@@ -162,31 +162,57 @@ class SearchDetailViewController: UIViewController {
         contentDBRef.observe(.childAdded, with: {
             snapshot in
             
-            print("snap", snapshot.value!)
-            let downloadLink = snapshot.value as! String
-            let storageRef = Storage.storage().reference(forURL: downloadLink)
-            storageRef.downloadURL(completion: {
-                (url, error) in
-                
-                print("url", url!)
-                
-                do{
-                    let data = try Data(contentsOf: url!)
-                    let newImage = UIImage(data: data as Data)
-                    
-                    self.userImages.append(newImage!)
-                    
-                    DispatchQueue.main.async {
-                        print("reloading")
-                        self.collectionView.reloadData()
-                    }
-                    
-                }catch{
-                    print("error with data")
-                }
-            })
+            print("Content snap", snapshot.value!)
+            
+            var linkArray = [String]()
+            
+            let snapObject = snapshot.value as! NSDictionary
+            let caption = snapObject["Caption"] as! String
+            
+            let imageObject = snapObject["Images"] as! NSArray
+            
+            for image in imageObject {
+                print("IMAGE", image)
+                let imageLink = image as! String
+                linkArray.append(imageLink)
+            }
+            
+            self.dowloadImages(caption: caption, dlLinks: linkArray)
             
         })
+    }
+    
+    func dowloadImages(caption: String, dlLinks: [String]) {
+        print("IN DOWLOAD")
+//        print("CAPTION", caption)
+        
+        let profileImageLink = dlLinks.first as! String
+        var imageHolder = userPost(caption: "", image: UIImage())
+        
+        let group = DispatchGroup()
+        group.enter()
+        
+        DispatchQueue.global(qos: .background).async {
+            print("DOWNLOADING")
+            let storageRef = Storage.storage().reference(forURL: profileImageLink)
+            storageRef.downloadURL {
+                (url, error) in
+                
+                if let data = try? Data(contentsOf: url!){
+                    if let image = UIImage(data: data){
+                        imageHolder = userPost(caption: caption, image: image)
+                        self.userPosts.append(imageHolder)
+                    }
+                }
+                group.leave()
+            }
+        }
+        
+        group.notify(queue: .main) {
+            print("DOWNLOAD COMPLETE")
+            print("USER POSTS", self.userPosts)
+            self.collectionView.reloadData()
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -195,8 +221,9 @@ class SearchDetailViewController: UIViewController {
             print("SELECTED IMAGE", imageSelected!.row)
             let imageDetail = segue.destination as! SearchDetailPhotoViewController
             
-            imageDetail.selectedImage = self.userImages[(imageSelected?.row)!]
+            imageDetail.selectedImage = self.userPosts[imageSelected!.row].image
             imageDetail.username = userName
+            imageDetail.caption = self.userPosts[imageSelected!.row].caption
         }
         
     }
@@ -206,7 +233,7 @@ class SearchDetailViewController: UIViewController {
 extension SearchDetailViewController: PinterestLayoutDelegate {
     func collectionView(_ collectionView: UICollectionView, heightForPhotoAtIndexPath indexPath: IndexPath) -> CGFloat {
 
-        let image = self.userImages[indexPath.item]
+        let image = self.userPosts[indexPath.row].image
         let height = (image.size.height)/10
 
         return height
@@ -214,15 +241,15 @@ extension SearchDetailViewController: PinterestLayoutDelegate {
 }
 extension SearchDetailViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        print("count", self.userImages.count)
-        return self.userImages.count
+        print("count", self.userPosts.count)
+        return self.userPosts.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SerachDetailCell", for: indexPath) as! SearchDetailCollectionViewCell
         
         print("userImages", self.userImages)
-        let image = self.userImages[indexPath.row]
+        let image = self.userPosts[indexPath.row].image
         cell.cellImage.image = image
         return cell
     }

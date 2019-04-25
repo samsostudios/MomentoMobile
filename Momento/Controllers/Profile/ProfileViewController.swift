@@ -269,16 +269,9 @@ class ProfileViewController: UIViewController, UITextViewDelegate, UINavigationC
             print("SNAP! in child listen profile", snapshot)
 
             let snapObject = snapshot.value as! NSDictionary
-//            print("SNAP OBJ", snapshot)
-
-//            let caption = "test"
             let caption = snapObject["Caption"] as! String
-//            print("CAP", caption)
-            
-//            print("IMAGES", snapObject["Images"]!)
 
             let imageObject = snapObject["Images"] as! NSArray
-//            print("IMG OBJ", imageObject)
 
             for image in imageObject {
 //                print("Image", image)

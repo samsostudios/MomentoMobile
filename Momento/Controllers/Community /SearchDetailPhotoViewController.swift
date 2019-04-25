@@ -12,6 +12,7 @@ class SearchDetailPhotoViewController: UIViewController {
     
     var selectedImage  = UIImage()
     var username: String = ""
+    var caption = ""
 
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var usernameLabel: UILabel!
@@ -28,7 +29,7 @@ class SearchDetailPhotoViewController: UIViewController {
         self.navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
         
         imageView.image = selectedImage
-        usernameLabel.text = username
+        usernameLabel.text = caption
 
         // Do any additional setup after loading the view.
     }
