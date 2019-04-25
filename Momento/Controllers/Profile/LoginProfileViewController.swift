@@ -47,10 +47,13 @@ class LoginProfileViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         setBG()
+        navbarSetup()
+        
         emailInput.delegate = self
         passwordInput.delegate = self
-        self.navigationController?.setNavigationBarHidden(true, animated: true)
-        // Do any additional setup after loading the view.
+//        self.navigationController?.setNavigationBarHidden(true, animated: true)
+        
+    
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -65,6 +68,21 @@ class LoginProfileViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLayoutSubviews() {
         setButton()
+    }
+    
+    private func navbarSetup(){
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.navigationBar.isTranslucent = true
+        self.navigationController?.view.backgroundColor = UIColor.clear
+        
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
+        let backButtonImage = UIImage(named: "backBlack")
+        self.navigationController?.navigationBar.backIndicatorImage = backButtonImage
+        self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = backButtonImage
+        let backButton = UIBarButtonItem()
+        backButton.title = " "
+        self.navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
     }
     
     func setBG (){

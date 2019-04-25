@@ -11,11 +11,9 @@ import Firebase
 import FirebaseStorage
 import Photos
 
-class ProfileViewController: UIViewController, UITextViewDelegate, UINavigationControllerDelegate,
-                                UIImagePickerControllerDelegate {
+class ProfileViewController: UIViewController, UITextViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     
     @IBOutlet weak var collectionView: UICollectionView!
-//    @IBOutlet weak var headerPhoto: UIImageView!
     @IBOutlet weak var headerPhoto: UIImageView!
     @IBOutlet weak var usernameField: UILabel!
     
@@ -24,10 +22,13 @@ class ProfileViewController: UIViewController, UITextViewDelegate, UINavigationC
     
     var username: String = ""
     var designTypes = [String]()
+    var downloadedImageArray = [UIImage]()
+    var userPosts = [userPost]()
     
     @IBOutlet weak var imageUploadBtn: UIButton!
     
     @IBAction func HeaderBtnUpload(_ sender: UIButton) {
+        print("HEADER SELECTED")
         imagePickerButtonSelected = "header photo"
         
         self.present(imagePicker, animated: true){
@@ -35,31 +36,10 @@ class ProfileViewController: UIViewController, UITextViewDelegate, UINavigationC
         }
     }
     
-    @IBAction func importBtn(_ sender: UIButton) {
-        imagePickerButtonSelected = "porfolio image"
-        
-        self.present(imagePicker, animated: true){
-            print("Upload comeplete")
-        }
-    }
-    
-    var userImages = [UIImage]()
-    var downloadLinksArray = [String]()
-    
-    let testImage1 = #imageLiteral(resourceName: "7R8A0139")
-    let testImage2 = #imageLiteral(resourceName: "7R8A9956 2")
-    let testImage3 = #imageLiteral(resourceName: "7R8A9987Crop")
-    
-    var testImages: [UIImage] = []
-    
-    let bgImage = UIImageView()
-    
-    let group = DispatchGroup()
-    
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage{
-//            print("image", image)
+            //            print("image", image)
             
             guard let imageData = image.jpegData(compressionQuality: 0.1) else { return }
             
@@ -67,9 +47,7 @@ class ProfileViewController: UIViewController, UITextViewDelegate, UINavigationC
             imageMetaData.contentType = "image/jpg"
             
             let uid = Auth.auth().currentUser!.uid
-            let contentStorageRef = Storage.storage().reference().child(uid).child("images")
             let headerPhotoStorageRef = Storage.storage().reference().child(uid).child("headerPhoto")
-            let contentDBRef = Database.database().reference().child("Content").child(uid).child("Images")
             let headerPhotoDBRef = Database.database().reference().child("Header Photos").child(uid)
             
             let postID = UUID().uuidString
@@ -90,7 +68,7 @@ class ProfileViewController: UIViewController, UITextViewDelegate, UINavigationC
                             if error != nil {
                                 print("ADD ALERT for error downloading")
                             }else{
-                                print("URL", imgURL!)
+//                                print("URL", imgURL!)
                                 
                                 let downloadUrl = imgURL?.absoluteString
                                 headerPhotoDBRef.child("Photo").setValue(downloadUrl)
@@ -102,32 +80,6 @@ class ProfileViewController: UIViewController, UITextViewDelegate, UINavigationC
                     (snapshot) in
                     
                     print(snapshot.progress ?? "No more progress")
-                }
-            }
-            if imagePickerButtonSelected == "porfolio image" {
-                print("portfolio photo button pressed")
-                
-                let uploadTask = contentStorageRef.child(postID).putData(imageData, metadata: imageMetaData) { (metaData, error) in
-                    
-                    if error != nil{
-                        print("ADD ALERT for failed upload")
-                    }else{
-                        print("Upload Complete!")
-                        contentStorageRef.child(postID).downloadURL {
-                            (imgURL, error) in
-                            
-                            if error != nil{
-                                print("ADD ALERT for errors")
-                            }else{
-                                print("URL:", imgURL!)
-                                let downloadUrl = imgURL?.absoluteString
-                                contentDBRef.child(postID).setValue(downloadUrl)
-                            }
-                        }
-                    }
-                }
-                uploadTask.observe(.progress) { (snapshot) in
-                    print(snapshot.progress ?? "NO MORE PROGRESS")
                 }
             }
         }else{
@@ -150,35 +102,27 @@ class ProfileViewController: UIViewController, UITextViewDelegate, UINavigationC
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        setNavBar()
         imageUploadBtn.alpha = 0.5
         
         imagePicker.delegate = self
         imagePicker.sourceType = UIImagePickerController.SourceType.photoLibrary
         imagePicker.allowsEditing = false
         
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
+        let backButton = UIBarButtonItem()
+        backButton.title = " "
+        self.navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
 
         self.view.backgroundColor = Colors.darkBlack
         self.collectionView.backgroundColor = UIColor(white: 1, alpha: 0)
-        
-//        let imageBlur = UIBlurEffect(style: .regular)
-//        let blurView = UIVisualEffectView(effect: imageBlur)
-//        blurView.frame = headerPhoto.bounds
-//        blurView.alpha = 0.6
-//        headerPhoto.addSubview(blurView)
-        
-       
-        
-        self.testImages.append(testImage1)
-        self.testImages.append(testImage2)
-        self.testImages.append(testImage3)
         
         if let layout = collectionView?.collectionViewLayout as? PinterestLayout {
             layout.delegate = self
         }
         
         let uid = Auth.auth().currentUser!.uid
-        let contentDBRef = Database.database().reference().child("Content").child(uid).child("Images")
+        let contentDBRef = Database.database().reference().child("Content").child(uid).child("Posts")
         let userDBRef = Database.database().reference().child("Users").child(uid)
         let headerPhotoDBRef = Database.database().reference().child("Header Photos").child(uid)
         
@@ -188,11 +132,11 @@ class ProfileViewController: UIViewController, UITextViewDelegate, UINavigationC
             let snap = snapshot.children.allObjects
             
             if snap.isEmpty {
-                print("No header photo")
+//                print("No header photo")
                 self.headerPhoto.image = UIImage(named: "image1")
                 
             }else{
-                print("Header photo")
+//                print("Header photo")
                 let downloadObject = snapshot.value as! NSDictionary
                 
                 for item in downloadObject {
@@ -221,7 +165,7 @@ class ProfileViewController: UIViewController, UITextViewDelegate, UINavigationC
         headerPhotoDBRef.observe(.childAdded){
             snapshot in
             
-            print("Header SNAP", snapshot.value!)
+//            print("Header SNAP", snapshot.value!)
             let downloadLink = snapshot.value! as! String
             
             let headerStorageRef = Storage.storage().reference(forURL: downloadLink)
@@ -276,6 +220,7 @@ class ProfileViewController: UIViewController, UITextViewDelegate, UINavigationC
             if snapshot.key == "Username"{
                 username = snapshot.value as! String
                 self.usernameField.text = username
+                self.username = username
             }
             if snapshot.key == "Header Photo" {
 //                print("Header link", snapshot.value!)
@@ -289,7 +234,7 @@ class ProfileViewController: UIViewController, UITextViewDelegate, UINavigationC
                     let headerStorageRef = Storage.storage().reference(forURL: downloadLink)
                     headerStorageRef.downloadURL(completion: {
                         (url, error) in
-                        print("header url", url!)
+//                        print("header url", url!)
 
                         do {
                             let data = try Data(contentsOf: url!)
@@ -313,92 +258,118 @@ class ProfileViewController: UIViewController, UITextViewDelegate, UINavigationC
                     self.designTypes.append(item.key as! String)
                 }
             }
-            
-//            print("username", username)
         })
+
         
         contentDBRef.observe(.childAdded, with: {
-            (snapshot) in
-            Thread.printCurrent()
-//            print("SNAP!!!!", snapshot)
-            let downloadLink = snapshot.value as! String
+            snapshot in
             
-            DispatchQueue.global(qos: .userInteractive).async {
-                self.downloadImages(dlLink: downloadLink)
-            }
-            
-//            DispatchQueue.main.async {
-//
-//            }
-        })
-//        print("USER IMAGES ARRAY", self.userImages)
-//        self.collectionView?.reloadData()
+            var linkArray = [String]()
 
+            print("SNAP! in child listen profile", snapshot)
+
+            let snapObject = snapshot.value as! NSDictionary
+//            print("SNAP OBJ", snapshot)
+
+//            let caption = "test"
+            let caption = snapObject["Caption"] as! String
+//            print("CAP", caption)
+            
+//            print("IMAGES", snapObject["Images"]!)
+
+            let imageObject = snapObject["Images"] as! NSArray
+//            print("IMG OBJ", imageObject)
+
+            for image in imageObject {
+//                print("Image", image)
+                let imageLink = image as! String
+                linkArray.append(imageLink)
+            }
+
+            self.downloadImages(caption: caption, dlLinks: linkArray)
+
+        })
+
+        
     }
     
-    func downloadImages(dlLink: String) {
-        Thread.printCurrent()
-        let storageRef = Storage.storage().reference(forURL: dlLink)
-        storageRef.downloadURL(completion: {
-            (url, error) in
-            
-//            print("URL", url!)
-            
-            do{
-                let data = try Data(contentsOf: url!)
-                let newImage = UIImage(data: data as Data)
-                
-                self.userImages.append(newImage!)
-                
-                
-                
-                DispatchQueue.main.async {
-                    print("reloading")
-                    self.collectionView.reloadData()
-                }
-                
-            }catch{
-                print("error with data")
-            }
-        })
+    func downloadImages(caption: String, dlLinks: [String]) {
+        print("IN DOWLOAD")
+        print("caption", caption)
         
+        let profileImageLink = dlLinks.first as! String
+        
+        var imageHolder = userPost(caption: "", image: UIImage())
+        
+        let group = DispatchGroup()
+        group.enter()
+        
+        DispatchQueue.main.async {
+            print("Downloading")
+            let storageRef = Storage.storage().reference(forURL: profileImageLink)
+            storageRef.downloadURL {
+                (url, error) in
+                
+                if let data = try? Data(contentsOf: url!) {
+                    if let image = UIImage(data: data){
+                        imageHolder = userPost(caption: caption, image: image)
+                        self.userPosts.append(imageHolder)
+                        
+                    }
+                }
+                group.leave()
             }
+        }
+        
+        group.notify(queue: .main){
+            print("download finished")
+            print("HOLDER cap", imageHolder.caption, "image", imageHolder.image)
+            print("user posts", self.userPosts)
+//            print("USER POSTS", self.userPosts)
+            self.collectionView.collectionViewLayout.invalidateLayout()
+            self.collectionView.reloadData()
+            
+        }
+    }
+    
     
     override func viewWillAppear(_ animated: Bool) {
-        setNavBar()
+//        setNavBar()
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
+        
+//        self.collectionView.reloadData()
     }
     
     func setNavBar(){
         //      Navigation Bar Styling
-        print("Setting navbar")
         self.navigationController?.setNavigationBarHidden(true, animated: true)
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.isTranslucent = true
         self.navigationController?.view.backgroundColor = UIColor.clear
-        
+
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let uid = Auth.auth().currentUser?.uid
-        
+
         if uid == nil {
             print("no user")
         }else{
             print("uid", uid!, "username", username)
-            
+
             if segue.identifier == "showDetail" {
                 let imageSelected = collectionView?.indexPath(for: sender as! ProfileCollectionViewCell)
-                print("SELECTED IMAGE", type(of: imageSelected!.row))
+//                print("SELECTED IMAGE", imageSelected!.row)
                 let imageDetail = segue.destination as! ProfileDetailViewController
-                
-                imageDetail.selectedImage = self.userImages[(imageSelected?.row)!]
-                print("Username from segue", username)
+
+                imageDetail.selectedImage = self.userPosts[(imageSelected?.row)!].image
+//                print("Username from segue", username)
                 imageDetail.username = username
-                print("TYPES", self.designTypes)
-                
+//                print("TYPES", self.designTypes)
+                imageDetail.caption = self.userPosts[imageSelected!.row].caption
                 imageDetail.types = self.designTypes
-                
+
             }
         }
     }
@@ -407,8 +378,8 @@ class ProfileViewController: UIViewController, UITextViewDelegate, UINavigationC
 // MARK :: Custom Collection view setup
 extension ProfileViewController: PinterestLayoutDelegate {
     func collectionView(_ collectionView: UICollectionView, heightForPhotoAtIndexPath indexPath: IndexPath) -> CGFloat {
-        print("gettting image height")
-        let image = self.userImages[indexPath.item]
+//        print("gettting image height")
+        let image = self.userPosts[indexPath.item].image
         let height = (image.size.height)/10
 
         return height
@@ -416,21 +387,30 @@ extension ProfileViewController: PinterestLayoutDelegate {
 }
 extension ProfileViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        print("count", self.userImages.count)
-        return self.userImages.count
+        print("count", self.userPosts.count)
+        return self.userPosts.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        print("drawing cell")
+//        print("drawing cell", self.userPosts[indexPath.row].image)
+        print("USER POST", self.userPosts[indexPath.row].image)
+
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "imgCell", for: indexPath) as! ProfileCollectionViewCell
-        let image = self.userImages[indexPath.row]
+        
+        let image = userPosts[indexPath.row].image
+        print("setting image", image)
         cell.cellImage.image = image
+
         return cell
     }
 }
 
-extension Thread {
-    class func printCurrent() {
-        print("\r⚡️: \(Thread.current)\r" + "🏭: \(OperationQueue.current?.underlyingQueue?.label ?? "None")\r")
+class userPost {
+    let caption: String
+    let image: UIImage
+    
+    init(caption: String, image: UIImage){
+        self.caption = caption
+        self.image = image
     }
 }

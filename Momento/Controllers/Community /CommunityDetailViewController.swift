@@ -76,10 +76,10 @@ class CommunityDetailViewController: UIViewController {
         self.testImages.append(testImage3)
         
         self.navigationController?.setNavigationBarHidden(false, animated: true)
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
-        self.navigationController?.navigationBar.shadowImage = UIImage()
-        self.navigationController?.navigationBar.isTranslucent = true
-        self.navigationController?.view.backgroundColor = UIColor.clear
+        let backButton = UIBarButtonItem()
+        backButton.title = " "
+        self.navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
+
         print("DATA IN DETAIL!", comName, ",", comDesc)
         
         nameLabel.text  = "Welcome to " + comName

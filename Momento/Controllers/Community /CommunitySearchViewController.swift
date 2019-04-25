@@ -27,11 +27,6 @@ class CommunitySearchViewController: UIViewController, UITableViewDelegate, UITa
         
         // NAV Setup
         self.navigationController?.setNavigationBarHidden(false, animated: true)
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
-        self.navigationController?.navigationBar.shadowImage = UIImage()
-        self.navigationController?.navigationBar.isTranslucent = true
-        self.navigationController?.view.backgroundColor = UIColor.clear
-        
         let backButton = UIBarButtonItem()
         backButton.title = " "
         self.navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
@@ -41,7 +36,6 @@ class CommunitySearchViewController: UIViewController, UITableViewDelegate, UITa
         self.tableView.separatorColor = Colors.darkYellow
         
         let usernamesDBRef = Database.database().reference().child("Usernames")
-        print("detail ref", usernamesDBRef)
         usernamesDBRef.observeSingleEvent(of: .value) {
             (snapshot, error) in
             
@@ -53,69 +47,75 @@ class CommunitySearchViewController: UIViewController, UITableViewDelegate, UITa
                 
                 let usernameObject = snapshot.value! as! NSDictionary
                 for (uid, username) in usernameObject {
-                    
+//                    print("UID", uid, "USERNAME", username)
                     //Vars for storing data
                     var uidStore = ""
                     var usernameStore = ""
                     var userImageStore = UIImage()
                     
                     usernameStore = username as! String
+                    uidStore = uid as! String
+//                    print("ID", uidStore)
+ 
                     
-                    let id = uid as! String
-//                    print("ID", id))
-                    
-                    uidStore = id
-                    
-                    
-                    let headerPhotoDBRef = Database.database().reference().child("Header Photos").child(id).child("Photo")
+                    let headerPhotoDBRef = Database.database().reference().child("Header Photos").child(uidStore).child("Photo")
+//                    print("DB FRE", headerPhotoDBRef)
                     headerPhotoDBRef.observeSingleEvent(of: .value) {
-                        snapshot in
-                        
-                        
-//                        print("SNAP", snapshot.value!)
-                        let downloadLink = snapshot.value! as! String
-                        print("DL LINK", downloadLink)
-                        
-                        if downloadLink != nil{
-                            print("GETTING USER PHOTOS")
-                            let headerStorageRef = Storage.storage().reference(forURL: downloadLink)
-                            headerStorageRef.downloadURL(completion: {
-                                (url, error) in
-                                
-                                do {
-                                    let data = try Data(contentsOf: url!)
-                                    let headerImage = UIImage(data: data as Data)
-                                    
-                                    userImageStore = headerImage!
-                                    
-                                    DispatchQueue.main.async {
-                                        
-                                        self.userArray.append(users(uid: uidStore, username: usernameStore, userImage: userImageStore))
-                                        
-                                        self.filteredUsersArray = self.userArray
-                                        
-                                        print("USER ARRAY", self.userArray)
-                                        
-                                        print("Reloading")
-                                        self.tableView.reloadData()
-                                    }
+                        (snapshot, error) in
 
-                                }
-                                catch {
-                                    print("Error with header photo")
-                                }
-                            })
+                        if error != nil {
+                            print("ADD ALERT FOR ERROR", error!)
                         }else{
-                            print("NOT GETTING PHOTOS")
-                            
-                            
+//                            print("SNAP", snapshot.exists())
+                            if snapshot.exists() == true {
+//                                print(snapshot.value!)
+                                
+                                let downloadLink = snapshot.value as! String
+                                downloadImages(link: downloadLink, uid: uidStore, username: usernameStore)
+
+                            }else{
+//                                print("Found null")
+                                print("USERNAME", username)
+                                let stockUserImage = UIImage(named: "stockUserPhoto")
+                                self.userArray.append(users(uid: uidStore, username: usernameStore, userImage: stockUserImage!))
+                                self.tableView.reloadData()
+                            }
                         }
                     }
-
-                    DispatchQueue.main.async {
-                        self.tableView.reloadData()
+                }
+            }
+        }
+        
+        func downloadImages(link: String, uid: String, username: String) {
+//            print("USERNAME", username)
+            
+            let group = DispatchGroup()
+            group.enter()
+            
+            DispatchQueue.global(qos: .background).async {
+                
+                let headerStorageRef = Storage.storage().reference(forURL: link)
+                headerStorageRef.downloadURL {
+                    (url, error) in
+                    
+                    if error != nil {
+                        print("ERROR Downloading images", error!)
+                    }else{
+                        if let data = try? Data(contentsOf: url!){
+                            if let headerImage = UIImage(data: data){
+                                self.userArray.append(users(uid: uid, username: username, userImage: headerImage))
+                                
+                                self.filteredUsersArray = self.userArray
+                            }
+                        }
+                        group.leave()
                     }
                 }
+            }
+            
+            group.notify(queue: .main){
+                print("download finished")
+                self.tableView.reloadData()
             }
         }
     }

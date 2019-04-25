@@ -14,6 +14,7 @@ class ProfileDetailViewController: UIViewController {
     var postID: String = ""
     var username = ""
     var types = [String]()
+    var caption = ""
 
     @IBOutlet weak var detailImageView: UIImageView!
     @IBOutlet weak var usernameLabel: UILabel!
@@ -24,6 +25,7 @@ class ProfileDetailViewController: UIViewController {
         self.view.backgroundColor = Colors.darkBlack
         
         self.navigationController?.setNavigationBarHidden(false, animated: true)
+        self.navigationController?.navigationBar.tintColor = Colors.darkYellow
         
         print("SELECTED", selectedImage)
         detailImageView.image = selectedImage
@@ -33,14 +35,16 @@ class ProfileDetailViewController: UIViewController {
         
         var displayTypes: String = ""
         
-        for item in types {
-            print("item", item)
-            displayTypes = displayTypes + item + ", "
-            
-            print("Display types", displayTypes)
-            
-            typesLabel.text = displayTypes
-        }
+        typesLabel.text = caption
+        
+//        for item in types {
+//            print("item", item)
+//            displayTypes = displayTypes + item + ", "
+//
+//            print("Display types", displayTypes)
+//
+//            typesLabel.text = displayTypes
+//        }
         // Do any additional setup after loading the view.
     }
     

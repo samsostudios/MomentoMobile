@@ -23,42 +23,163 @@ class UploadCameraRollViewController: UIViewController, UINavigationControllerDe
     var userDesignTypes = [String]()
     var typesSelected = [String]()
     
+    @IBOutlet weak var uploadCollectionView: UICollectionView!
+    
     @IBOutlet weak var buttonType1: OnboardButton!
     @IBAction func button1Selected(_ sender: UIButton) {
-        buttonsSelected[1] = true
+        buttonsSelected[1] = !buttonsSelected[1]!
+        
     }
     @IBOutlet weak var buttonType2: OnboardButton!
     @IBAction func button2Selected(_ sender: UIButton) {
-        buttonsSelected[2] = true
+        buttonsSelected[2] = !buttonsSelected[2]!
     }
     @IBOutlet weak var buttonType3: OnboardButton!
     @IBAction func button3Selected(_ sender: UIButton) {
-        buttonsSelected[3] = true
+        buttonsSelected[3] = !buttonsSelected[3]!
     }
     @IBOutlet weak var buttonType4: OnboardButton!
     @IBAction func button4Selected(_ sender: UIButton) {
-        buttonsSelected[4] = true
+        buttonsSelected[4] = !buttonsSelected[4]!
     }
     @IBOutlet weak var buttonType5: OnboardButton!
     @IBAction func button5Selected(_ sender: Any) {
-        buttonsSelected[5] = true
+        buttonsSelected[5] = !buttonsSelected[5]!
     }
     @IBOutlet weak var buttonType6: OnboardButton!
     @IBAction func button6Selected(_ sender: Any) {
-        buttonsSelected[2] = true
+        buttonsSelected[6] = !buttonsSelected[6]!
     }
     @IBOutlet weak var buttonType7: OnboardButton!
+    @IBAction func button7Selected(_ sender: UIButton) {
+        buttonsSelected[7] = !buttonsSelected[7]!
+    }
     @IBOutlet weak var buttonType8: OnboardButton!
+    @IBAction func button8Selected(_ sender: UIButton) {
+        buttonsSelected[8] = !buttonsSelected[8]!
+    }
     @IBOutlet weak var buttonType9: OnboardButton!
 
     
     @IBOutlet weak var commentView: UITextView!
     
     @IBAction func uploadButton(_ sender: UIBarButtonItem) {
-        print("UPLOAD CLICKED")
-        print("B1 Selected", buttonType1.isSelected)
+        var postTypes = [String]()
+        var caption =  ""
+        var uploadImages = [String]()
+        
+        print("SELECTED IMAGES", self.selectedImages )
+        
+        if commentView.text == "Add Caption" || commentView.text == "" {
+            caption = ""
+        }else{
+            caption = commentView.text
+        }
+        
+        for (key, value) in buttonsSelected {
+            if value == true{
+                switch key {
+                case 1:
+                    //                    print(buttonType1.titleLabel!.text!)
+                    postTypes.append(buttonType1.titleLabel!.text!)
+                case 2:
+                    postTypes.append(buttonType2.titleLabel!.text!)
+                case 3:
+                    postTypes.append(buttonType3.titleLabel!.text!)
+                case 4:
+                    postTypes.append(buttonType4.titleLabel!.text!)
+                case 5:
+                    postTypes.append(buttonType5.titleLabel!.text!)
+                case 6:
+                    postTypes.append(buttonType6.titleLabel!.text!)
+                case 7:
+                    postTypes.append(buttonType7.titleLabel!.text!)
+                case 8:
+                    postTypes.append(buttonType8.titleLabel!.text!)
+                default:
+                    print("default")
+                }
+            }
+        }
+        
+        let uid = Auth.auth().currentUser!.uid
+        print("UID", uid)
+        let contentDBRef = Database.database().reference().child("Content").child(uid).child("Posts")
+        let contentStorageRef = Storage.storage().reference().child(uid).child("images")
+        
+        let postID = UUID().uuidString
+        
+        for image in selectedImages{
+
+            let imageID = UUID().uuidString
+            print("IMG ID", imageID)
+
+            guard let imageData = image.jpegData(compressionQuality: 0.1) else {return}
+
+            let imageMetaData = StorageMetadata()
+            imageMetaData.contentType = "image/jpg"
+
+            let uploadTask = contentStorageRef.child(imageID).putData(imageData, metadata: imageMetaData) {
+                (metaData, error) in
+
+                if error != nil {
+                    print("ADD ALERT for errors")
+                }else{
+                    contentStorageRef.child(imageID).downloadURL {
+                        (imgURL, error) in
+
+                        if error != nil{
+                            print("ADD ALERT for errors", error!)
+                        }else{
+//                            print("URL:", imgURL!)
+                            let downloadUrl = imgURL?.absoluteString
+                            uploadImages.append(downloadUrl!)
+
+                            print("selected count", self.selectedImages)
+                            print("upload count", uploadImages.count)
+
+                            if self.selectedImages.count == uploadImages.count {
+                                print("DOWNLOAD URL COMPLETE")
+//                                print("UPLOAD IMAGES", uploadImages)
+
+                                let firbaseUpload = ["Caption": caption, "Types": postTypes, "Images": uploadImages] as [String : Any]
+                                print("FIRE UPLOAD", firbaseUpload)
+
+                                contentDBRef.child(postID).setValue(firbaseUpload)
+                                
+                                self.selectedImages.removeAll()
+                                self.uploadCollectionView.reloadData()
+                                self.tabBarController?.selectedIndex = 4
+                                self.commentView.text = "Add Caption"
+//                                for item in self.buttonsSelected {
+//                                    print(item.value)
+//                                    if item.value == true{
+//                                        print("KEY", item.key)
+//                                        switch item.key{
+//                                        case 1:
+//                                            print("button1", self.buttonType1)
+//                                        default:
+//                                            print("default")
+//                                        }
+//
+//                                    }
+//                                }
+                                
+
+                            }
+                        }
+                    }
+                }
+            }
+            uploadTask.observe(.success) {
+                snapshot in
+
+                print("UPLOAD COMPLETE", snapshot)
+            }
+
+        }
     }
-    @IBOutlet weak var uploadCollectionView: UICollectionView!
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -82,10 +203,10 @@ class UploadCameraRollViewController: UIViewController, UINavigationControllerDe
             (snapshot) in
             
             var count = 1
-            print("SMAP!!!!", snapshot.value!)
-            print("SNAP COUNT", snapshot.children.allObjects.count)
+//            print("SMAP!!!!", snapshot.value!)
+//            print("SNAP COUNT", snapshot.children.allObjects.count)
             let snapDict = snapshot.value as! NSDictionary
-            for (item, value) in snapDict{
+            for (item, _) in snapDict{
 //                print("ITEM", item, "VALUE", value)
 //                self.userDesignTypes.append(item as! String)
                 let typeToSet = item as! String
@@ -125,7 +246,7 @@ class UploadCameraRollViewController: UIViewController, UINavigationControllerDe
     
     // MARK: TEXTVIEW SET UP
     func textViewDidBeginEditing(_ textView: UITextView) {
-        print("editing text view")
+//        print("editing text view")
         if commentView.textColor == UIColor.lightGray {
             commentView.text = nil
             commentView.textColor = UIColor.white
@@ -133,7 +254,7 @@ class UploadCameraRollViewController: UIViewController, UINavigationControllerDe
     }
     
     func textViewDidEndEditing(_ textView: UITextView) {
-        print("Text view eneded")
+//        print("Text view eneded")
         commentView.resignFirstResponder()
         
     }
@@ -201,20 +322,21 @@ class UploadCameraRollViewController: UIViewController, UINavigationControllerDe
                 picker.dismiss(animated: true, completion: nil)
                 return
             }
-            _ = items.map { print("🧀 \($0)") }
+//            _ = items.map { print("🧀 \($0)") }
             
             for item in items{
 //                print("ITEM", item)
                 switch item {
                 case .photo(let photo):
-                    print("PHOTO", photo.image)
+//                    print("PHOTO", photo.image)
                     self.selectedImages.append(photo.image)
+                    print("SELECTED IMAGES", self.selectedImages)
                     self.uploadCollectionView.reloadData()
                 case .video(let video):
                     print("VIDEO", video)
                 }
                 
-                print("SELECTED IMAGES", self.selectedImages)
+//                print("SELECTED IMAGES", self.selectedImages)
                 
                 picker.dismiss(animated: true, completion: nil)
             }
@@ -262,7 +384,7 @@ class UploadCameraRollViewController: UIViewController, UINavigationControllerDe
 }
 extension UploadCameraRollViewController: UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        print("COUNT", self.selectedImages.count)
+//        print("COUNT", self.selectedImages.count)
         return self.selectedImages.count
     }
 

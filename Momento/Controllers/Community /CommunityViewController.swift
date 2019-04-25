@@ -18,24 +18,13 @@ class CommunityViewController: UIViewController, UICollectionViewDelegate, UICol
     var communityArray = [communities]()
     
     override func viewDidLoad() {
-        print("community did load")
         super.viewDidLoad()
+        navbarSetup()
         self.view.backgroundColor = Colors.darkBlack
         
         self.communityCollectionView.backgroundColor = UIColor(white: 1, alpha: 0)
         
-        self.navigationController?.setNavigationBarHidden(false, animated: true)
-        let backButtonImage = UIImage(named: "backBlack")
-        self.navigationController?.navigationBar.backIndicatorImage = backButtonImage
-    
-        self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = backButtonImage
-        
-        let backButton = UIBarButtonItem()
-        backButton.title = " "
-        self.navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
-        
         let communitiesDBRef = Database.database().reference().child("Communities")
-        print("communtiy ref", communitiesDBRef)
         communitiesDBRef.observe(.childAdded, with: {
             snapshot in
             
@@ -48,7 +37,7 @@ class CommunityViewController: UIViewController, UICollectionViewDelegate, UICol
             
             let communityObject = snapshot.value as! NSDictionary
             for item in communityObject {
-                print("ITEM", item.key)
+//                print("ITEM", item.key)
                 let itemTag = item.key as! String
                 
                 if itemTag == "Description" {
@@ -65,6 +54,21 @@ class CommunityViewController: UIViewController, UICollectionViewDelegate, UICol
             }
             
         })
+    }
+    
+    private func navbarSetup(){
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.navigationBar.isTranslucent = true
+        self.navigationController?.view.backgroundColor = UIColor.clear
+        
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
+        let backButtonImage = UIImage(named: "backBlack")
+        self.navigationController?.navigationBar.backIndicatorImage = backButtonImage
+        self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = backButtonImage
+        let backButton = UIBarButtonItem()
+        backButton.title = " "
+        self.navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
