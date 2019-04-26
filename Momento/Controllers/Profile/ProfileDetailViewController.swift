@@ -25,6 +25,10 @@ class ProfileDetailViewController: UIViewController {
         self.view.backgroundColor = Colors.darkBlack
         
         self.navigationController?.setNavigationBarHidden(false, animated: true)
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.navigationBar.isTranslucent = true
+        self.navigationController?.view.backgroundColor = UIColor.clear
         self.navigationController?.navigationBar.tintColor = Colors.darkYellow
         
         print("SELECTED", selectedImage)
@@ -33,7 +37,7 @@ class ProfileDetailViewController: UIViewController {
         print("USERNAME", username)
         usernameLabel.text = username
         
-        var displayTypes: String = ""
+//        var displayTypes: String = ""
         
         typesLabel.text = caption
     }

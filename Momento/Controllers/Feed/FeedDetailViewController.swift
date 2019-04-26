@@ -11,12 +11,18 @@ import UIKit
 class FeedDetailViewController: UIViewController {
     
     var incomingImage = UIImage()
+    var incomingCaption = ""
+    var incomingUID = ""
 
     @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var captionLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = Colors.darkBlack
+        
+        print("uid", incomingUID, "caption", incomingCaption)
+        captionLabel.text = incomingCaption
         
         let backButton = UIBarButtonItem()
         backButton.title = " "

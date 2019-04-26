@@ -13,7 +13,6 @@ class SearchDetailViewController: UIViewController {
     
     var incomingUserInfo  = [String: Any]()
     var userImages = [UIImage]()
-
     
     var userImage = UIImage()
     var userName = ""
@@ -22,39 +21,29 @@ class SearchDetailViewController: UIViewController {
     
     var userTypesLabel: String = ""
     
-    var followButtonSelected = Bool()
+    var isFollowing = Bool()
     
-    let testImage1 = #imageLiteral(resourceName: "7R8A0139")
-    let testImage2 = #imageLiteral(resourceName: "7R8A9956 2")
-    let testImage3 = #imageLiteral(resourceName: "7R8A9987Crop")
-    
-    var testImages: [UIImage] = []
-
     @IBOutlet weak var headerPhoto: UIImageView!
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var designTypesLabel: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var followButtonSetup: UIButton!
+    @IBOutlet weak var headerPhotoOverlay: UIImageView!
     
     @IBAction func followButton(_ sender: UIButton) {
-        sender.isSelected = !sender.isSelected
-//        print("selected", sender.isSelected)
+        print("is following?", isFollowing)
         
         let currentUserId = Auth.auth().currentUser?.uid
         let selectedUserfollowingDBRef = Database.database().reference().child("Followings").child(userID).child("Followers")
         let currentUserDBRef = Database.database().reference().child("Followings").child(currentUserId!).child("Following")
+
         
-        if sender.isSelected == true {
-            followButtonSetup.setBackgroundImage(#imageLiteral(resourceName: "followButon") , for: UIControl.State.normal)
-            followButtonSelected = true
-            //add follower for selected user
-            selectedUserfollowingDBRef.child(currentUserId!).setValue("true")
+        if isFollowing == true {
+            print("unfollow")
+            isFollowing = false
+            followButtonSetup.backgroundColor = .clear
+            followButtonSetup.setTitleColor(Colors.darkYellow, for: .normal)
             
-            //add following for current user
-            currentUserDBRef.child(userID).setValue("true")
-        }else{
-            followButtonSetup.setBackgroundImage(#imageLiteral(resourceName: "followButtonUN"), for: UIControl.State.normal)
-            followButtonSelected = false
             //delete follower for selected user
             selectedUserfollowingDBRef.child(currentUserId!).removeValue(completionBlock: {
                 (error, snapshot) in
@@ -76,24 +65,52 @@ class SearchDetailViewController: UIViewController {
                     print("Delete Succesfull")
                 }
             })
+        }else{
+            print("follow")
+            isFollowing = true
+            followButtonSetup.backgroundColor = Colors.darkYellow
+            followButtonSetup.setTitleColor(Colors.white, for: .normal)
+            
+            //add follower for selected user
+            selectedUserfollowingDBRef.child(currentUserId!).setValue("true")
+            
+            //add following for current user
+            currentUserDBRef.child(userID).setValue("true")
         }
 
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = Colors.darkBlack
         self.collectionView.backgroundColor = UIColor(white: 1, alpha: 0)
         
-        print("INCOMING DATA", self.incomingUserInfo)
-        
-        testImages.append(testImage1)
-        testImages.append(testImage2)
-        testImages.append(testImage3)
+        print("DATA PASSED", incomingUserInfo)
         
         if let layout = collectionView?.collectionViewLayout as? PinterestLayout {
             layout.delegate = self
         }
         
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.navigationBar.isTranslucent = true
+        self.navigationController?.view.backgroundColor = UIColor.clear
+        
+        let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.dark)
+        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+        blurEffectView.frame = view.bounds
+        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        headerPhotoOverlay.addSubview(blurEffectView)
+        
+        headerPhotoOverlay.backgroundColor = Colors.darkBlack.withAlphaComponent(0.1)
+        headerPhotoOverlay.layer.cornerRadius = 10.0
+        headerPhotoOverlay.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMinXMaxYCorner]
+        
+        let buttonHeight = followButtonSetup.bounds.height
+        followButtonSetup.backgroundColor = .clear
+        followButtonSetup.layer.cornerRadius = buttonHeight/2
+        followButtonSetup.layer.borderWidth = 1.0
+        followButtonSetup.layer.borderColor = Colors.darkYellow.cgColor
         userImage = incomingUserInfo["image"] as! UIImage
         headerPhoto.image = userImage
         
@@ -101,8 +118,6 @@ class SearchDetailViewController: UIViewController {
         usernameLabel.text = userName
         
         userID = incomingUserInfo["uid"] as! String
-        
-        print("follow button selected", followButtonSelected)
         
         let currentUserId = Auth.auth().currentUser?.uid
         let followingDBRef = Database.database().reference().child("Followings").child(userID).child("Followers")
@@ -116,21 +131,39 @@ class SearchDetailViewController: UIViewController {
         followingDBRef.observeSingleEvent(of: .value, with: {
             snapshot in
             
-            print("SNAP", snapshot)
-            
-            if snapshot.key == currentUserId {
-                userFollowing.append(snapshot.key)
-            }
-            DispatchQueue.main.async {
-                print("users following", userFollowing)
-                if userFollowing.contains(currentUserId!) {
-                    print("Following")
-                    self.followButtonSetup.setBackgroundImage(#imageLiteral(resourceName: "followButon"), for: UIControl.State.normal)
-                }else{
-                    print("not following")
-                    self.followButtonSetup.setBackgroundImage(#imageLiteral(resourceName: "followButtonUN"), for: UIControl.State.normal)
+//            print("FOLLOWING SNAP", snapshot)
+            if snapshot.exists() == false{
+                print("USER HAS NO FOLLOWERS")
+            }else{
+                let followersObject = snapshot.value as! NSDictionary
+//                print("FOLLOWER OBJECT", followersObject)
+                
+                for (key, _) in followersObject {
+//                    print("KEY", key)
+                    let currentSnapUser = key as! String
+                    if currentSnapUser == currentUserId {
+                        self.isFollowing = true
+                        self.setFollowButton()
+                    }
                 }
             }
+ 
+            
+//            if snapshot.key == currentUserId {
+//                userFollowing.append(snapshot.key)
+//            }
+//            DispatchQueue.main.async {
+//                print("users following", userFollowing)
+//                if userFollowing.contains(currentUserId!) {
+//                    print("Following")
+//                    self.followButtonSelected = true
+//                    self.setFollowButton()
+//
+//                }else{
+//                    print("not following")
+//                    self.followButtonSetup.setBackgroundImage(#imageLiteral(resourceName: "followButtonUN"), for: UIControl.State.normal)
+//                }
+//            }
         })
         
         designTypesDBRef.observe(.childAdded, with: {
@@ -162,7 +195,7 @@ class SearchDetailViewController: UIViewController {
         contentDBRef.observe(.childAdded, with: {
             snapshot in
             
-            print("Content snap", snapshot.value!)
+//            print("Content snap", snapshot.value!)
             
             var linkArray = [String]()
             
@@ -172,7 +205,7 @@ class SearchDetailViewController: UIViewController {
             let imageObject = snapObject["Images"] as! NSArray
             
             for image in imageObject {
-                print("IMAGE", image)
+//                print("IMAGE", image)
                 let imageLink = image as! String
                 linkArray.append(imageLink)
             }
@@ -183,8 +216,6 @@ class SearchDetailViewController: UIViewController {
     }
     
     func dowloadImages(caption: String, dlLinks: [String]) {
-        print("IN DOWLOAD")
-//        print("CAPTION", caption)
         
         let profileImageLink = dlLinks.first as! String
         var imageHolder = userPost(caption: "", image: UIImage())
@@ -193,10 +224,11 @@ class SearchDetailViewController: UIViewController {
         group.enter()
         
         DispatchQueue.global(qos: .background).async {
-            print("DOWNLOADING")
+//            print("DOWNLOADING")
             let storageRef = Storage.storage().reference(forURL: profileImageLink)
             storageRef.downloadURL {
                 (url, error) in
+                
                 
                 if let data = try? Data(contentsOf: url!){
                     if let image = UIImage(data: data){
@@ -209,23 +241,30 @@ class SearchDetailViewController: UIViewController {
         }
         
         group.notify(queue: .main) {
-            print("DOWNLOAD COMPLETE")
-            print("USER POSTS", self.userPosts)
+//            print("DOWNLOAD COMPLETE")
+//            print("USER POSTS", self.userPosts)
             self.collectionView.reloadData()
         }
+    }
+    
+    func setFollowButton() {
+        print("Setting follow button", isFollowing)
+        followButtonSetup.text("Following")
+        followButtonSetup.setTitleColor(Colors.white, for: .normal)
+        followButtonSetup.backgroundColor = Colors.darkYellow
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "SeachShowPhoto" {
             let imageSelected = collectionView?.indexPath(for: sender as! SearchDetailCollectionViewCell)
-            print("SELECTED IMAGE", imageSelected!.row)
+//            print("SELECTED IMAGE", imageSelected!.row)
             let imageDetail = segue.destination as! SearchDetailPhotoViewController
             
             imageDetail.selectedImage = self.userPosts[imageSelected!.row].image
             imageDetail.username = userName
             imageDetail.caption = self.userPosts[imageSelected!.row].caption
+            imageDetail.selectedUserId = incomingUserInfo["uid"] as! String
         }
-        
     }
 }
 
@@ -235,20 +274,19 @@ extension SearchDetailViewController: PinterestLayoutDelegate {
 
         let image = self.userPosts[indexPath.row].image
         let height = (image.size.height)/10
-
         return height
     }
 }
 extension SearchDetailViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        print("count", self.userPosts.count)
+//        print("count", self.userPosts.count)
         return self.userPosts.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SerachDetailCell", for: indexPath) as! SearchDetailCollectionViewCell
         
-        print("userImages", self.userImages)
+//        print("userImages", self.userImages)
         let image = self.userPosts[indexPath.row].image
         cell.cellImage.image = image
         return cell

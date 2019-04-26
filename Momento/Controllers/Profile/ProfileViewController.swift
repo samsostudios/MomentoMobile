@@ -16,6 +16,7 @@ class ProfileViewController: UIViewController, UITextViewDelegate, UINavigationC
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var headerPhoto: UIImageView!
     @IBOutlet weak var usernameField: UILabel!
+    @IBOutlet weak var headerOverlay: UIImageView!
     
     var imagePickerButtonSelected: String = ""
     let imagePicker = UIImagePickerController()
@@ -103,7 +104,7 @@ class ProfileViewController: UIViewController, UITextViewDelegate, UINavigationC
     override func viewDidLoad() {
         super.viewDidLoad()
         setNavBar()
-        imageUploadBtn.alpha = 0.5
+//        imageUploadBtn.alpha = 0.5
         
         imagePicker.delegate = self
         imagePicker.sourceType = UIImagePickerController.SourceType.photoLibrary
@@ -116,6 +117,18 @@ class ProfileViewController: UIViewController, UITextViewDelegate, UINavigationC
 
         self.view.backgroundColor = Colors.darkBlack
         self.collectionView.backgroundColor = UIColor(white: 1, alpha: 0)
+        
+        self.headerPhoto.layer.cornerRadius = 15.0
+        
+        let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.dark)
+        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+        blurEffectView.frame = view.bounds
+        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        headerOverlay.addSubview(blurEffectView)
+        
+        headerOverlay.backgroundColor = Colors.darkBlack.withAlphaComponent(0.1)
+        headerOverlay.layer.cornerRadius = 10.0
+        headerOverlay.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMinXMaxYCorner]
         
         if let layout = collectionView?.collectionViewLayout as? PinterestLayout {
             layout.delegate = self
@@ -133,7 +146,7 @@ class ProfileViewController: UIViewController, UITextViewDelegate, UINavigationC
             
             if snap.isEmpty {
 //                print("No header photo")
-                self.headerPhoto.image = UIImage(named: "image1")
+                self.headerPhoto.image = UIImage(named: "headerPlaceholder")
                 
             }else{
 //                print("Header photo")
@@ -290,7 +303,7 @@ class ProfileViewController: UIViewController, UITextViewDelegate, UINavigationC
         print("IN DOWLOAD")
         print("caption", caption)
         
-        let profileImageLink = dlLinks.first as! String
+        let profileImageLink = dlLinks.first 
         
         var imageHolder = userPost(caption: "", image: UIImage())
         
@@ -299,7 +312,7 @@ class ProfileViewController: UIViewController, UITextViewDelegate, UINavigationC
         
         DispatchQueue.main.async {
             print("Downloading")
-            let storageRef = Storage.storage().reference(forURL: profileImageLink)
+            let storageRef = Storage.storage().reference(forURL: profileImageLink!)
             storageRef.downloadURL {
                 (url, error) in
                 
